@@ -18,11 +18,13 @@ model Organization {
   id        String   @id @default(uuid())
   name      String
   email     String
+  slug      String   @unique
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   users     User[]
   plans     Plan[]
+  tickets   Ticket[] // Adicionado o campo de relação para Ticket
 }
 
 model User {
@@ -37,6 +39,15 @@ model User {
   password       String
   Organization   Organization? @relation(fields: [organizationId], references: [id])
   organizationId String?
+}
+
+model TicketAccessToken {
+  id        String    @id @default(uuid())
+  ticketId  String
+  ticket    Ticket    @relation(fields: [ticketId], references: [id])
+  token     String    @unique
+  createdAt DateTime  @default(now())
+  expiresAt DateTime? // opcional: pode deixar nulo para acesso eterno
 }
 
 model Plan {
@@ -64,13 +75,19 @@ model Ticket {
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
 
-  createdById String
-  createdBy   User   @relation("CreatedTickets", fields: [createdById], references: [id])
+  createdById String?
+  createdBy   User?   @relation("CreatedTickets", fields: [createdById], references: [id])
 
   assignedToId String?
   assignedTo   User?   @relation("AssignedTickets", fields: [assignedToId], references: [id])
 
-  comments Comment[]
+  comments           Comment[]
+  ticketAccessTokens TicketAccessToken[] // Adicionado o campo de relação para TicketAccessToken
+
+  externalName   String?
+  externalEmail  String?
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id])
 }
 
 model Comment {

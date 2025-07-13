@@ -4,9 +4,9 @@ import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class OrganizationsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) {}
 
-  async create(createOrganizationDto: CreateOrganizationDto) {
+  async create(createOrganizationDto: any) {
     return this.prisma.organization.create({
       data: createOrganizationDto,
     });

@@ -124,6 +124,7 @@ exports.Prisma.OrganizationScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
+  slug: 'slug',
   isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -137,6 +138,14 @@ exports.Prisma.UserScalarFieldEnum = {
   enable: 'enable',
   password: 'password',
   organizationId: 'organizationId'
+};
+
+exports.Prisma.TicketAccessTokenScalarFieldEnum = {
+  id: 'id',
+  ticketId: 'ticketId',
+  token: 'token',
+  createdAt: 'createdAt',
+  expiresAt: 'expiresAt'
 };
 
 exports.Prisma.PlanScalarFieldEnum = {
@@ -162,7 +171,10 @@ exports.Prisma.TicketScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   createdById: 'createdById',
-  assignedToId: 'assignedToId'
+  assignedToId: 'assignedToId',
+  externalName: 'externalName',
+  externalEmail: 'externalEmail',
+  organizationId: 'organizationId'
 };
 
 exports.Prisma.CommentScalarFieldEnum = {
@@ -209,6 +221,7 @@ exports.TicketPriority = exports.$Enums.TicketPriority = {
 exports.Prisma.ModelName = {
   Organization: 'Organization',
   User: 'User',
+  TicketAccessToken: 'TicketAccessToken',
   Plan: 'Plan',
   Ticket: 'Ticket',
   Comment: 'Comment'

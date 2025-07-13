@@ -125,3 +125,102 @@ Se quiser, posso te gerar agora:
 * Uma função para **gerar `slug`** automaticamente
 
 Quer seguir com isso? Qual é o stack que você está usando (Next.js, Express, outro)?
+
+
+Exatamente. Após o cliente externo enviar o ticket, o próximo passo ideal é:
+
+---
+
+## ✅ **Enviar um e-mail com link de acesso ao ticket**
+
+### 🔐 Objetivo:
+
+Permitir que o cliente:
+
+* Visualize o ticket depois (sem login)
+* Receba atualizações (por e-mail ou através desse link)
+
+---
+
+## 🔗 **Como gerar um link seguro de acesso ao ticket?**
+
+### 🔒 Opção recomendada: **Token de acesso único (com validade opcional)**
+
+Adicione um modelo no schema para armazenar o token de acesso:
+
+```prisma
+model TicketAccessToken {
+  id         String   @id @default(uuid())
+  ticketId   String
+  ticket     Ticket   @relation(fields: [ticketId], references: [id])
+  token      String   @unique
+  createdAt  DateTime @default(now())
+  expiresAt  DateTime? // opcional: pode deixar nulo para acesso eterno
+}
+```
+
+---
+
+## 🚀 Fluxo completo:
+
+1. **Cliente preenche formulário** em `/empresa-xpto` ✅
+2. **Backend cria o `Ticket`**
+3. **Gera um token de acesso**:
+
+```ts
+import { randomBytes } from "crypto";
+
+const token = randomBytes(32).toString("hex"); // 64 caracteres
+
+await prisma.ticketAccessToken.create({
+  data: {
+    ticketId: ticket.id,
+    token: token,
+    expiresAt: addDays(new Date(), 7), // opcional: expira em 7 dias
+  },
+});
+```
+
+4. **Envia e-mail com link**:
+
+```
+Olá João,
+
+Recebemos sua solicitação.
+
+Você pode acompanhar o ticket aqui:
+https://suporte.meusite.com/ticket/SEU_TOKEN_AQUI
+
+Atenciosamente,
+Equipe XPTO
+```
+
+---
+
+## 🔍 Página `/ticket/[token]`
+
+Na página pública de visualização:
+
+* Você faz um `findUnique` com `where: { token }`
+* Carrega o `ticket` associado
+* Mostra título, descrição, status, comentários (opcional)
+* Pode permitir que o cliente **responda** ao ticket
+
+---
+
+## ⚠️ Cuidados
+
+* Gere tokens longos e aleatórios (`crypto.randomBytes`)
+* (Opcional) expire tokens antigos
+* Evite mostrar dados de outros tickets ou da empresa
+
+---
+
+Se quiser, posso montar pra você:
+
+* O model completo com token
+* O handler da rota de criação com envio de e-mail
+* O template do e-mail
+* A lógica da página `/ticket/[token]`
+
+Só diz qual framework estás a usar (ex: **Next.js**?).
