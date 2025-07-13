@@ -84,7 +84,7 @@ export class TicketsService {
 `;
 
       await this.emailService.sendEmail(
-        creator.email,
+        creator.email ?? ticket?.externalEmail,
         'Ticket Criado',
         emailHtml,
       );
@@ -108,7 +108,7 @@ export class TicketsService {
         title: dto.title,
         description: dto.description,
         priority: dto.priority,
-        slaDeadline: getSLADate(dto.priority), // ajuste conforme regra
+        slaDeadline: getSLADate(dto.priority),  
         externalName: dto.name,
         externalEmail: dto.email,
         organizationId: org.id,
@@ -423,7 +423,7 @@ export class TicketsService {
       <h1>Status do Ticket Atualizado</h1>
     </div>
     <div class="content">
-      <h2>Olá, ${creator.name}!</h2>
+      <h2>Olá, ${creator.name ?? ticket?.externalEmail}!</h2>
       <p>O status do ticket <strong>"${ticket.title}"</strong> foi alterado para:</p>
       <p style="font-size: 18px;"><strong>${this.traduzirStatus(ticket.status)}</strong></p>
       <div class="ticket-info">
@@ -444,7 +444,7 @@ export class TicketsService {
 `;
 
       await this.emailService.sendEmail(
-        creator.email,
+        creator.email ?? ticket?.externalEmail,
         'Atualização de Status do Ticket',
         emailHtml,
       );
