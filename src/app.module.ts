@@ -7,9 +7,16 @@ import { AuthModule } from './auth/auth.module';
 import { WebSocketModule } from './websocket/websocket.module';
 import { EmailService } from './utils/email.service';
 import { PrismaService } from './prisma.service';
+import { OrganizationsModule } from './organizations/organizations.module';
 
 @Module({
-  imports: [UsersModule, AuthModule, WebSocketModule, TicketsModule],
+  imports: [
+    UsersModule,
+    AuthModule,
+    WebSocketModule,
+    TicketsModule,
+    OrganizationsModule,
+  ],
   controllers: [AppController],
   providers: [AppService, PrismaService, EmailService],
 })

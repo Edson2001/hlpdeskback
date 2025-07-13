@@ -14,16 +14,44 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Organization {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  users     User[]
+  plans     Plan[]
+}
+
 model User {
-  id       String    @id @default(uuid())
-  name     String
-  email    String    @unique
-  role     Role      @default(CLIENT)
-  tickets  Ticket[]  @relation("CreatedTickets")
-  enable   Boolean?  @default(false)
-  assigned Ticket[]  @relation("AssignedTickets")
-  comments Comment[]
-  password String
+  id             String        @id @default(uuid())
+  name           String
+  email          String        @unique
+  role           Role          @default(CLIENT)
+  tickets        Ticket[]      @relation("CreatedTickets")
+  enable         Boolean?      @default(false)
+  assigned       Ticket[]      @relation("AssignedTickets")
+  comments       Comment[]
+  password       String
+  Organization   Organization? @relation(fields: [organizationId], references: [id])
+  organizationId String?
+}
+
+model Plan {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  price       Float
+  duration    Int // Duração em dias
+  userLimit   Int // Limite de usuários permitidos no plano
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  Organization   Organization? @relation(fields: [organizationId], references: [id])
+  organizationId String?
 }
 
 model Ticket {

@@ -120,13 +120,36 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.OrganizationScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
   role: 'role',
   enable: 'enable',
-  password: 'password'
+  password: 'password',
+  organizationId: 'organizationId'
+};
+
+exports.Prisma.PlanScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  price: 'price',
+  duration: 'duration',
+  userLimit: 'userLimit',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  organizationId: 'organizationId'
 };
 
 exports.Prisma.TicketScalarFieldEnum = {
@@ -184,7 +207,9 @@ exports.TicketPriority = exports.$Enums.TicketPriority = {
 };
 
 exports.Prisma.ModelName = {
+  Organization: 'Organization',
   User: 'User',
+  Plan: 'Plan',
   Ticket: 'Ticket',
   Comment: 'Comment'
 };
