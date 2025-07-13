@@ -101,4 +101,9 @@ export class TicketsController {
 
     return this.ticketsService.findAllByUser(token);
   }
+
+  @Get('ticket-by-token/:token')
+  async getTicketByToken(@Param('token') token: string) {
+    return this.ticketsService.findOneByToken(token);
+  }
 }
