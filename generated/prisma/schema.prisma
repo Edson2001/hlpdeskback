@@ -15,16 +15,17 @@ datasource db {
 }
 
 model Organization {
-  id        String   @id @default(uuid())
-  name      String
-  email     String
-  slug      String   @unique
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  users     User[]
-  plans     Plan[]
-  tickets   Ticket[] // Adicionado o campo de relação para Ticket
+  id          String   @id @default(uuid())
+  name        String
+  email       String
+  slug        String   @unique
+  phoneNumber String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  users       User[]
+  plans       Plan[]
+  tickets     Ticket[] // Adicionado o campo de relação para Ticket
 }
 
 model User {

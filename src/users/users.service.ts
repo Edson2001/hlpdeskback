@@ -14,9 +14,19 @@ export class UsersService {
     private readonly jwtService: JwtService, // Injete o JwtService
   ) {}
 
-  async create(createUserDto: CreateUserDto) {
+  async create(createUserDto: any) {
+
+    const payloadUser = this.jwtService.verify(createUserDto?.token); // Decodifica o token
+    console.log(payloadUser, 'payload');
+    const userAdmin = await this.usersRepository.findOneByEmail(payloadUser.email); // Busca o usuário pelo email (sub)
+    if (!userAdmin) {
+      throw new NotFoundException('Usuário não encontrado');
+    }
+    console.log(userAdmin, "userAdmin")
+    delete createUserDto?.token
     const user = await this.usersRepository.create({
       ...createUserDto,
+      organizationId: userAdmin.organizationId, // Associa o usuário à organização
       // enable: false,
     });
 
@@ -197,12 +207,12 @@ export class UsersService {
   async getLoggedInUser(token: string) {
     try {
       const payload = this.jwtService.verify(token); // Decodifica o token
-      console.log(payload, "payload")
+      console.log(payload, 'payload');
       const user = await this.usersRepository.findOneByEmail(payload.email); // Busca o usuário pelo email (sub)
       if (!user) {
         throw new NotFoundException('Usuário não encontrado');
       }
-      console.log(user, "console.logconsole.logconsole.logconsole.log")
+      console.log(user, 'console.logconsole.logconsole.logconsole.log');
       return user;
     } catch (error) {
       console.error('Erro ao verificar o token:', error);
