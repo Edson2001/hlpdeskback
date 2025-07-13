@@ -8,13 +8,14 @@ import {
   Delete,
   Patch,
   UseGuards,
+  Req,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { TicketsService } from './tickets.service';
 import { CreateTicketDto } from './dto/create-ticket.dto';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('tickets')
-@UseGuards(AuthGuard('jwt'))
 export class TicketsController {
   constructor(private readonly ticketsService: TicketsService) {}
 
@@ -66,5 +67,28 @@ export class TicketsController {
     @Body('authorId') authorId: string,
   ) {
     return this.ticketsService.addComment(ticketId, content, authorId);
+  }
+
+  @Get('/me/data')
+  @UseGuards(AuthGuard('jwt'))
+  async getMyTickets(@Req() req) {
+    const authHeader = req.headers.authorization;
+    let token: string;
+
+    if (authHeader) {
+      const tokenParts = authHeader.split(' ');
+      if (tokenParts.length !== 2 || tokenParts[0] !== 'Bearer') {
+        throw new UnauthorizedException('Formato do token inválido');
+      }
+      token = tokenParts[1];
+    } else {
+      // Verifica o cookie 'token'
+      token = req.cookies?.token;
+      if (!token) {
+        throw new UnauthorizedException('Token de autenticação não fornecido');
+      }
+    }
+
+    return this.ticketsService.findAllByUser(token);
   }
 }

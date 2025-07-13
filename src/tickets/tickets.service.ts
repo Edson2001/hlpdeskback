@@ -1,18 +1,23 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTicketDto } from './dto/create-ticket.dto';
 import { TicketsRepository } from './tickets.repository';
 import { getSLADate } from 'src/utils/sla';
 import { EmailService } from 'src/utils/email.service';
 import { UsersService } from 'src/users/users.service';
 import { CommentGateway } from '../websocket/comment.gateway';
-
+import { JwtService } from '@nestjs/jwt';
+import { randomBytes } from 'crypto';
+import { CreateExternalTicketDto } from './dto/CreateExternalTicketDto.dto';
+import { addDays } from 'date-fns';
+import { PrismaService } from 'src/prisma.service';
 @Injectable()
 export class TicketsService {
   constructor(
     private readonly ticketsRepository: TicketsRepository,
     private readonly emailService: EmailService,
     private readonly usersService: UsersService,
-    //private readonly commentGateway: CommentGateway, // Injetar o CommentGateway
+    private readonly jwtService: JwtService,
+    private readonly prisma: PrismaService, // Nome consistente
   ) {}
 
   async create(createTicketDto: CreateTicketDto) {
@@ -91,6 +96,130 @@ export class TicketsService {
     return ticket;
   }
 
+  async createExternalTicket(dto: CreateExternalTicketDto, orgSlug: string) {
+    const org = await this.prisma.organization.findUnique({
+      where: { slug: orgSlug },
+    });
+
+    if (!org) throw new NotFoundException('Organização não encontrada');
+
+    const ticket = await this.prisma.ticket.create({
+      data: {
+        title: dto.title,
+        description: dto.description,
+        priority: dto.priority,
+        slaDeadline: getSLADate(dto.priority), // ajuste conforme regra
+        externalName: dto.name,
+        externalEmail: dto.email,
+        organizationId: org.id,
+      },
+    });
+
+    const token = randomBytes(32).toString('hex');
+
+    await this.prisma.ticketAccessToken.create({
+      data: {
+        ticketId: ticket.id,
+        token,
+        expiresAt: addDays(new Date(), 7), // opcional
+      },
+    });
+
+    const htmlFile = `
+      <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Token de Acesso ao Ticket</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #007bff;
+            color: #ffffff;
+            border-radius: 8px 8px 0 0;
+        }
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+        .content {
+            padding: 20px;
+            color: #555555;
+            line-height: 1.6;
+        }
+        .content h2 {
+            color: #333333;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .token-box {
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 18px;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            color: #777777;
+            font-size: 14px;
+            border-top: 1px solid #eeeeee;
+            margin-top: 20px;
+        }
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>Token de Acesso ao Ticket</h1>
+        </div>
+        <div class="content">
+            <h2>Olá!</h2>
+            <p>Você recebeu um token de acesso para acompanhar o seu ticket na nossa plataforma de suporte. Utilize o token abaixo para acessar o ticket:</p>
+            <div class="token-box">
+                ${token}
+            </div>
+            <p>Para acessar o ticket, clique no link abaixo:</p>
+            <p><a href="http://localhost:3000/tickets/?token=${token}">Acessar Ticket</a></p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2025 Plataforma de Suporte. Todos os direitos reservados.</p>
+            <p><a href="http://suaplataforma.com">Visite nosso site</a></p>
+        </div>
+    </div>
+</body>
+</html>
+    `;
+
+    await this.emailService.sendEmail(dto.email, 'Ticket Criado', htmlFile);
+
+    return { message: 'Ticket criado com sucesso' };
+  }
+
   traduzirPrioridade(priority: 'LOW' | 'MEDIUM' | 'HIGH' | 'URGENT'): string {
     switch (priority) {
       case 'LOW':
@@ -117,6 +246,41 @@ export class TicketsService {
 
   findAll() {
     return this.ticketsRepository.findAll({ orderBy: { createdAt: 'desc' } });
+  }
+
+  async findAllByUser(token: string) {
+    const payload = this.jwtService.verify(token);
+    const user = await this.usersService.findOneByEmail(payload.email);
+    const userId = user?.id;
+    const userRole = user?.role;
+
+    if (!userId || !userRole) {
+      throw new Error('Dados do usuário não encontrados no token');
+    }
+
+    const where: any = {};
+
+    if (userRole === 'CLIENT') {
+      where.createdById = userId;
+    } else if (userRole === 'AGENT') {
+      console.log('AGENT******');
+      where.OR = [{ createdById: userId }, { assignedToId: userId }];
+    }
+    // ADMIN não precisa de filtro (vê tudo)
+
+    return this.ticketsRepository.findAll({
+      where,
+      include: {
+        comments: {
+          include: {
+            author: true,
+          },
+        },
+        assignedTo: true,
+        createdBy: true,
+      },
+      orderBy: { createdAt: 'desc' },
+    });
   }
 
   findOne(id: string) {
@@ -216,7 +380,7 @@ export class TicketsService {
     const slaDeadline = fullTicket.slaDeadline.toLocaleString('pt-BR');
 
     // Notificar criador
-    const creator = await this.usersService.findOne(fullTicket.createdById);
+    const creator = await this.usersService.findOne(String(fullTicket.createdById));
     if (creator) {
       /*  const emailHtml = `
             <h2>Olá, ${creator.name}!</h2>

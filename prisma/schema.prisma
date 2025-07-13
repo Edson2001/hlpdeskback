@@ -14,36 +14,80 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Organization {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  slug      String   @unique
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  users     User[]
+  plans     Plan[]
+  tickets   Ticket[] // Adicionado o campo de relação para Ticket
+}
 
 model User {
+  id             String        @id @default(uuid())
+  name           String
+  email          String        @unique
+  role           Role          @default(CLIENT)
+  tickets        Ticket[]      @relation("CreatedTickets")
+  enable         Boolean?      @default(false)
+  assigned       Ticket[]      @relation("AssignedTickets")
+  comments       Comment[]
+  password       String
+  Organization   Organization? @relation(fields: [organizationId], references: [id])
+  organizationId String?
+}
+
+model TicketAccessToken {
   id        String    @id @default(uuid())
-  name      String
-  email     String    @unique
-  role      Role      @default(CLIENT)
-  tickets   Ticket[]  @relation("CreatedTickets")
-  enable Boolean? @default(false)
-  assigned  Ticket[]  @relation("AssignedTickets")
-  comments  Comment[]
-  password String
+  ticketId  String
+  ticket    Ticket    @relation(fields: [ticketId], references: [id])
+  token     String    @unique
+  createdAt DateTime  @default(now())
+  expiresAt DateTime? // opcional: pode deixar nulo para acesso eterno
+}
+
+model Plan {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  price       Float
+  duration    Int // Duração em dias
+  userLimit   Int // Limite de usuários permitidos no plano
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  Organization   Organization? @relation(fields: [organizationId], references: [id])
+  organizationId String?
 }
 
 model Ticket {
-  id           String    @id @default(uuid())
-  title        String
-  description  String
-  status       TicketStatus @default(OPEN)
-  priority     TicketPriority
-  slaDeadline  DateTime
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id          String         @id @default(uuid())
+  title       String
+  description String
+  status      TicketStatus   @default(OPEN)
+  priority    TicketPriority
+  slaDeadline DateTime
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
 
-  createdById  String
-  createdBy    User     @relation("CreatedTickets", fields: [createdById], references: [id])
-  
+  createdById String?
+  createdBy   User?   @relation("CreatedTickets", fields: [createdById], references: [id])
+
   assignedToId String?
-  assignedTo   User?    @relation("AssignedTickets", fields: [assignedToId], references: [id])
-  
-  comments     Comment[]
+  assignedTo   User?   @relation("AssignedTickets", fields: [assignedToId], references: [id])
+
+  comments           Comment[]
+  ticketAccessTokens TicketAccessToken[] // Adicionado o campo de relação para TicketAccessToken
+
+  externalName   String?
+  externalEmail  String?
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id])
 }
 
 model Comment {
