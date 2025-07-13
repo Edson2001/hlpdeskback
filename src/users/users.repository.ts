@@ -24,8 +24,9 @@ export class UsersRepository {
       }
 
       // Criar o usuário
+      console.log(createUserDto, "createUserDtocreateUserDto")
       return await this.prisma.user.create({
-        data: createUserDto,
+        data: createUserDto as any,
       });
     } catch (error) {
       if (error.code === 'P2002') {

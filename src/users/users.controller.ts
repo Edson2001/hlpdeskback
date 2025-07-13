@@ -17,13 +17,33 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { NotFoundException, BadRequestException } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
+
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  @UseGuards(AuthGuard('jwt'))
+  create(@Body() createUserDto: CreateUserDto, @Req() req) {
+
+    const authHeader = req.headers.authorization;
+    let token: string;
+
+    if (authHeader) {
+      const tokenParts = authHeader.split(' ');
+      if (tokenParts.length !== 2 || tokenParts[0] !== 'Bearer') {
+        throw new UnauthorizedException('Formato do token inválido');
+      }
+      token = tokenParts[1];
+    } else {
+      // Verifica o cookie 'token'
+      token = req.cookies?.token;
+      if (!token) {
+        throw new UnauthorizedException('Token de autenticação não fornecido');
+      }
+    }
+
+    return this.usersService.create({...createUserDto, token});
   }
 
   @Get()

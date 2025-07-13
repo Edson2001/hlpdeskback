@@ -1,10 +1,9 @@
-import { Role } from "generated/prisma";
-
- 
+import { Role } from 'generated/prisma';
 
 export class CreateUserDto {
   name: string;
   email: string;
-  role: Role; // Use o tipo Role em vez de string
-  password: string
+  password: string;
+  role?: string; // Opcional, se já existir
+  OrganizationId?: string; // Adicionar este campo
 }

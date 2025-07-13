@@ -253,6 +253,7 @@ export class TicketsService {
     const user = await this.usersService.findOneByEmail(payload.email);
     const userId = user?.id;
     const userRole = user?.role;
+    const userOrganizationId = user?.organizationId; // Assumindo que o usuário tem um campo organizationId
 
     if (!userId || !userRole) {
       throw new Error('Dados do usuário não encontrados no token');
@@ -263,10 +264,13 @@ export class TicketsService {
     if (userRole === 'CLIENT') {
       where.createdById = userId;
     } else if (userRole === 'AGENT') {
-      console.log('AGENT******');
       where.OR = [{ createdById: userId }, { assignedToId: userId }];
     }
-    // ADMIN não precisa de filtro (vê tudo)
+
+    // Adicionar filtro por organização, se o usuário estiver associado a uma
+    if (userOrganizationId) {
+      where.organizationId = userOrganizationId;
+    }
 
     return this.ticketsRepository.findAll({
       where,
@@ -380,7 +384,9 @@ export class TicketsService {
     const slaDeadline = fullTicket.slaDeadline.toLocaleString('pt-BR');
 
     // Notificar criador
-    const creator = await this.usersService.findOne(String(fullTicket.createdById));
+    const creator = await this.usersService.findOne(
+      String(fullTicket.createdById),
+    );
     if (creator) {
       /*  const emailHtml = `
             <h2>Olá, ${creator.name}!</h2>

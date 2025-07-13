@@ -10,10 +10,12 @@ import {
   UseGuards,
   Req,
   UnauthorizedException,
+  Query,
 } from '@nestjs/common';
 import { TicketsService } from './tickets.service';
 import { CreateTicketDto } from './dto/create-ticket.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { CreateExternalTicketDto } from './dto/CreateExternalTicketDto.dto';
 
 @Controller('tickets')
 export class TicketsController {
@@ -67,6 +69,14 @@ export class TicketsController {
     @Body('authorId') authorId: string,
   ) {
     return this.ticketsService.addComment(ticketId, content, authorId);
+  }
+
+  @Post('external')
+  async createExternalTicket(
+    @Body() dto: CreateExternalTicketDto,
+    @Query('orgSlug') orgSlug: string,
+  ) {
+    return this.ticketsService.createExternalTicket(dto, orgSlug);
   }
 
   @Get('/me/data')
