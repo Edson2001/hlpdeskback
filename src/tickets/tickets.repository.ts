@@ -13,19 +13,8 @@ export class TicketsRepository {
     });
   }
 
-  async findAll(options?: { orderBy?: { [key: string]: 'asc' | 'desc' } }) {
-    return this.prisma.ticket.findMany({
-      orderBy: options?.orderBy,
-      include: {
-        comments: {
-          include: {
-            author: true,
-          },
-        },
-        assignedTo: true,
-        createdBy: true,
-      },
-    });
+  async findAll(params?: any) {
+    return this.prisma.ticket.findMany(params);
   }
 
   async findOne(id: string) {
@@ -63,9 +52,9 @@ export class TicketsRepository {
         ticketId,
         authorId,
       },
-      include:{
-        author: true
-      }
+      include: {
+        author: true,
+      },
     });
   }
 }

@@ -5,6 +5,7 @@ import { getSLADate } from 'src/utils/sla';
 import { EmailService } from 'src/utils/email.service';
 import { UsersService } from 'src/users/users.service';
 import { CommentGateway } from '../websocket/comment.gateway';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class TicketsService {
@@ -12,6 +13,8 @@ export class TicketsService {
     private readonly ticketsRepository: TicketsRepository,
     private readonly emailService: EmailService,
     private readonly usersService: UsersService,
+    private readonly jwtService: JwtService,
+
     //private readonly commentGateway: CommentGateway, // Injetar o CommentGateway
   ) {}
 
@@ -117,6 +120,42 @@ export class TicketsService {
 
   findAll() {
     return this.ticketsRepository.findAll({ orderBy: { createdAt: 'desc' } });
+  }
+
+  async findAllByUser(token: string) {
+    const payload = this.jwtService.verify(token);
+    const user = await this.usersService.findOneByEmail(payload.email);
+    const userId = user?.id;
+    const userRole = user?.role;
+
+    if (!userId || !userRole) {
+      throw new Error('Dados do usuário não encontrados no token');
+    }
+
+    const where: any = {};
+
+    if (userRole === 'CLIENT') {
+      where.createdById = userId;
+    } else if (userRole === 'AGENT') {
+      console.log("AGENT******")
+      where.OR = [{ createdById: userId }, { assignedToId: userId }];
+    }
+    // ADMIN não precisa de filtro (vê tudo)
+
+    return this.ticketsRepository.findAll({
+      where,
+      include: {
+        comments: {
+          include: {
+            author: true,
+          },
+        },
+        assignedTo: true,
+        createdBy: true,
+      },
+      orderBy: { createdAt: 'desc' },
+      
+    });
   }
 
   findOne(id: string) {
