@@ -21,6 +21,10 @@ export class TicketsService {
   ) {}
 
   async create(createTicketDto: CreateTicketDto) {
+    
+    const user = await this.usersService.findOne(createTicketDto.createdById)
+
+
     const ticketData = {
       title: createTicketDto.title,
       description: createTicketDto.description,
@@ -28,7 +32,10 @@ export class TicketsService {
       status: 'OPEN',
       createdById: createTicketDto.createdById,
       slaDeadline: getSLADate(createTicketDto.priority),
+      organizationId: user?.organizationId as any
     };
+
+
     const ticket = await this.ticketsRepository.create(ticketData);
 
     // Enviar email para o criador do ticket

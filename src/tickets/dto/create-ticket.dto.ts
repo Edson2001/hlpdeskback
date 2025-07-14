@@ -10,4 +10,5 @@ export class CreateTicketDto {
   createdById: string;
   slaDeadline: Date;
   assignedToId?: string;
+  organizationId?: string
 }
