@@ -7411,6 +7411,8 @@ export namespace Prisma {
     createdAt: Date | null
     ticketId: string | null
     authorId: string | null
+    externalName: string | null
+    externalEmail: string | null
   }
 
   export type CommentMaxAggregateOutputType = {
@@ -7419,6 +7421,8 @@ export namespace Prisma {
     createdAt: Date | null
     ticketId: string | null
     authorId: string | null
+    externalName: string | null
+    externalEmail: string | null
   }
 
   export type CommentCountAggregateOutputType = {
@@ -7427,6 +7431,8 @@ export namespace Prisma {
     createdAt: number
     ticketId: number
     authorId: number
+    externalName: number
+    externalEmail: number
     _all: number
   }
 
@@ -7437,6 +7443,8 @@ export namespace Prisma {
     createdAt?: true
     ticketId?: true
     authorId?: true
+    externalName?: true
+    externalEmail?: true
   }
 
   export type CommentMaxAggregateInputType = {
@@ -7445,6 +7453,8 @@ export namespace Prisma {
     createdAt?: true
     ticketId?: true
     authorId?: true
+    externalName?: true
+    externalEmail?: true
   }
 
   export type CommentCountAggregateInputType = {
@@ -7453,6 +7463,8 @@ export namespace Prisma {
     createdAt?: true
     ticketId?: true
     authorId?: true
+    externalName?: true
+    externalEmail?: true
     _all?: true
   }
 
@@ -7533,7 +7545,9 @@ export namespace Prisma {
     content: string
     createdAt: Date
     ticketId: string
-    authorId: string
+    authorId: string | null
+    externalName: string | null
+    externalEmail: string | null
     _count: CommentCountAggregateOutputType | null
     _min: CommentMinAggregateOutputType | null
     _max: CommentMaxAggregateOutputType | null
@@ -7559,8 +7573,10 @@ export namespace Prisma {
     createdAt?: boolean
     ticketId?: boolean
     authorId?: boolean
+    externalName?: boolean
+    externalEmail?: boolean
     ticket?: boolean | TicketDefaultArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Comment$authorArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
 
   export type CommentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7569,8 +7585,10 @@ export namespace Prisma {
     createdAt?: boolean
     ticketId?: boolean
     authorId?: boolean
+    externalName?: boolean
+    externalEmail?: boolean
     ticket?: boolean | TicketDefaultArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Comment$authorArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
 
   export type CommentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7579,8 +7597,10 @@ export namespace Prisma {
     createdAt?: boolean
     ticketId?: boolean
     authorId?: boolean
+    externalName?: boolean
+    externalEmail?: boolean
     ticket?: boolean | TicketDefaultArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Comment$authorArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
 
   export type CommentSelectScalar = {
@@ -7589,34 +7609,38 @@ export namespace Prisma {
     createdAt?: boolean
     ticketId?: boolean
     authorId?: boolean
+    externalName?: boolean
+    externalEmail?: boolean
   }
 
-  export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "createdAt" | "ticketId" | "authorId", ExtArgs["result"]["comment"]>
+  export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "createdAt" | "ticketId" | "authorId" | "externalName" | "externalEmail", ExtArgs["result"]["comment"]>
   export type CommentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ticket?: boolean | TicketDefaultArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Comment$authorArgs<ExtArgs>
   }
   export type CommentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ticket?: boolean | TicketDefaultArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Comment$authorArgs<ExtArgs>
   }
   export type CommentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ticket?: boolean | TicketDefaultArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Comment$authorArgs<ExtArgs>
   }
 
   export type $CommentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Comment"
     objects: {
       ticket: Prisma.$TicketPayload<ExtArgs>
-      author: Prisma.$UserPayload<ExtArgs>
+      author: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       content: string
       createdAt: Date
       ticketId: string
-      authorId: string
+      authorId: string | null
+      externalName: string | null
+      externalEmail: string | null
     }, ExtArgs["result"]["comment"]>
     composites: {}
   }
@@ -8012,7 +8036,7 @@ export namespace Prisma {
   export interface Prisma__CommentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     ticket<T extends TicketDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TicketDefaultArgs<ExtArgs>>): Prisma__TicketClient<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    author<T extends Comment$authorArgs<ExtArgs> = {}>(args?: Subset<T, Comment$authorArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8047,6 +8071,8 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"Comment", 'DateTime'>
     readonly ticketId: FieldRef<"Comment", 'String'>
     readonly authorId: FieldRef<"Comment", 'String'>
+    readonly externalName: FieldRef<"Comment", 'String'>
+    readonly externalEmail: FieldRef<"Comment", 'String'>
   }
     
 
@@ -8443,6 +8469,25 @@ export namespace Prisma {
   }
 
   /**
+   * Comment.author
+   */
+  export type Comment$authorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
    * Comment without action
    */
   export type CommentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8553,7 +8598,9 @@ export namespace Prisma {
     content: 'content',
     createdAt: 'createdAt',
     ticketId: 'ticketId',
-    authorId: 'authorId'
+    authorId: 'authorId',
+    externalName: 'externalName',
+    externalEmail: 'externalEmail'
   };
 
   export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
@@ -9098,9 +9145,11 @@ export namespace Prisma {
     content?: StringFilter<"Comment"> | string
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     ticketId?: StringFilter<"Comment"> | string
-    authorId?: StringFilter<"Comment"> | string
+    authorId?: StringNullableFilter<"Comment"> | string | null
+    externalName?: StringNullableFilter<"Comment"> | string | null
+    externalEmail?: StringNullableFilter<"Comment"> | string | null
     ticket?: XOR<TicketScalarRelationFilter, TicketWhereInput>
-    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    author?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type CommentOrderByWithRelationInput = {
@@ -9108,7 +9157,9 @@ export namespace Prisma {
     content?: SortOrder
     createdAt?: SortOrder
     ticketId?: SortOrder
-    authorId?: SortOrder
+    authorId?: SortOrderInput | SortOrder
+    externalName?: SortOrderInput | SortOrder
+    externalEmail?: SortOrderInput | SortOrder
     ticket?: TicketOrderByWithRelationInput
     author?: UserOrderByWithRelationInput
   }
@@ -9121,9 +9172,11 @@ export namespace Prisma {
     content?: StringFilter<"Comment"> | string
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     ticketId?: StringFilter<"Comment"> | string
-    authorId?: StringFilter<"Comment"> | string
+    authorId?: StringNullableFilter<"Comment"> | string | null
+    externalName?: StringNullableFilter<"Comment"> | string | null
+    externalEmail?: StringNullableFilter<"Comment"> | string | null
     ticket?: XOR<TicketScalarRelationFilter, TicketWhereInput>
-    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    author?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
   export type CommentOrderByWithAggregationInput = {
@@ -9131,7 +9184,9 @@ export namespace Prisma {
     content?: SortOrder
     createdAt?: SortOrder
     ticketId?: SortOrder
-    authorId?: SortOrder
+    authorId?: SortOrderInput | SortOrder
+    externalName?: SortOrderInput | SortOrder
+    externalEmail?: SortOrderInput | SortOrder
     _count?: CommentCountOrderByAggregateInput
     _max?: CommentMaxOrderByAggregateInput
     _min?: CommentMinOrderByAggregateInput
@@ -9145,7 +9200,9 @@ export namespace Prisma {
     content?: StringWithAggregatesFilter<"Comment"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Comment"> | Date | string
     ticketId?: StringWithAggregatesFilter<"Comment"> | string
-    authorId?: StringWithAggregatesFilter<"Comment"> | string
+    authorId?: StringNullableWithAggregatesFilter<"Comment"> | string | null
+    externalName?: StringNullableWithAggregatesFilter<"Comment"> | string | null
+    externalEmail?: StringNullableWithAggregatesFilter<"Comment"> | string | null
   }
 
   export type OrganizationCreateInput = {
@@ -9584,8 +9641,10 @@ export namespace Prisma {
     id?: string
     content: string
     createdAt?: Date | string
+    externalName?: string | null
+    externalEmail?: string | null
     ticket: TicketCreateNestedOneWithoutCommentsInput
-    author: UserCreateNestedOneWithoutCommentsInput
+    author?: UserCreateNestedOneWithoutCommentsInput
   }
 
   export type CommentUncheckedCreateInput = {
@@ -9593,15 +9652,19 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     ticketId: string
-    authorId: string
+    authorId?: string | null
+    externalName?: string | null
+    externalEmail?: string | null
   }
 
   export type CommentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalName?: NullableStringFieldUpdateOperationsInput | string | null
+    externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
     ticket?: TicketUpdateOneRequiredWithoutCommentsNestedInput
-    author?: UserUpdateOneRequiredWithoutCommentsNestedInput
+    author?: UserUpdateOneWithoutCommentsNestedInput
   }
 
   export type CommentUncheckedUpdateInput = {
@@ -9609,7 +9672,9 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ticketId?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalName?: NullableStringFieldUpdateOperationsInput | string | null
+    externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CommentCreateManyInput = {
@@ -9617,13 +9682,17 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     ticketId: string
-    authorId: string
+    authorId?: string | null
+    externalName?: string | null
+    externalEmail?: string | null
   }
 
   export type CommentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalName?: NullableStringFieldUpdateOperationsInput | string | null
+    externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CommentUncheckedUpdateManyInput = {
@@ -9631,7 +9700,9 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ticketId?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalName?: NullableStringFieldUpdateOperationsInput | string | null
+    externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -10137,17 +10208,14 @@ export namespace Prisma {
     _max?: NestedEnumTicketPriorityFilter<$PrismaModel>
   }
 
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
-  }
-
   export type CommentCountOrderByAggregateInput = {
     id?: SortOrder
     content?: SortOrder
     createdAt?: SortOrder
     ticketId?: SortOrder
     authorId?: SortOrder
+    externalName?: SortOrder
+    externalEmail?: SortOrder
   }
 
   export type CommentMaxOrderByAggregateInput = {
@@ -10156,6 +10224,8 @@ export namespace Prisma {
     createdAt?: SortOrder
     ticketId?: SortOrder
     authorId?: SortOrder
+    externalName?: SortOrder
+    externalEmail?: SortOrder
   }
 
   export type CommentMinOrderByAggregateInput = {
@@ -10164,6 +10234,8 @@ export namespace Prisma {
     createdAt?: SortOrder
     ticketId?: SortOrder
     authorId?: SortOrder
+    externalName?: SortOrder
+    externalEmail?: SortOrder
   }
 
   export type UserCreateNestedManyWithoutOrganizationInput = {
@@ -10668,10 +10740,12 @@ export namespace Prisma {
     update?: XOR<XOR<TicketUpdateToOneWithWhereWithoutCommentsInput, TicketUpdateWithoutCommentsInput>, TicketUncheckedUpdateWithoutCommentsInput>
   }
 
-  export type UserUpdateOneRequiredWithoutCommentsNestedInput = {
+  export type UserUpdateOneWithoutCommentsNestedInput = {
     create?: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
     connectOrCreate?: UserCreateOrConnectWithoutCommentsInput
     upsert?: UserUpsertWithoutCommentsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCommentsInput, UserUpdateWithoutCommentsInput>, UserUncheckedUpdateWithoutCommentsInput>
   }
@@ -11230,6 +11304,8 @@ export namespace Prisma {
     id?: string
     content: string
     createdAt?: Date | string
+    externalName?: string | null
+    externalEmail?: string | null
     ticket: TicketCreateNestedOneWithoutCommentsInput
   }
 
@@ -11238,6 +11314,8 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     ticketId: string
+    externalName?: string | null
+    externalEmail?: string | null
   }
 
   export type CommentCreateOrConnectWithoutAuthorInput = {
@@ -11337,7 +11415,9 @@ export namespace Prisma {
     content?: StringFilter<"Comment"> | string
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     ticketId?: StringFilter<"Comment"> | string
-    authorId?: StringFilter<"Comment"> | string
+    authorId?: StringNullableFilter<"Comment"> | string | null
+    externalName?: StringNullableFilter<"Comment"> | string | null
+    externalEmail?: StringNullableFilter<"Comment"> | string | null
   }
 
   export type OrganizationUpsertWithoutUsersInput = {
@@ -11591,14 +11671,18 @@ export namespace Prisma {
     id?: string
     content: string
     createdAt?: Date | string
-    author: UserCreateNestedOneWithoutCommentsInput
+    externalName?: string | null
+    externalEmail?: string | null
+    author?: UserCreateNestedOneWithoutCommentsInput
   }
 
   export type CommentUncheckedCreateWithoutTicketInput = {
     id?: string
     content: string
     createdAt?: Date | string
-    authorId: string
+    authorId?: string | null
+    externalName?: string | null
+    externalEmail?: string | null
   }
 
   export type CommentCreateOrConnectWithoutTicketInput = {
@@ -12153,6 +12237,8 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     ticketId: string
+    externalName?: string | null
+    externalEmail?: string | null
   }
 
   export type TicketUpdateWithoutCreatedByInput = {
@@ -12257,6 +12343,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalName?: NullableStringFieldUpdateOperationsInput | string | null
+    externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
     ticket?: TicketUpdateOneRequiredWithoutCommentsNestedInput
   }
 
@@ -12265,6 +12353,8 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ticketId?: StringFieldUpdateOperationsInput | string
+    externalName?: NullableStringFieldUpdateOperationsInput | string | null
+    externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CommentUncheckedUpdateManyWithoutAuthorInput = {
@@ -12272,13 +12362,17 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ticketId?: StringFieldUpdateOperationsInput | string
+    externalName?: NullableStringFieldUpdateOperationsInput | string | null
+    externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CommentCreateManyTicketInput = {
     id?: string
     content: string
     createdAt?: Date | string
-    authorId: string
+    authorId?: string | null
+    externalName?: string | null
+    externalEmail?: string | null
   }
 
   export type TicketAccessTokenCreateManyTicketInput = {
@@ -12292,21 +12386,27 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: UserUpdateOneRequiredWithoutCommentsNestedInput
+    externalName?: NullableStringFieldUpdateOperationsInput | string | null
+    externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    author?: UserUpdateOneWithoutCommentsNestedInput
   }
 
   export type CommentUncheckedUpdateWithoutTicketInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalName?: NullableStringFieldUpdateOperationsInput | string | null
+    externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CommentUncheckedUpdateManyWithoutTicketInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalName?: NullableStringFieldUpdateOperationsInput | string | null
+    externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TicketAccessTokenUpdateWithoutTicketInput = {

@@ -21,15 +21,23 @@ export class CommentGateway {
   @SubscribeMessage('addComment')
   async handleAddComment(
     @MessageBody()
-    data: { ticketId: string; content: string; authorId: string },
+    data: {
+      ticketId: string;
+      authorId?: string;
+      content: string;
+      externalName?: string;
+      externalEmail?: string;
+    },
     @ConnectedSocket() client: Socket,
   ) {
-    console.log(data, "addCommentaddComment")
+    console.log(data, 'addCommentaddComment');
     // Cadastra o comentário no banco de dados
     const comment = await this.ticketsService.addComment(
       data.ticketId,
       data.content,
       data.authorId,
+      data.externalName,
+      data.externalEmail,
     );
 
     // Emite o comentário para todos os clientes

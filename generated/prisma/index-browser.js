@@ -183,7 +183,9 @@ exports.Prisma.CommentScalarFieldEnum = {
   content: 'content',
   createdAt: 'createdAt',
   ticketId: 'ticketId',
-  authorId: 'authorId'
+  authorId: 'authorId',
+  externalName: 'externalName',
+  externalEmail: 'externalEmail'
 };
 
 exports.Prisma.SortOrder = {

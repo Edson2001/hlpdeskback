@@ -45,12 +45,25 @@ export class TicketsRepository {
     });
   }
 
-  async addComment(ticketId: string, content: string, authorId: string) {
+  async addComment(
+    ticketId: string,
+    content: string,
+    authorId?: string,
+    externalName?: string,
+    externalEmail?: string,
+  ) {
+    console.log(content,
+      ticketId,
+      authorId,
+      externalName,
+      externalEmail,"===============000")
     return this.prisma.comment.create({
       data: {
         content,
         ticketId,
         authorId,
+        externalName,
+        externalEmail,
       },
       include: {
         author: true,

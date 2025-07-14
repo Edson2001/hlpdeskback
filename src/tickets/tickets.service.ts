@@ -21,6 +21,10 @@ export class TicketsService {
   ) {}
 
   async create(createTicketDto: CreateTicketDto) {
+    
+    const user = await this.usersService.findOne(createTicketDto.createdById)
+
+
     const ticketData = {
       title: createTicketDto.title,
       description: createTicketDto.description,
@@ -28,7 +32,10 @@ export class TicketsService {
       status: 'OPEN',
       createdById: createTicketDto.createdById,
       slaDeadline: getSLADate(createTicketDto.priority),
+      organizationId: user?.organizationId as any
     };
+
+
     const ticket = await this.ticketsRepository.create(ticketData);
 
     // Enviar email para o criador do ticket
@@ -108,7 +115,7 @@ export class TicketsService {
         title: dto.title,
         description: dto.description,
         priority: dto.priority,
-        slaDeadline: getSLADate(dto.priority),  
+        slaDeadline: getSLADate(dto.priority),
         externalName: dto.name,
         externalEmail: dto.email,
         organizationId: org.id,
@@ -204,7 +211,7 @@ export class TicketsService {
                 ${token}
             </div>
             <p>Para acessar o ticket, clique no link abaixo:</p>
-            <p><a href="http://localhost:3000/tickets/?token=${token}">Acessar Ticket</a></p>
+            <p><a href="http://localhost:3000/ticket?token=${token}">Acessar Ticket</a></p>
         </div>
         <div class="footer">
             <p>&copy; 2025 Plataforma de Suporte. Todos os direitos reservados.</p>
@@ -510,7 +517,60 @@ export class TicketsService {
     return ticket;
   }
 
-  async addComment(ticketId: string, content: string, authorId: string) {
-    return this.ticketsRepository.addComment(ticketId, content, authorId);
+  async addComment(
+    ticketId: string,
+    content: string,
+    authorId?: string,
+    externalName?: string,
+    externalEmail?: string,
+  ) {
+    console.log(
+      content,
+      ticketId,
+      authorId,
+      externalName,
+      externalEmail,
+      '#################',
+    );
+    return this.ticketsRepository.addComment(
+      ticketId,
+      content,
+      authorId,
+      externalName,
+      externalEmail,
+    );
+  }
+
+  async findOneByToken(token: string) {
+    const ticketAccessToken = await this.prisma.ticketAccessToken.findUnique({
+      where: { token },
+      include: {
+        ticket: {
+          include: {
+            comments: {
+              include: {
+                author: true,
+              },
+            },
+            assignedTo: true,
+            createdBy: true,
+          },
+        },
+      },
+    });
+
+    if (!ticketAccessToken) {
+      throw new NotFoundException('Token inválido ou expirado');
+    }
+
+    // Verificar se o token expirou (opcional)
+    if (
+      ticketAccessToken.expiresAt &&
+      new Date() > ticketAccessToken.expiresAt
+    ) {
+      throw new NotFoundException('Token expirado');
+    }
+
+    return ticketAccessToken.ticket;
   }
 }

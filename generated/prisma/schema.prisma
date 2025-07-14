@@ -97,8 +97,11 @@ model Comment {
   createdAt DateTime @default(now())
   ticketId  String
   ticket    Ticket   @relation(fields: [ticketId], references: [id])
-  authorId  String
-  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String?
+  author    User?    @relation(fields: [authorId], references: [id])
+
+  externalName  String?
+  externalEmail String?
 }
 
 enum Role {
