@@ -21,31 +21,37 @@ import { CreateExternalTicketDto } from './dto/CreateExternalTicketDto.dto';
 export class TicketsController {
   constructor(private readonly ticketsService: TicketsService) {}
 
+  @UseGuards(AuthGuard('jwt'))
   @Post()
   create(@Body() createTicketDto: CreateTicketDto) {
     return this.ticketsService.create(createTicketDto);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Get()
   findAll() {
     return this.ticketsService.findAll();
   }
 
+  
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.ticketsService.findOne(id);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Put(':id')
   update(@Param('id') id: string, @Body() updateTicketDto: CreateTicketDto) {
     return this.ticketsService.update(id, updateTicketDto);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.ticketsService.remove(id);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Patch(':id/assign')
   assignTicket(
     @Param('id') ticketId: string,
@@ -98,6 +104,7 @@ export class TicketsController {
         throw new UnauthorizedException('Token de autenticação não fornecido');
       }
     }
+    console.log(token, "*******************")
 
     return this.ticketsService.findAllByUser(token);
   }
