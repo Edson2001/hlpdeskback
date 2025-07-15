@@ -89,6 +89,7 @@ export class TicketsController {
   @UseGuards(AuthGuard('jwt'))
   async getMyTickets(@Req() req) {
     const authHeader = req.headers.authorization;
+    console.log(authHeader, "authHeaderauthHeaderauthHeader")
     let token: string;
 
     if (authHeader) {
