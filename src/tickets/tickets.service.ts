@@ -256,11 +256,16 @@ export class TicketsService {
   }
 
   async findAllByUser(token: string) {
+    
     const payload = this.jwtService.verify(token);
     const user = await this.usersService.findOneByEmail(payload.email);
     const userId = user?.id;
     const userRole = user?.role;
+    
+    console.log(payload, "payload")
     const userOrganizationId = user?.organizationId; // Assumindo que o usuário tem um campo organizationId
+    
+    console.log(userOrganizationId, "userOrganizationId")
 
     if (!userId || !userRole) {
       throw new Error('Dados do usuário não encontrados no token');
