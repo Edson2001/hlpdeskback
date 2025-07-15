@@ -33,7 +33,7 @@ export class UsersService {
     const payload = { username: createUserDto.name, sub: createUserDto.email };
     const token = this.jwtService.sign(payload);
 
-    const confirmationLink = `http://localhost:3000/validate/${token}`;
+    const confirmationLink = `${process.env.FRONT_URL}/validate/${token}`;
 
     // Template HTML de boas-vindas
     const emailHtml = `
@@ -72,7 +72,7 @@ export class UsersService {
                 </div>
                 <div class="footer">
                     <p>&copy; 2025 Plataforma. Todos os direitos reservados.</p>
-                    <p><a href="http://suaplataforma.com/ajuda">Precisa de ajuda?</a></p>
+                    <p><a href="${process.env.FRONT_URL}/ajuda">Precisa de ajuda?</a></p>
                 </div>
             </div>
         </body>
@@ -154,7 +154,7 @@ export class UsersService {
     const payload = { username: user.name, sub: user.email };
     const token = this.jwtService.sign(payload);
 
-    const confirmationLink = `http://localhost:3000/validate/${token}`;
+    const confirmationLink = `${process.env.FRONT_URL}/validate/${token}`;
 
     const emailHtml = `    <!DOCTYPE html>
     <html lang="pt-BR">
@@ -188,7 +188,7 @@ export class UsersService {
             </div>
             <div class="footer">
                 <p>&copy; 2025 Plataforma. Todos os direitos reservados.</p>
-                <p><a href="http://suaplataforma.com/ajuda">Precisa de ajuda?</a></p>
+                <p><a href="${process.env.FRONT_URL}/ajuda">Precisa de ajuda?</a></p>
             </div>
         </div>
     </body>

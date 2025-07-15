@@ -83,7 +83,7 @@ export class TicketsService {
       </div>
       <div class="footer">
         <p>&copy; 2025 Plataforma de Suporte. Todos os direitos reservados.</p>
-        <p><a href="http://suaplataforma.com/tickets">Ver meus tickets</a></p>
+        <p><a href="${process.env.FRONT_URL}/tickets">Ver meus tickets</a></p>
       </div>
     </div>
   </body>
@@ -211,11 +211,11 @@ export class TicketsService {
                 ${token}
             </div>
             <p>Para acessar o ticket, clique no link abaixo:</p>
-            <p><a href="http://localhost:3000/ticket?token=${token}">Acessar Ticket</a></p>
+            <p><a href="${process.env.FRONT_URL}/ticket?token=${token}">Acessar Ticket</a></p>
         </div>
         <div class="footer">
             <p>&copy; 2025 Plataforma de Suporte. Todos os direitos reservados.</p>
-            <p><a href="http://suaplataforma.com">Visite nosso site</a></p>
+            <p><a href="${process.env.FRONT_URL}">Visite nosso site</a></p>
         </div>
     </div>
 </body>
@@ -355,7 +355,7 @@ export class TicketsService {
       </div>
       <div class="footer">
         <p>&copy; 2025 Plataforma de Suporte. Todos os direitos reservados.</p>
-        <p><a href="http://suaplataforma.com/tickets/${ticket.id}">Ver ticket</a></p>
+        <p><a href="${process.env.FRONT_URL}/tickets/${ticket.id}">Ver ticket</a></p>
       </div>
     </div>
   </body>
@@ -401,7 +401,7 @@ export class TicketsService {
             <p><strong>ID:</strong> #${fullTicket.id}</p>
             <p><strong>Descrição:</strong> ${fullTicket.description}</p>
             <p><strong>Prazo SLA:</strong> ${slaDeadline}</p>
-            <p><a href="http://suaplataforma.com/tickets/${fullTicket.id}">Visualizar Ticket</a></p>
+            <p><a href="${process.env.FRONT_URL}/tickets/${fullTicket.id}">Visualizar Ticket</a></p>
         `; */
 
       const emailHtml = `
@@ -443,7 +443,7 @@ export class TicketsService {
     </div>
     <div class="footer">
       <p>&copy; 2025 Plataforma de Suporte. Todos os direitos reservados.</p>
-      <p><a href="http://suaplataforma.com/tickets/${ticket.id}">Ver Ticket</a></p>
+      <p><a href="${process.env.FRONT_URL}/ticket/${ticket.id}">Ver Ticket</a></p>
     </div>
   </div>
 </body>
@@ -500,7 +500,7 @@ export class TicketsService {
     </div>
     <div class="footer">
       <p>&copy; 2025 Plataforma de Suporte. Todos os direitos reservados.</p>
-      <p><a href="http://suaplataforma.com/tickets/${ticket.id}">Ver Ticket</a></p>
+      <p><a href="${process.env.FRONT_URL}/ticket/${ticket.id}">Ver Ticket</a></p>
     </div>
   </div>
 </body>
