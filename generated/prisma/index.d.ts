@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type Organization = $Result.DefaultSelection<Prisma.$OrganizationPayload>
 /**
+ * Model WidgetConfig
+ * 
+ */
+export type WidgetConfig = $Result.DefaultSelection<Prisma.$WidgetConfigPayload>
+/**
  * Model User
  * 
  */
@@ -223,6 +228,16 @@ export class PrismaClient<
     * ```
     */
   get organization(): Prisma.OrganizationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.widgetConfig`: Exposes CRUD operations for the **WidgetConfig** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more WidgetConfigs
+    * const widgetConfigs = await prisma.widgetConfig.findMany()
+    * ```
+    */
+  get widgetConfig(): Prisma.WidgetConfigDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
@@ -714,6 +729,7 @@ export namespace Prisma {
 
   export const ModelName: {
     Organization: 'Organization',
+    WidgetConfig: 'WidgetConfig',
     User: 'User',
     TicketAccessToken: 'TicketAccessToken',
     Plan: 'Plan',
@@ -737,7 +753,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "organization" | "user" | "ticketAccessToken" | "plan" | "ticket" | "comment"
+      modelProps: "organization" | "widgetConfig" | "user" | "ticketAccessToken" | "plan" | "ticket" | "comment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -812,6 +828,80 @@ export namespace Prisma {
           count: {
             args: Prisma.OrganizationCountArgs<ExtArgs>
             result: $Utils.Optional<OrganizationCountAggregateOutputType> | number
+          }
+        }
+      }
+      WidgetConfig: {
+        payload: Prisma.$WidgetConfigPayload<ExtArgs>
+        fields: Prisma.WidgetConfigFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.WidgetConfigFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WidgetConfigPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.WidgetConfigFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WidgetConfigPayload>
+          }
+          findFirst: {
+            args: Prisma.WidgetConfigFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WidgetConfigPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.WidgetConfigFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WidgetConfigPayload>
+          }
+          findMany: {
+            args: Prisma.WidgetConfigFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WidgetConfigPayload>[]
+          }
+          create: {
+            args: Prisma.WidgetConfigCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WidgetConfigPayload>
+          }
+          createMany: {
+            args: Prisma.WidgetConfigCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.WidgetConfigCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WidgetConfigPayload>[]
+          }
+          delete: {
+            args: Prisma.WidgetConfigDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WidgetConfigPayload>
+          }
+          update: {
+            args: Prisma.WidgetConfigUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WidgetConfigPayload>
+          }
+          deleteMany: {
+            args: Prisma.WidgetConfigDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.WidgetConfigUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.WidgetConfigUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WidgetConfigPayload>[]
+          }
+          upsert: {
+            args: Prisma.WidgetConfigUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WidgetConfigPayload>
+          }
+          aggregate: {
+            args: Prisma.WidgetConfigAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateWidgetConfig>
+          }
+          groupBy: {
+            args: Prisma.WidgetConfigGroupByArgs<ExtArgs>
+            result: $Utils.Optional<WidgetConfigGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.WidgetConfigCountArgs<ExtArgs>
+            result: $Utils.Optional<WidgetConfigCountAggregateOutputType> | number
           }
         }
       }
@@ -1270,6 +1360,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     organization?: OrganizationOmit
+    widgetConfig?: WidgetConfigOmit
     user?: UserOmit
     ticketAccessToken?: TicketAccessTokenOmit
     plan?: PlanOmit
@@ -1372,12 +1463,14 @@ export namespace Prisma {
     users: number
     plans: number
     tickets: number
+    widgetConfig: number
   }
 
   export type OrganizationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | OrganizationCountOutputTypeCountUsersArgs
     plans?: boolean | OrganizationCountOutputTypeCountPlansArgs
     tickets?: boolean | OrganizationCountOutputTypeCountTicketsArgs
+    widgetConfig?: boolean | OrganizationCountOutputTypeCountWidgetConfigArgs
   }
 
   // Custom InputTypes
@@ -1410,6 +1503,13 @@ export namespace Prisma {
    */
   export type OrganizationCountOutputTypeCountTicketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TicketWhereInput
+  }
+
+  /**
+   * OrganizationCountOutputType without action
+   */
+  export type OrganizationCountOutputTypeCountWidgetConfigArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WidgetConfigWhereInput
   }
 
 
@@ -1697,6 +1797,7 @@ export namespace Prisma {
     users?: boolean | Organization$usersArgs<ExtArgs>
     plans?: boolean | Organization$plansArgs<ExtArgs>
     tickets?: boolean | Organization$ticketsArgs<ExtArgs>
+    widgetConfig?: boolean | Organization$widgetConfigArgs<ExtArgs>
     _count?: boolean | OrganizationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["organization"]>
 
@@ -1738,6 +1839,7 @@ export namespace Prisma {
     users?: boolean | Organization$usersArgs<ExtArgs>
     plans?: boolean | Organization$plansArgs<ExtArgs>
     tickets?: boolean | Organization$ticketsArgs<ExtArgs>
+    widgetConfig?: boolean | Organization$widgetConfigArgs<ExtArgs>
     _count?: boolean | OrganizationCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type OrganizationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1749,6 +1851,7 @@ export namespace Prisma {
       users: Prisma.$UserPayload<ExtArgs>[]
       plans: Prisma.$PlanPayload<ExtArgs>[]
       tickets: Prisma.$TicketPayload<ExtArgs>[]
+      widgetConfig: Prisma.$WidgetConfigPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2156,6 +2259,7 @@ export namespace Prisma {
     users<T extends Organization$usersArgs<ExtArgs> = {}>(args?: Subset<T, Organization$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     plans<T extends Organization$plansArgs<ExtArgs> = {}>(args?: Subset<T, Organization$plansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     tickets<T extends Organization$ticketsArgs<ExtArgs> = {}>(args?: Subset<T, Organization$ticketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    widgetConfig<T extends Organization$widgetConfigArgs<ExtArgs> = {}>(args?: Subset<T, Organization$widgetConfigArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WidgetConfigPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2653,6 +2757,30 @@ export namespace Prisma {
   }
 
   /**
+   * Organization.widgetConfig
+   */
+  export type Organization$widgetConfigArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WidgetConfig
+     */
+    select?: WidgetConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WidgetConfig
+     */
+    omit?: WidgetConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WidgetConfigInclude<ExtArgs> | null
+    where?: WidgetConfigWhereInput
+    orderBy?: WidgetConfigOrderByWithRelationInput | WidgetConfigOrderByWithRelationInput[]
+    cursor?: WidgetConfigWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WidgetConfigScalarFieldEnum | WidgetConfigScalarFieldEnum[]
+  }
+
+  /**
    * Organization without action
    */
   export type OrganizationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2668,6 +2796,1155 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: OrganizationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model WidgetConfig
+   */
+
+  export type AggregateWidgetConfig = {
+    _count: WidgetConfigCountAggregateOutputType | null
+    _min: WidgetConfigMinAggregateOutputType | null
+    _max: WidgetConfigMaxAggregateOutputType | null
+  }
+
+  export type WidgetConfigMinAggregateOutputType = {
+    id: string | null
+    orgId: string | null
+    buttonText: string | null
+    modalTitle: string | null
+    buttonColor: string | null
+    headerColor: string | null
+    logoUrl: string | null
+    showPriority: boolean | null
+    theme: string | null
+    successMessage: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WidgetConfigMaxAggregateOutputType = {
+    id: string | null
+    orgId: string | null
+    buttonText: string | null
+    modalTitle: string | null
+    buttonColor: string | null
+    headerColor: string | null
+    logoUrl: string | null
+    showPriority: boolean | null
+    theme: string | null
+    successMessage: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WidgetConfigCountAggregateOutputType = {
+    id: number
+    orgId: number
+    buttonText: number
+    modalTitle: number
+    buttonColor: number
+    headerColor: number
+    logoUrl: number
+    showPriority: number
+    theme: number
+    successMessage: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type WidgetConfigMinAggregateInputType = {
+    id?: true
+    orgId?: true
+    buttonText?: true
+    modalTitle?: true
+    buttonColor?: true
+    headerColor?: true
+    logoUrl?: true
+    showPriority?: true
+    theme?: true
+    successMessage?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WidgetConfigMaxAggregateInputType = {
+    id?: true
+    orgId?: true
+    buttonText?: true
+    modalTitle?: true
+    buttonColor?: true
+    headerColor?: true
+    logoUrl?: true
+    showPriority?: true
+    theme?: true
+    successMessage?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WidgetConfigCountAggregateInputType = {
+    id?: true
+    orgId?: true
+    buttonText?: true
+    modalTitle?: true
+    buttonColor?: true
+    headerColor?: true
+    logoUrl?: true
+    showPriority?: true
+    theme?: true
+    successMessage?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type WidgetConfigAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WidgetConfig to aggregate.
+     */
+    where?: WidgetConfigWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WidgetConfigs to fetch.
+     */
+    orderBy?: WidgetConfigOrderByWithRelationInput | WidgetConfigOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: WidgetConfigWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WidgetConfigs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WidgetConfigs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned WidgetConfigs
+    **/
+    _count?: true | WidgetConfigCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: WidgetConfigMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: WidgetConfigMaxAggregateInputType
+  }
+
+  export type GetWidgetConfigAggregateType<T extends WidgetConfigAggregateArgs> = {
+        [P in keyof T & keyof AggregateWidgetConfig]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWidgetConfig[P]>
+      : GetScalarType<T[P], AggregateWidgetConfig[P]>
+  }
+
+
+
+
+  export type WidgetConfigGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WidgetConfigWhereInput
+    orderBy?: WidgetConfigOrderByWithAggregationInput | WidgetConfigOrderByWithAggregationInput[]
+    by: WidgetConfigScalarFieldEnum[] | WidgetConfigScalarFieldEnum
+    having?: WidgetConfigScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: WidgetConfigCountAggregateInputType | true
+    _min?: WidgetConfigMinAggregateInputType
+    _max?: WidgetConfigMaxAggregateInputType
+  }
+
+  export type WidgetConfigGroupByOutputType = {
+    id: string
+    orgId: string
+    buttonText: string | null
+    modalTitle: string | null
+    buttonColor: string | null
+    headerColor: string | null
+    logoUrl: string | null
+    showPriority: boolean
+    theme: string | null
+    successMessage: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: WidgetConfigCountAggregateOutputType | null
+    _min: WidgetConfigMinAggregateOutputType | null
+    _max: WidgetConfigMaxAggregateOutputType | null
+  }
+
+  type GetWidgetConfigGroupByPayload<T extends WidgetConfigGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WidgetConfigGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WidgetConfigGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WidgetConfigGroupByOutputType[P]>
+            : GetScalarType<T[P], WidgetConfigGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type WidgetConfigSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    orgId?: boolean
+    buttonText?: boolean
+    modalTitle?: boolean
+    buttonColor?: boolean
+    headerColor?: boolean
+    logoUrl?: boolean
+    showPriority?: boolean
+    theme?: boolean
+    successMessage?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    org?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["widgetConfig"]>
+
+  export type WidgetConfigSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    orgId?: boolean
+    buttonText?: boolean
+    modalTitle?: boolean
+    buttonColor?: boolean
+    headerColor?: boolean
+    logoUrl?: boolean
+    showPriority?: boolean
+    theme?: boolean
+    successMessage?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    org?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["widgetConfig"]>
+
+  export type WidgetConfigSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    orgId?: boolean
+    buttonText?: boolean
+    modalTitle?: boolean
+    buttonColor?: boolean
+    headerColor?: boolean
+    logoUrl?: boolean
+    showPriority?: boolean
+    theme?: boolean
+    successMessage?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    org?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["widgetConfig"]>
+
+  export type WidgetConfigSelectScalar = {
+    id?: boolean
+    orgId?: boolean
+    buttonText?: boolean
+    modalTitle?: boolean
+    buttonColor?: boolean
+    headerColor?: boolean
+    logoUrl?: boolean
+    showPriority?: boolean
+    theme?: boolean
+    successMessage?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type WidgetConfigOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orgId" | "buttonText" | "modalTitle" | "buttonColor" | "headerColor" | "logoUrl" | "showPriority" | "theme" | "successMessage" | "createdAt" | "updatedAt", ExtArgs["result"]["widgetConfig"]>
+  export type WidgetConfigInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    org?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }
+  export type WidgetConfigIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    org?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }
+  export type WidgetConfigIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    org?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }
+
+  export type $WidgetConfigPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "WidgetConfig"
+    objects: {
+      org: Prisma.$OrganizationPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      orgId: string
+      buttonText: string | null
+      modalTitle: string | null
+      buttonColor: string | null
+      headerColor: string | null
+      logoUrl: string | null
+      showPriority: boolean
+      theme: string | null
+      successMessage: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["widgetConfig"]>
+    composites: {}
+  }
+
+  type WidgetConfigGetPayload<S extends boolean | null | undefined | WidgetConfigDefaultArgs> = $Result.GetResult<Prisma.$WidgetConfigPayload, S>
+
+  type WidgetConfigCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<WidgetConfigFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: WidgetConfigCountAggregateInputType | true
+    }
+
+  export interface WidgetConfigDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['WidgetConfig'], meta: { name: 'WidgetConfig' } }
+    /**
+     * Find zero or one WidgetConfig that matches the filter.
+     * @param {WidgetConfigFindUniqueArgs} args - Arguments to find a WidgetConfig
+     * @example
+     * // Get one WidgetConfig
+     * const widgetConfig = await prisma.widgetConfig.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends WidgetConfigFindUniqueArgs>(args: SelectSubset<T, WidgetConfigFindUniqueArgs<ExtArgs>>): Prisma__WidgetConfigClient<$Result.GetResult<Prisma.$WidgetConfigPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one WidgetConfig that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {WidgetConfigFindUniqueOrThrowArgs} args - Arguments to find a WidgetConfig
+     * @example
+     * // Get one WidgetConfig
+     * const widgetConfig = await prisma.widgetConfig.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends WidgetConfigFindUniqueOrThrowArgs>(args: SelectSubset<T, WidgetConfigFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WidgetConfigClient<$Result.GetResult<Prisma.$WidgetConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WidgetConfig that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WidgetConfigFindFirstArgs} args - Arguments to find a WidgetConfig
+     * @example
+     * // Get one WidgetConfig
+     * const widgetConfig = await prisma.widgetConfig.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends WidgetConfigFindFirstArgs>(args?: SelectSubset<T, WidgetConfigFindFirstArgs<ExtArgs>>): Prisma__WidgetConfigClient<$Result.GetResult<Prisma.$WidgetConfigPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WidgetConfig that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WidgetConfigFindFirstOrThrowArgs} args - Arguments to find a WidgetConfig
+     * @example
+     * // Get one WidgetConfig
+     * const widgetConfig = await prisma.widgetConfig.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends WidgetConfigFindFirstOrThrowArgs>(args?: SelectSubset<T, WidgetConfigFindFirstOrThrowArgs<ExtArgs>>): Prisma__WidgetConfigClient<$Result.GetResult<Prisma.$WidgetConfigPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more WidgetConfigs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WidgetConfigFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all WidgetConfigs
+     * const widgetConfigs = await prisma.widgetConfig.findMany()
+     * 
+     * // Get first 10 WidgetConfigs
+     * const widgetConfigs = await prisma.widgetConfig.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const widgetConfigWithIdOnly = await prisma.widgetConfig.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends WidgetConfigFindManyArgs>(args?: SelectSubset<T, WidgetConfigFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WidgetConfigPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a WidgetConfig.
+     * @param {WidgetConfigCreateArgs} args - Arguments to create a WidgetConfig.
+     * @example
+     * // Create one WidgetConfig
+     * const WidgetConfig = await prisma.widgetConfig.create({
+     *   data: {
+     *     // ... data to create a WidgetConfig
+     *   }
+     * })
+     * 
+     */
+    create<T extends WidgetConfigCreateArgs>(args: SelectSubset<T, WidgetConfigCreateArgs<ExtArgs>>): Prisma__WidgetConfigClient<$Result.GetResult<Prisma.$WidgetConfigPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many WidgetConfigs.
+     * @param {WidgetConfigCreateManyArgs} args - Arguments to create many WidgetConfigs.
+     * @example
+     * // Create many WidgetConfigs
+     * const widgetConfig = await prisma.widgetConfig.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends WidgetConfigCreateManyArgs>(args?: SelectSubset<T, WidgetConfigCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many WidgetConfigs and returns the data saved in the database.
+     * @param {WidgetConfigCreateManyAndReturnArgs} args - Arguments to create many WidgetConfigs.
+     * @example
+     * // Create many WidgetConfigs
+     * const widgetConfig = await prisma.widgetConfig.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many WidgetConfigs and only return the `id`
+     * const widgetConfigWithIdOnly = await prisma.widgetConfig.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends WidgetConfigCreateManyAndReturnArgs>(args?: SelectSubset<T, WidgetConfigCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WidgetConfigPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a WidgetConfig.
+     * @param {WidgetConfigDeleteArgs} args - Arguments to delete one WidgetConfig.
+     * @example
+     * // Delete one WidgetConfig
+     * const WidgetConfig = await prisma.widgetConfig.delete({
+     *   where: {
+     *     // ... filter to delete one WidgetConfig
+     *   }
+     * })
+     * 
+     */
+    delete<T extends WidgetConfigDeleteArgs>(args: SelectSubset<T, WidgetConfigDeleteArgs<ExtArgs>>): Prisma__WidgetConfigClient<$Result.GetResult<Prisma.$WidgetConfigPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one WidgetConfig.
+     * @param {WidgetConfigUpdateArgs} args - Arguments to update one WidgetConfig.
+     * @example
+     * // Update one WidgetConfig
+     * const widgetConfig = await prisma.widgetConfig.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends WidgetConfigUpdateArgs>(args: SelectSubset<T, WidgetConfigUpdateArgs<ExtArgs>>): Prisma__WidgetConfigClient<$Result.GetResult<Prisma.$WidgetConfigPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more WidgetConfigs.
+     * @param {WidgetConfigDeleteManyArgs} args - Arguments to filter WidgetConfigs to delete.
+     * @example
+     * // Delete a few WidgetConfigs
+     * const { count } = await prisma.widgetConfig.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends WidgetConfigDeleteManyArgs>(args?: SelectSubset<T, WidgetConfigDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WidgetConfigs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WidgetConfigUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many WidgetConfigs
+     * const widgetConfig = await prisma.widgetConfig.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends WidgetConfigUpdateManyArgs>(args: SelectSubset<T, WidgetConfigUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WidgetConfigs and returns the data updated in the database.
+     * @param {WidgetConfigUpdateManyAndReturnArgs} args - Arguments to update many WidgetConfigs.
+     * @example
+     * // Update many WidgetConfigs
+     * const widgetConfig = await prisma.widgetConfig.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more WidgetConfigs and only return the `id`
+     * const widgetConfigWithIdOnly = await prisma.widgetConfig.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends WidgetConfigUpdateManyAndReturnArgs>(args: SelectSubset<T, WidgetConfigUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WidgetConfigPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one WidgetConfig.
+     * @param {WidgetConfigUpsertArgs} args - Arguments to update or create a WidgetConfig.
+     * @example
+     * // Update or create a WidgetConfig
+     * const widgetConfig = await prisma.widgetConfig.upsert({
+     *   create: {
+     *     // ... data to create a WidgetConfig
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the WidgetConfig we want to update
+     *   }
+     * })
+     */
+    upsert<T extends WidgetConfigUpsertArgs>(args: SelectSubset<T, WidgetConfigUpsertArgs<ExtArgs>>): Prisma__WidgetConfigClient<$Result.GetResult<Prisma.$WidgetConfigPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of WidgetConfigs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WidgetConfigCountArgs} args - Arguments to filter WidgetConfigs to count.
+     * @example
+     * // Count the number of WidgetConfigs
+     * const count = await prisma.widgetConfig.count({
+     *   where: {
+     *     // ... the filter for the WidgetConfigs we want to count
+     *   }
+     * })
+    **/
+    count<T extends WidgetConfigCountArgs>(
+      args?: Subset<T, WidgetConfigCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], WidgetConfigCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a WidgetConfig.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WidgetConfigAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends WidgetConfigAggregateArgs>(args: Subset<T, WidgetConfigAggregateArgs>): Prisma.PrismaPromise<GetWidgetConfigAggregateType<T>>
+
+    /**
+     * Group by WidgetConfig.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WidgetConfigGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends WidgetConfigGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: WidgetConfigGroupByArgs['orderBy'] }
+        : { orderBy?: WidgetConfigGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, WidgetConfigGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWidgetConfigGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the WidgetConfig model
+   */
+  readonly fields: WidgetConfigFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for WidgetConfig.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__WidgetConfigClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    org<T extends OrganizationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrganizationDefaultArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the WidgetConfig model
+   */
+  interface WidgetConfigFieldRefs {
+    readonly id: FieldRef<"WidgetConfig", 'String'>
+    readonly orgId: FieldRef<"WidgetConfig", 'String'>
+    readonly buttonText: FieldRef<"WidgetConfig", 'String'>
+    readonly modalTitle: FieldRef<"WidgetConfig", 'String'>
+    readonly buttonColor: FieldRef<"WidgetConfig", 'String'>
+    readonly headerColor: FieldRef<"WidgetConfig", 'String'>
+    readonly logoUrl: FieldRef<"WidgetConfig", 'String'>
+    readonly showPriority: FieldRef<"WidgetConfig", 'Boolean'>
+    readonly theme: FieldRef<"WidgetConfig", 'String'>
+    readonly successMessage: FieldRef<"WidgetConfig", 'String'>
+    readonly createdAt: FieldRef<"WidgetConfig", 'DateTime'>
+    readonly updatedAt: FieldRef<"WidgetConfig", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * WidgetConfig findUnique
+   */
+  export type WidgetConfigFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WidgetConfig
+     */
+    select?: WidgetConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WidgetConfig
+     */
+    omit?: WidgetConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WidgetConfigInclude<ExtArgs> | null
+    /**
+     * Filter, which WidgetConfig to fetch.
+     */
+    where: WidgetConfigWhereUniqueInput
+  }
+
+  /**
+   * WidgetConfig findUniqueOrThrow
+   */
+  export type WidgetConfigFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WidgetConfig
+     */
+    select?: WidgetConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WidgetConfig
+     */
+    omit?: WidgetConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WidgetConfigInclude<ExtArgs> | null
+    /**
+     * Filter, which WidgetConfig to fetch.
+     */
+    where: WidgetConfigWhereUniqueInput
+  }
+
+  /**
+   * WidgetConfig findFirst
+   */
+  export type WidgetConfigFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WidgetConfig
+     */
+    select?: WidgetConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WidgetConfig
+     */
+    omit?: WidgetConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WidgetConfigInclude<ExtArgs> | null
+    /**
+     * Filter, which WidgetConfig to fetch.
+     */
+    where?: WidgetConfigWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WidgetConfigs to fetch.
+     */
+    orderBy?: WidgetConfigOrderByWithRelationInput | WidgetConfigOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WidgetConfigs.
+     */
+    cursor?: WidgetConfigWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WidgetConfigs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WidgetConfigs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WidgetConfigs.
+     */
+    distinct?: WidgetConfigScalarFieldEnum | WidgetConfigScalarFieldEnum[]
+  }
+
+  /**
+   * WidgetConfig findFirstOrThrow
+   */
+  export type WidgetConfigFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WidgetConfig
+     */
+    select?: WidgetConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WidgetConfig
+     */
+    omit?: WidgetConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WidgetConfigInclude<ExtArgs> | null
+    /**
+     * Filter, which WidgetConfig to fetch.
+     */
+    where?: WidgetConfigWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WidgetConfigs to fetch.
+     */
+    orderBy?: WidgetConfigOrderByWithRelationInput | WidgetConfigOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WidgetConfigs.
+     */
+    cursor?: WidgetConfigWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WidgetConfigs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WidgetConfigs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WidgetConfigs.
+     */
+    distinct?: WidgetConfigScalarFieldEnum | WidgetConfigScalarFieldEnum[]
+  }
+
+  /**
+   * WidgetConfig findMany
+   */
+  export type WidgetConfigFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WidgetConfig
+     */
+    select?: WidgetConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WidgetConfig
+     */
+    omit?: WidgetConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WidgetConfigInclude<ExtArgs> | null
+    /**
+     * Filter, which WidgetConfigs to fetch.
+     */
+    where?: WidgetConfigWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WidgetConfigs to fetch.
+     */
+    orderBy?: WidgetConfigOrderByWithRelationInput | WidgetConfigOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing WidgetConfigs.
+     */
+    cursor?: WidgetConfigWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WidgetConfigs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WidgetConfigs.
+     */
+    skip?: number
+    distinct?: WidgetConfigScalarFieldEnum | WidgetConfigScalarFieldEnum[]
+  }
+
+  /**
+   * WidgetConfig create
+   */
+  export type WidgetConfigCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WidgetConfig
+     */
+    select?: WidgetConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WidgetConfig
+     */
+    omit?: WidgetConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WidgetConfigInclude<ExtArgs> | null
+    /**
+     * The data needed to create a WidgetConfig.
+     */
+    data: XOR<WidgetConfigCreateInput, WidgetConfigUncheckedCreateInput>
+  }
+
+  /**
+   * WidgetConfig createMany
+   */
+  export type WidgetConfigCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many WidgetConfigs.
+     */
+    data: WidgetConfigCreateManyInput | WidgetConfigCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * WidgetConfig createManyAndReturn
+   */
+  export type WidgetConfigCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WidgetConfig
+     */
+    select?: WidgetConfigSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WidgetConfig
+     */
+    omit?: WidgetConfigOmit<ExtArgs> | null
+    /**
+     * The data used to create many WidgetConfigs.
+     */
+    data: WidgetConfigCreateManyInput | WidgetConfigCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WidgetConfigIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WidgetConfig update
+   */
+  export type WidgetConfigUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WidgetConfig
+     */
+    select?: WidgetConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WidgetConfig
+     */
+    omit?: WidgetConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WidgetConfigInclude<ExtArgs> | null
+    /**
+     * The data needed to update a WidgetConfig.
+     */
+    data: XOR<WidgetConfigUpdateInput, WidgetConfigUncheckedUpdateInput>
+    /**
+     * Choose, which WidgetConfig to update.
+     */
+    where: WidgetConfigWhereUniqueInput
+  }
+
+  /**
+   * WidgetConfig updateMany
+   */
+  export type WidgetConfigUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update WidgetConfigs.
+     */
+    data: XOR<WidgetConfigUpdateManyMutationInput, WidgetConfigUncheckedUpdateManyInput>
+    /**
+     * Filter which WidgetConfigs to update
+     */
+    where?: WidgetConfigWhereInput
+    /**
+     * Limit how many WidgetConfigs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * WidgetConfig updateManyAndReturn
+   */
+  export type WidgetConfigUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WidgetConfig
+     */
+    select?: WidgetConfigSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WidgetConfig
+     */
+    omit?: WidgetConfigOmit<ExtArgs> | null
+    /**
+     * The data used to update WidgetConfigs.
+     */
+    data: XOR<WidgetConfigUpdateManyMutationInput, WidgetConfigUncheckedUpdateManyInput>
+    /**
+     * Filter which WidgetConfigs to update
+     */
+    where?: WidgetConfigWhereInput
+    /**
+     * Limit how many WidgetConfigs to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WidgetConfigIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WidgetConfig upsert
+   */
+  export type WidgetConfigUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WidgetConfig
+     */
+    select?: WidgetConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WidgetConfig
+     */
+    omit?: WidgetConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WidgetConfigInclude<ExtArgs> | null
+    /**
+     * The filter to search for the WidgetConfig to update in case it exists.
+     */
+    where: WidgetConfigWhereUniqueInput
+    /**
+     * In case the WidgetConfig found by the `where` argument doesn't exist, create a new WidgetConfig with this data.
+     */
+    create: XOR<WidgetConfigCreateInput, WidgetConfigUncheckedCreateInput>
+    /**
+     * In case the WidgetConfig was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<WidgetConfigUpdateInput, WidgetConfigUncheckedUpdateInput>
+  }
+
+  /**
+   * WidgetConfig delete
+   */
+  export type WidgetConfigDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WidgetConfig
+     */
+    select?: WidgetConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WidgetConfig
+     */
+    omit?: WidgetConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WidgetConfigInclude<ExtArgs> | null
+    /**
+     * Filter which WidgetConfig to delete.
+     */
+    where: WidgetConfigWhereUniqueInput
+  }
+
+  /**
+   * WidgetConfig deleteMany
+   */
+  export type WidgetConfigDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WidgetConfigs to delete
+     */
+    where?: WidgetConfigWhereInput
+    /**
+     * Limit how many WidgetConfigs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * WidgetConfig without action
+   */
+  export type WidgetConfigDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WidgetConfig
+     */
+    select?: WidgetConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WidgetConfig
+     */
+    omit?: WidgetConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WidgetConfigInclude<ExtArgs> | null
   }
 
 
@@ -8534,6 +9811,24 @@ export namespace Prisma {
   export type OrganizationScalarFieldEnum = (typeof OrganizationScalarFieldEnum)[keyof typeof OrganizationScalarFieldEnum]
 
 
+  export const WidgetConfigScalarFieldEnum: {
+    id: 'id',
+    orgId: 'orgId',
+    buttonText: 'buttonText',
+    modalTitle: 'modalTitle',
+    buttonColor: 'buttonColor',
+    headerColor: 'headerColor',
+    logoUrl: 'logoUrl',
+    showPriority: 'showPriority',
+    theme: 'theme',
+    successMessage: 'successMessage',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type WidgetConfigScalarFieldEnum = (typeof WidgetConfigScalarFieldEnum)[keyof typeof WidgetConfigScalarFieldEnum]
+
+
   export const UserScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -8758,6 +10053,7 @@ export namespace Prisma {
     users?: UserListRelationFilter
     plans?: PlanListRelationFilter
     tickets?: TicketListRelationFilter
+    widgetConfig?: WidgetConfigListRelationFilter
   }
 
   export type OrganizationOrderByWithRelationInput = {
@@ -8772,6 +10068,7 @@ export namespace Prisma {
     users?: UserOrderByRelationAggregateInput
     plans?: PlanOrderByRelationAggregateInput
     tickets?: TicketOrderByRelationAggregateInput
+    widgetConfig?: WidgetConfigOrderByRelationAggregateInput
   }
 
   export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
@@ -8789,6 +10086,7 @@ export namespace Prisma {
     users?: UserListRelationFilter
     plans?: PlanListRelationFilter
     tickets?: TicketListRelationFilter
+    widgetConfig?: WidgetConfigListRelationFilter
   }, "id" | "slug">
 
   export type OrganizationOrderByWithAggregationInput = {
@@ -8817,6 +10115,96 @@ export namespace Prisma {
     isActive?: BoolWithAggregatesFilter<"Organization"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Organization"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Organization"> | Date | string
+  }
+
+  export type WidgetConfigWhereInput = {
+    AND?: WidgetConfigWhereInput | WidgetConfigWhereInput[]
+    OR?: WidgetConfigWhereInput[]
+    NOT?: WidgetConfigWhereInput | WidgetConfigWhereInput[]
+    id?: StringFilter<"WidgetConfig"> | string
+    orgId?: StringFilter<"WidgetConfig"> | string
+    buttonText?: StringNullableFilter<"WidgetConfig"> | string | null
+    modalTitle?: StringNullableFilter<"WidgetConfig"> | string | null
+    buttonColor?: StringNullableFilter<"WidgetConfig"> | string | null
+    headerColor?: StringNullableFilter<"WidgetConfig"> | string | null
+    logoUrl?: StringNullableFilter<"WidgetConfig"> | string | null
+    showPriority?: BoolFilter<"WidgetConfig"> | boolean
+    theme?: StringNullableFilter<"WidgetConfig"> | string | null
+    successMessage?: StringNullableFilter<"WidgetConfig"> | string | null
+    createdAt?: DateTimeFilter<"WidgetConfig"> | Date | string
+    updatedAt?: DateTimeFilter<"WidgetConfig"> | Date | string
+    org?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
+  }
+
+  export type WidgetConfigOrderByWithRelationInput = {
+    id?: SortOrder
+    orgId?: SortOrder
+    buttonText?: SortOrderInput | SortOrder
+    modalTitle?: SortOrderInput | SortOrder
+    buttonColor?: SortOrderInput | SortOrder
+    headerColor?: SortOrderInput | SortOrder
+    logoUrl?: SortOrderInput | SortOrder
+    showPriority?: SortOrder
+    theme?: SortOrderInput | SortOrder
+    successMessage?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    org?: OrganizationOrderByWithRelationInput
+  }
+
+  export type WidgetConfigWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    orgId?: string
+    AND?: WidgetConfigWhereInput | WidgetConfigWhereInput[]
+    OR?: WidgetConfigWhereInput[]
+    NOT?: WidgetConfigWhereInput | WidgetConfigWhereInput[]
+    buttonText?: StringNullableFilter<"WidgetConfig"> | string | null
+    modalTitle?: StringNullableFilter<"WidgetConfig"> | string | null
+    buttonColor?: StringNullableFilter<"WidgetConfig"> | string | null
+    headerColor?: StringNullableFilter<"WidgetConfig"> | string | null
+    logoUrl?: StringNullableFilter<"WidgetConfig"> | string | null
+    showPriority?: BoolFilter<"WidgetConfig"> | boolean
+    theme?: StringNullableFilter<"WidgetConfig"> | string | null
+    successMessage?: StringNullableFilter<"WidgetConfig"> | string | null
+    createdAt?: DateTimeFilter<"WidgetConfig"> | Date | string
+    updatedAt?: DateTimeFilter<"WidgetConfig"> | Date | string
+    org?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
+  }, "id" | "orgId">
+
+  export type WidgetConfigOrderByWithAggregationInput = {
+    id?: SortOrder
+    orgId?: SortOrder
+    buttonText?: SortOrderInput | SortOrder
+    modalTitle?: SortOrderInput | SortOrder
+    buttonColor?: SortOrderInput | SortOrder
+    headerColor?: SortOrderInput | SortOrder
+    logoUrl?: SortOrderInput | SortOrder
+    showPriority?: SortOrder
+    theme?: SortOrderInput | SortOrder
+    successMessage?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: WidgetConfigCountOrderByAggregateInput
+    _max?: WidgetConfigMaxOrderByAggregateInput
+    _min?: WidgetConfigMinOrderByAggregateInput
+  }
+
+  export type WidgetConfigScalarWhereWithAggregatesInput = {
+    AND?: WidgetConfigScalarWhereWithAggregatesInput | WidgetConfigScalarWhereWithAggregatesInput[]
+    OR?: WidgetConfigScalarWhereWithAggregatesInput[]
+    NOT?: WidgetConfigScalarWhereWithAggregatesInput | WidgetConfigScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"WidgetConfig"> | string
+    orgId?: StringWithAggregatesFilter<"WidgetConfig"> | string
+    buttonText?: StringNullableWithAggregatesFilter<"WidgetConfig"> | string | null
+    modalTitle?: StringNullableWithAggregatesFilter<"WidgetConfig"> | string | null
+    buttonColor?: StringNullableWithAggregatesFilter<"WidgetConfig"> | string | null
+    headerColor?: StringNullableWithAggregatesFilter<"WidgetConfig"> | string | null
+    logoUrl?: StringNullableWithAggregatesFilter<"WidgetConfig"> | string | null
+    showPriority?: BoolWithAggregatesFilter<"WidgetConfig"> | boolean
+    theme?: StringNullableWithAggregatesFilter<"WidgetConfig"> | string | null
+    successMessage?: StringNullableWithAggregatesFilter<"WidgetConfig"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"WidgetConfig"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"WidgetConfig"> | Date | string
   }
 
   export type UserWhereInput = {
@@ -9217,6 +10605,7 @@ export namespace Prisma {
     users?: UserCreateNestedManyWithoutOrganizationInput
     plans?: PlanCreateNestedManyWithoutOrganizationInput
     tickets?: TicketCreateNestedManyWithoutOrganizationInput
+    widgetConfig?: WidgetConfigCreateNestedManyWithoutOrgInput
   }
 
   export type OrganizationUncheckedCreateInput = {
@@ -9231,6 +10620,7 @@ export namespace Prisma {
     users?: UserUncheckedCreateNestedManyWithoutOrganizationInput
     plans?: PlanUncheckedCreateNestedManyWithoutOrganizationInput
     tickets?: TicketUncheckedCreateNestedManyWithoutOrganizationInput
+    widgetConfig?: WidgetConfigUncheckedCreateNestedManyWithoutOrgInput
   }
 
   export type OrganizationUpdateInput = {
@@ -9245,6 +10635,7 @@ export namespace Prisma {
     users?: UserUpdateManyWithoutOrganizationNestedInput
     plans?: PlanUpdateManyWithoutOrganizationNestedInput
     tickets?: TicketUpdateManyWithoutOrganizationNestedInput
+    widgetConfig?: WidgetConfigUpdateManyWithoutOrgNestedInput
   }
 
   export type OrganizationUncheckedUpdateInput = {
@@ -9259,6 +10650,7 @@ export namespace Prisma {
     users?: UserUncheckedUpdateManyWithoutOrganizationNestedInput
     plans?: PlanUncheckedUpdateManyWithoutOrganizationNestedInput
     tickets?: TicketUncheckedUpdateManyWithoutOrganizationNestedInput
+    widgetConfig?: WidgetConfigUncheckedUpdateManyWithoutOrgNestedInput
   }
 
   export type OrganizationCreateManyInput = {
@@ -9290,6 +10682,110 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WidgetConfigCreateInput = {
+    id?: string
+    buttonText?: string | null
+    modalTitle?: string | null
+    buttonColor?: string | null
+    headerColor?: string | null
+    logoUrl?: string | null
+    showPriority?: boolean
+    theme?: string | null
+    successMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    org: OrganizationCreateNestedOneWithoutWidgetConfigInput
+  }
+
+  export type WidgetConfigUncheckedCreateInput = {
+    id?: string
+    orgId: string
+    buttonText?: string | null
+    modalTitle?: string | null
+    buttonColor?: string | null
+    headerColor?: string | null
+    logoUrl?: string | null
+    showPriority?: boolean
+    theme?: string | null
+    successMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WidgetConfigUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    buttonText?: NullableStringFieldUpdateOperationsInput | string | null
+    modalTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    buttonColor?: NullableStringFieldUpdateOperationsInput | string | null
+    headerColor?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    showPriority?: BoolFieldUpdateOperationsInput | boolean
+    theme?: NullableStringFieldUpdateOperationsInput | string | null
+    successMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    org?: OrganizationUpdateOneRequiredWithoutWidgetConfigNestedInput
+  }
+
+  export type WidgetConfigUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orgId?: StringFieldUpdateOperationsInput | string
+    buttonText?: NullableStringFieldUpdateOperationsInput | string | null
+    modalTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    buttonColor?: NullableStringFieldUpdateOperationsInput | string | null
+    headerColor?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    showPriority?: BoolFieldUpdateOperationsInput | boolean
+    theme?: NullableStringFieldUpdateOperationsInput | string | null
+    successMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WidgetConfigCreateManyInput = {
+    id?: string
+    orgId: string
+    buttonText?: string | null
+    modalTitle?: string | null
+    buttonColor?: string | null
+    headerColor?: string | null
+    logoUrl?: string | null
+    showPriority?: boolean
+    theme?: string | null
+    successMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WidgetConfigUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    buttonText?: NullableStringFieldUpdateOperationsInput | string | null
+    modalTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    buttonColor?: NullableStringFieldUpdateOperationsInput | string | null
+    headerColor?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    showPriority?: BoolFieldUpdateOperationsInput | boolean
+    theme?: NullableStringFieldUpdateOperationsInput | string | null
+    successMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WidgetConfigUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orgId?: StringFieldUpdateOperationsInput | string
+    buttonText?: NullableStringFieldUpdateOperationsInput | string | null
+    modalTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    buttonColor?: NullableStringFieldUpdateOperationsInput | string | null
+    headerColor?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    showPriority?: BoolFieldUpdateOperationsInput | boolean
+    theme?: NullableStringFieldUpdateOperationsInput | string | null
+    successMessage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9754,6 +11250,12 @@ export namespace Prisma {
     none?: TicketWhereInput
   }
 
+  export type WidgetConfigListRelationFilter = {
+    every?: WidgetConfigWhereInput
+    some?: WidgetConfigWhereInput
+    none?: WidgetConfigWhereInput
+  }
+
   export type UserOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -9763,6 +11265,10 @@ export namespace Prisma {
   }
 
   export type TicketOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type WidgetConfigOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -9839,18 +11345,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type EnumRoleFilter<$PrismaModel = never> = {
-    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
-  }
-
-  export type BoolNullableFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
-  }
-
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -9866,6 +11360,91 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type OrganizationScalarRelationFilter = {
+    is?: OrganizationWhereInput
+    isNot?: OrganizationWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type WidgetConfigCountOrderByAggregateInput = {
+    id?: SortOrder
+    orgId?: SortOrder
+    buttonText?: SortOrder
+    modalTitle?: SortOrder
+    buttonColor?: SortOrder
+    headerColor?: SortOrder
+    logoUrl?: SortOrder
+    showPriority?: SortOrder
+    theme?: SortOrder
+    successMessage?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WidgetConfigMaxOrderByAggregateInput = {
+    id?: SortOrder
+    orgId?: SortOrder
+    buttonText?: SortOrder
+    modalTitle?: SortOrder
+    buttonColor?: SortOrder
+    headerColor?: SortOrder
+    logoUrl?: SortOrder
+    showPriority?: SortOrder
+    theme?: SortOrder
+    successMessage?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WidgetConfigMinOrderByAggregateInput = {
+    id?: SortOrder
+    orgId?: SortOrder
+    buttonText?: SortOrder
+    modalTitle?: SortOrder
+    buttonColor?: SortOrder
+    headerColor?: SortOrder
+    logoUrl?: SortOrder
+    showPriority?: SortOrder
+    theme?: SortOrder
+    successMessage?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type EnumRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
+  }
+
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type CommentListRelationFilter = {
     every?: CommentWhereInput
     some?: CommentWhereInput
@@ -9875,11 +11454,6 @@ export namespace Prisma {
   export type OrganizationNullableScalarRelationFilter = {
     is?: OrganizationWhereInput | null
     isNot?: OrganizationWhereInput | null
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
   }
 
   export type CommentOrderByRelationAggregateInput = {
@@ -9932,24 +11506,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedBoolNullableFilter<$PrismaModel>
     _max?: NestedBoolNullableFilter<$PrismaModel>
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -10259,6 +11815,13 @@ export namespace Prisma {
     connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
   }
 
+  export type WidgetConfigCreateNestedManyWithoutOrgInput = {
+    create?: XOR<WidgetConfigCreateWithoutOrgInput, WidgetConfigUncheckedCreateWithoutOrgInput> | WidgetConfigCreateWithoutOrgInput[] | WidgetConfigUncheckedCreateWithoutOrgInput[]
+    connectOrCreate?: WidgetConfigCreateOrConnectWithoutOrgInput | WidgetConfigCreateOrConnectWithoutOrgInput[]
+    createMany?: WidgetConfigCreateManyOrgInputEnvelope
+    connect?: WidgetConfigWhereUniqueInput | WidgetConfigWhereUniqueInput[]
+  }
+
   export type UserUncheckedCreateNestedManyWithoutOrganizationInput = {
     create?: XOR<UserCreateWithoutOrganizationInput, UserUncheckedCreateWithoutOrganizationInput> | UserCreateWithoutOrganizationInput[] | UserUncheckedCreateWithoutOrganizationInput[]
     connectOrCreate?: UserCreateOrConnectWithoutOrganizationInput | UserCreateOrConnectWithoutOrganizationInput[]
@@ -10278,6 +11841,13 @@ export namespace Prisma {
     connectOrCreate?: TicketCreateOrConnectWithoutOrganizationInput | TicketCreateOrConnectWithoutOrganizationInput[]
     createMany?: TicketCreateManyOrganizationInputEnvelope
     connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+  }
+
+  export type WidgetConfigUncheckedCreateNestedManyWithoutOrgInput = {
+    create?: XOR<WidgetConfigCreateWithoutOrgInput, WidgetConfigUncheckedCreateWithoutOrgInput> | WidgetConfigCreateWithoutOrgInput[] | WidgetConfigUncheckedCreateWithoutOrgInput[]
+    connectOrCreate?: WidgetConfigCreateOrConnectWithoutOrgInput | WidgetConfigCreateOrConnectWithoutOrgInput[]
+    createMany?: WidgetConfigCreateManyOrgInputEnvelope
+    connect?: WidgetConfigWhereUniqueInput | WidgetConfigWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -10334,6 +11904,20 @@ export namespace Prisma {
     deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
   }
 
+  export type WidgetConfigUpdateManyWithoutOrgNestedInput = {
+    create?: XOR<WidgetConfigCreateWithoutOrgInput, WidgetConfigUncheckedCreateWithoutOrgInput> | WidgetConfigCreateWithoutOrgInput[] | WidgetConfigUncheckedCreateWithoutOrgInput[]
+    connectOrCreate?: WidgetConfigCreateOrConnectWithoutOrgInput | WidgetConfigCreateOrConnectWithoutOrgInput[]
+    upsert?: WidgetConfigUpsertWithWhereUniqueWithoutOrgInput | WidgetConfigUpsertWithWhereUniqueWithoutOrgInput[]
+    createMany?: WidgetConfigCreateManyOrgInputEnvelope
+    set?: WidgetConfigWhereUniqueInput | WidgetConfigWhereUniqueInput[]
+    disconnect?: WidgetConfigWhereUniqueInput | WidgetConfigWhereUniqueInput[]
+    delete?: WidgetConfigWhereUniqueInput | WidgetConfigWhereUniqueInput[]
+    connect?: WidgetConfigWhereUniqueInput | WidgetConfigWhereUniqueInput[]
+    update?: WidgetConfigUpdateWithWhereUniqueWithoutOrgInput | WidgetConfigUpdateWithWhereUniqueWithoutOrgInput[]
+    updateMany?: WidgetConfigUpdateManyWithWhereWithoutOrgInput | WidgetConfigUpdateManyWithWhereWithoutOrgInput[]
+    deleteMany?: WidgetConfigScalarWhereInput | WidgetConfigScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateManyWithoutOrganizationNestedInput = {
     create?: XOR<UserCreateWithoutOrganizationInput, UserUncheckedCreateWithoutOrganizationInput> | UserCreateWithoutOrganizationInput[] | UserUncheckedCreateWithoutOrganizationInput[]
     connectOrCreate?: UserCreateOrConnectWithoutOrganizationInput | UserCreateOrConnectWithoutOrganizationInput[]
@@ -10374,6 +11958,38 @@ export namespace Prisma {
     update?: TicketUpdateWithWhereUniqueWithoutOrganizationInput | TicketUpdateWithWhereUniqueWithoutOrganizationInput[]
     updateMany?: TicketUpdateManyWithWhereWithoutOrganizationInput | TicketUpdateManyWithWhereWithoutOrganizationInput[]
     deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
+  }
+
+  export type WidgetConfigUncheckedUpdateManyWithoutOrgNestedInput = {
+    create?: XOR<WidgetConfigCreateWithoutOrgInput, WidgetConfigUncheckedCreateWithoutOrgInput> | WidgetConfigCreateWithoutOrgInput[] | WidgetConfigUncheckedCreateWithoutOrgInput[]
+    connectOrCreate?: WidgetConfigCreateOrConnectWithoutOrgInput | WidgetConfigCreateOrConnectWithoutOrgInput[]
+    upsert?: WidgetConfigUpsertWithWhereUniqueWithoutOrgInput | WidgetConfigUpsertWithWhereUniqueWithoutOrgInput[]
+    createMany?: WidgetConfigCreateManyOrgInputEnvelope
+    set?: WidgetConfigWhereUniqueInput | WidgetConfigWhereUniqueInput[]
+    disconnect?: WidgetConfigWhereUniqueInput | WidgetConfigWhereUniqueInput[]
+    delete?: WidgetConfigWhereUniqueInput | WidgetConfigWhereUniqueInput[]
+    connect?: WidgetConfigWhereUniqueInput | WidgetConfigWhereUniqueInput[]
+    update?: WidgetConfigUpdateWithWhereUniqueWithoutOrgInput | WidgetConfigUpdateWithWhereUniqueWithoutOrgInput[]
+    updateMany?: WidgetConfigUpdateManyWithWhereWithoutOrgInput | WidgetConfigUpdateManyWithWhereWithoutOrgInput[]
+    deleteMany?: WidgetConfigScalarWhereInput | WidgetConfigScalarWhereInput[]
+  }
+
+  export type OrganizationCreateNestedOneWithoutWidgetConfigInput = {
+    create?: XOR<OrganizationCreateWithoutWidgetConfigInput, OrganizationUncheckedCreateWithoutWidgetConfigInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutWidgetConfigInput
+    connect?: OrganizationWhereUniqueInput
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type OrganizationUpdateOneRequiredWithoutWidgetConfigNestedInput = {
+    create?: XOR<OrganizationCreateWithoutWidgetConfigInput, OrganizationUncheckedCreateWithoutWidgetConfigInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutWidgetConfigInput
+    upsert?: OrganizationUpsertWithoutWidgetConfigInput
+    connect?: OrganizationWhereUniqueInput
+    update?: XOR<XOR<OrganizationUpdateToOneWithWhereWithoutWidgetConfigInput, OrganizationUpdateWithoutWidgetConfigInput>, OrganizationUncheckedUpdateWithoutWidgetConfigInput>
   }
 
   export type TicketCreateNestedManyWithoutCreatedByInput = {
@@ -10482,10 +12098,6 @@ export namespace Prisma {
     delete?: OrganizationWhereInput | boolean
     connect?: OrganizationWhereUniqueInput
     update?: XOR<XOR<OrganizationUpdateToOneWithWhereWithoutUsersInput, OrganizationUpdateWithoutUsersInput>, OrganizationUncheckedUpdateWithoutUsersInput>
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type TicketUncheckedUpdateManyWithoutCreatedByNestedInput = {
@@ -10830,18 +12442,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedEnumRoleFilter<$PrismaModel = never> = {
-    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
-  }
-
-  export type NestedBoolNullableFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
-  }
-
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -10854,6 +12454,46 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
+  }
+
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
   export type NestedEnumRoleWithAggregatesFilter<$PrismaModel = never> = {
@@ -10872,34 +12512,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedBoolNullableFilter<$PrismaModel>
     _max?: NestedBoolNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
@@ -11116,6 +12728,44 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type WidgetConfigCreateWithoutOrgInput = {
+    id?: string
+    buttonText?: string | null
+    modalTitle?: string | null
+    buttonColor?: string | null
+    headerColor?: string | null
+    logoUrl?: string | null
+    showPriority?: boolean
+    theme?: string | null
+    successMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WidgetConfigUncheckedCreateWithoutOrgInput = {
+    id?: string
+    buttonText?: string | null
+    modalTitle?: string | null
+    buttonColor?: string | null
+    headerColor?: string | null
+    logoUrl?: string | null
+    showPriority?: boolean
+    theme?: string | null
+    successMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WidgetConfigCreateOrConnectWithoutOrgInput = {
+    where: WidgetConfigWhereUniqueInput
+    create: XOR<WidgetConfigCreateWithoutOrgInput, WidgetConfigUncheckedCreateWithoutOrgInput>
+  }
+
+  export type WidgetConfigCreateManyOrgInputEnvelope = {
+    data: WidgetConfigCreateManyOrgInput | WidgetConfigCreateManyOrgInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithWhereUniqueWithoutOrganizationInput = {
     where: UserWhereUniqueInput
     update: XOR<UserUpdateWithoutOrganizationInput, UserUncheckedUpdateWithoutOrganizationInput>
@@ -11210,6 +12860,112 @@ export namespace Prisma {
     externalName?: StringNullableFilter<"Ticket"> | string | null
     externalEmail?: StringNullableFilter<"Ticket"> | string | null
     organizationId?: StringNullableFilter<"Ticket"> | string | null
+  }
+
+  export type WidgetConfigUpsertWithWhereUniqueWithoutOrgInput = {
+    where: WidgetConfigWhereUniqueInput
+    update: XOR<WidgetConfigUpdateWithoutOrgInput, WidgetConfigUncheckedUpdateWithoutOrgInput>
+    create: XOR<WidgetConfigCreateWithoutOrgInput, WidgetConfigUncheckedCreateWithoutOrgInput>
+  }
+
+  export type WidgetConfigUpdateWithWhereUniqueWithoutOrgInput = {
+    where: WidgetConfigWhereUniqueInput
+    data: XOR<WidgetConfigUpdateWithoutOrgInput, WidgetConfigUncheckedUpdateWithoutOrgInput>
+  }
+
+  export type WidgetConfigUpdateManyWithWhereWithoutOrgInput = {
+    where: WidgetConfigScalarWhereInput
+    data: XOR<WidgetConfigUpdateManyMutationInput, WidgetConfigUncheckedUpdateManyWithoutOrgInput>
+  }
+
+  export type WidgetConfigScalarWhereInput = {
+    AND?: WidgetConfigScalarWhereInput | WidgetConfigScalarWhereInput[]
+    OR?: WidgetConfigScalarWhereInput[]
+    NOT?: WidgetConfigScalarWhereInput | WidgetConfigScalarWhereInput[]
+    id?: StringFilter<"WidgetConfig"> | string
+    orgId?: StringFilter<"WidgetConfig"> | string
+    buttonText?: StringNullableFilter<"WidgetConfig"> | string | null
+    modalTitle?: StringNullableFilter<"WidgetConfig"> | string | null
+    buttonColor?: StringNullableFilter<"WidgetConfig"> | string | null
+    headerColor?: StringNullableFilter<"WidgetConfig"> | string | null
+    logoUrl?: StringNullableFilter<"WidgetConfig"> | string | null
+    showPriority?: BoolFilter<"WidgetConfig"> | boolean
+    theme?: StringNullableFilter<"WidgetConfig"> | string | null
+    successMessage?: StringNullableFilter<"WidgetConfig"> | string | null
+    createdAt?: DateTimeFilter<"WidgetConfig"> | Date | string
+    updatedAt?: DateTimeFilter<"WidgetConfig"> | Date | string
+  }
+
+  export type OrganizationCreateWithoutWidgetConfigInput = {
+    id?: string
+    name: string
+    email: string
+    slug: string
+    phoneNumber: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserCreateNestedManyWithoutOrganizationInput
+    plans?: PlanCreateNestedManyWithoutOrganizationInput
+    tickets?: TicketCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationUncheckedCreateWithoutWidgetConfigInput = {
+    id?: string
+    name: string
+    email: string
+    slug: string
+    phoneNumber: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutOrganizationInput
+    plans?: PlanUncheckedCreateNestedManyWithoutOrganizationInput
+    tickets?: TicketUncheckedCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationCreateOrConnectWithoutWidgetConfigInput = {
+    where: OrganizationWhereUniqueInput
+    create: XOR<OrganizationCreateWithoutWidgetConfigInput, OrganizationUncheckedCreateWithoutWidgetConfigInput>
+  }
+
+  export type OrganizationUpsertWithoutWidgetConfigInput = {
+    update: XOR<OrganizationUpdateWithoutWidgetConfigInput, OrganizationUncheckedUpdateWithoutWidgetConfigInput>
+    create: XOR<OrganizationCreateWithoutWidgetConfigInput, OrganizationUncheckedCreateWithoutWidgetConfigInput>
+    where?: OrganizationWhereInput
+  }
+
+  export type OrganizationUpdateToOneWithWhereWithoutWidgetConfigInput = {
+    where?: OrganizationWhereInput
+    data: XOR<OrganizationUpdateWithoutWidgetConfigInput, OrganizationUncheckedUpdateWithoutWidgetConfigInput>
+  }
+
+  export type OrganizationUpdateWithoutWidgetConfigInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutOrganizationNestedInput
+    plans?: PlanUpdateManyWithoutOrganizationNestedInput
+    tickets?: TicketUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type OrganizationUncheckedUpdateWithoutWidgetConfigInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutOrganizationNestedInput
+    plans?: PlanUncheckedUpdateManyWithoutOrganizationNestedInput
+    tickets?: TicketUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type TicketCreateWithoutCreatedByInput = {
@@ -11339,6 +13095,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     plans?: PlanCreateNestedManyWithoutOrganizationInput
     tickets?: TicketCreateNestedManyWithoutOrganizationInput
+    widgetConfig?: WidgetConfigCreateNestedManyWithoutOrgInput
   }
 
   export type OrganizationUncheckedCreateWithoutUsersInput = {
@@ -11352,6 +13109,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     plans?: PlanUncheckedCreateNestedManyWithoutOrganizationInput
     tickets?: TicketUncheckedCreateNestedManyWithoutOrganizationInput
+    widgetConfig?: WidgetConfigUncheckedCreateNestedManyWithoutOrgInput
   }
 
   export type OrganizationCreateOrConnectWithoutUsersInput = {
@@ -11442,6 +13200,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     plans?: PlanUpdateManyWithoutOrganizationNestedInput
     tickets?: TicketUpdateManyWithoutOrganizationNestedInput
+    widgetConfig?: WidgetConfigUpdateManyWithoutOrgNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutUsersInput = {
@@ -11455,6 +13214,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     plans?: PlanUncheckedUpdateManyWithoutOrganizationNestedInput
     tickets?: TicketUncheckedUpdateManyWithoutOrganizationNestedInput
+    widgetConfig?: WidgetConfigUncheckedUpdateManyWithoutOrgNestedInput
   }
 
   export type TicketCreateWithoutTicketAccessTokensInput = {
@@ -11552,6 +13312,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutOrganizationInput
     tickets?: TicketCreateNestedManyWithoutOrganizationInput
+    widgetConfig?: WidgetConfigCreateNestedManyWithoutOrgInput
   }
 
   export type OrganizationUncheckedCreateWithoutPlansInput = {
@@ -11565,6 +13326,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutOrganizationInput
     tickets?: TicketUncheckedCreateNestedManyWithoutOrganizationInput
+    widgetConfig?: WidgetConfigUncheckedCreateNestedManyWithoutOrgInput
   }
 
   export type OrganizationCreateOrConnectWithoutPlansInput = {
@@ -11594,6 +13356,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutOrganizationNestedInput
     tickets?: TicketUpdateManyWithoutOrganizationNestedInput
+    widgetConfig?: WidgetConfigUpdateManyWithoutOrgNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutPlansInput = {
@@ -11607,6 +13370,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutOrganizationNestedInput
     tickets?: TicketUncheckedUpdateManyWithoutOrganizationNestedInput
+    widgetConfig?: WidgetConfigUncheckedUpdateManyWithoutOrgNestedInput
   }
 
   export type UserCreateWithoutTicketsInput = {
@@ -11730,6 +13494,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutOrganizationInput
     plans?: PlanCreateNestedManyWithoutOrganizationInput
+    widgetConfig?: WidgetConfigCreateNestedManyWithoutOrgInput
   }
 
   export type OrganizationUncheckedCreateWithoutTicketsInput = {
@@ -11743,6 +13508,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutOrganizationInput
     plans?: PlanUncheckedCreateNestedManyWithoutOrganizationInput
+    widgetConfig?: WidgetConfigUncheckedCreateNestedManyWithoutOrgInput
   }
 
   export type OrganizationCreateOrConnectWithoutTicketsInput = {
@@ -11885,6 +13651,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutOrganizationNestedInput
     plans?: PlanUpdateManyWithoutOrganizationNestedInput
+    widgetConfig?: WidgetConfigUpdateManyWithoutOrgNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutTicketsInput = {
@@ -11898,6 +13665,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutOrganizationNestedInput
     plans?: PlanUncheckedUpdateManyWithoutOrganizationNestedInput
+    widgetConfig?: WidgetConfigUncheckedUpdateManyWithoutOrgNestedInput
   }
 
   export type TicketCreateWithoutCommentsInput = {
@@ -12084,6 +13852,20 @@ export namespace Prisma {
     externalEmail?: string | null
   }
 
+  export type WidgetConfigCreateManyOrgInput = {
+    id?: string
+    buttonText?: string | null
+    modalTitle?: string | null
+    buttonColor?: string | null
+    headerColor?: string | null
+    logoUrl?: string | null
+    showPriority?: boolean
+    theme?: string | null
+    successMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type UserUpdateWithoutOrganizationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -12200,6 +13982,48 @@ export namespace Prisma {
     assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
     externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type WidgetConfigUpdateWithoutOrgInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    buttonText?: NullableStringFieldUpdateOperationsInput | string | null
+    modalTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    buttonColor?: NullableStringFieldUpdateOperationsInput | string | null
+    headerColor?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    showPriority?: BoolFieldUpdateOperationsInput | boolean
+    theme?: NullableStringFieldUpdateOperationsInput | string | null
+    successMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WidgetConfigUncheckedUpdateWithoutOrgInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    buttonText?: NullableStringFieldUpdateOperationsInput | string | null
+    modalTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    buttonColor?: NullableStringFieldUpdateOperationsInput | string | null
+    headerColor?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    showPriority?: BoolFieldUpdateOperationsInput | boolean
+    theme?: NullableStringFieldUpdateOperationsInput | string | null
+    successMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WidgetConfigUncheckedUpdateManyWithoutOrgInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    buttonText?: NullableStringFieldUpdateOperationsInput | string | null
+    modalTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    buttonColor?: NullableStringFieldUpdateOperationsInput | string | null
+    headerColor?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    showPriority?: BoolFieldUpdateOperationsInput | boolean
+    theme?: NullableStringFieldUpdateOperationsInput | string | null
+    successMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TicketCreateManyCreatedByInput = {

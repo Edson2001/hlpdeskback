@@ -131,6 +131,21 @@ exports.Prisma.OrganizationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.WidgetConfigScalarFieldEnum = {
+  id: 'id',
+  orgId: 'orgId',
+  buttonText: 'buttonText',
+  modalTitle: 'modalTitle',
+  buttonColor: 'buttonColor',
+  headerColor: 'headerColor',
+  logoUrl: 'logoUrl',
+  showPriority: 'showPriority',
+  theme: 'theme',
+  successMessage: 'successMessage',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -223,6 +238,7 @@ exports.TicketPriority = exports.$Enums.TicketPriority = {
 
 exports.Prisma.ModelName = {
   Organization: 'Organization',
+  WidgetConfig: 'WidgetConfig',
   User: 'User',
   TicketAccessToken: 'TicketAccessToken',
   Plan: 'Plan',

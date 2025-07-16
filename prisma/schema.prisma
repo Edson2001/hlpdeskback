@@ -26,7 +26,26 @@ model Organization {
   users     User[]
   plans     Plan[]
   tickets   Ticket[] // Adicionado o campo de relação para Ticket
+  widgetConfig WidgetConfig[]
 }
+
+model WidgetConfig {
+  id          String   @id @default(cuid())
+  orgId       String   @unique
+  org         Organization @relation(fields: [orgId], references: [id])
+
+  buttonText  String?  @default("💬 Suporte")
+  modalTitle  String?  @default("Reportar um Problema")
+  buttonColor String?  @default("#1f2937")
+  headerColor String?  @default("#1f2937")
+  logoUrl     String?
+  showPriority Boolean @default(true)
+  theme       String?  @default("light") // "light" ou "dark"
+  successMessage String? @default("Seu ticket foi registrado com sucesso!")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
 
 model User {
   id             String        @id @default(uuid())
