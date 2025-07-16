@@ -53,7 +53,7 @@ export class OrganizationsService {
     // Gera o token de confirmação
     const payload = { username: user.name, sub: user.email };
     const token = this.jwtService.sign(payload);
-    const confirmationLink = `http://localhost:3000/validate/${token}`;
+    const confirmationLink = `${process.env.FRONT_URL}/validate/${token}`;
 
     // Template HTML de e-mail
     const emailHtml = `
