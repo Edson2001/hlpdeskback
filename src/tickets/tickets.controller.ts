@@ -11,15 +11,22 @@ import {
   Req,
   UnauthorizedException,
   Query,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { TicketsService } from './tickets.service';
 import { CreateTicketDto } from './dto/create-ticket.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateExternalTicketDto } from './dto/CreateExternalTicketDto.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { R2Service } from 'src/utils/r2.service';
 
 @Controller('tickets')
 export class TicketsController {
-  constructor(private readonly ticketsService: TicketsService) {}
+  constructor(
+    private readonly ticketsService: TicketsService,
+    private readonly r2Service: R2Service,
+  ) {}
 
   @UseGuards(AuthGuard('jwt'))
   @Post()
@@ -100,6 +107,21 @@ export class TicketsController {
     @Query('orgSlug') orgSlug: string,
   ) {
     return this.ticketsService.createExternalTicket(dto, orgSlug);
+  }
+
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('image'))
+  async uploadImage(@UploadedFile() file: Express.Multer.File) {
+    const uniqueKey = `${Date.now()}-${file.originalname}`;
+    const fileBuffer = file.buffer;
+
+    const imageUrl = await this.r2Service.uploadFile(
+      process.env.R2_BUCKET_NAME!,  
+      uniqueKey,
+      fileBuffer,
+    );
+
+    return { url: imageUrl };
   }
 
   @Get('/me/data')

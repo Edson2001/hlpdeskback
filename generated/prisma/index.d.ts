@@ -10196,6 +10196,7 @@ export namespace Prisma {
     createdAt: Date | null
     ticketId: string | null
     authorId: string | null
+    isImage: boolean | null
     externalName: string | null
     externalEmail: string | null
   }
@@ -10206,6 +10207,7 @@ export namespace Prisma {
     createdAt: Date | null
     ticketId: string | null
     authorId: string | null
+    isImage: boolean | null
     externalName: string | null
     externalEmail: string | null
   }
@@ -10216,6 +10218,7 @@ export namespace Prisma {
     createdAt: number
     ticketId: number
     authorId: number
+    isImage: number
     externalName: number
     externalEmail: number
     _all: number
@@ -10228,6 +10231,7 @@ export namespace Prisma {
     createdAt?: true
     ticketId?: true
     authorId?: true
+    isImage?: true
     externalName?: true
     externalEmail?: true
   }
@@ -10238,6 +10242,7 @@ export namespace Prisma {
     createdAt?: true
     ticketId?: true
     authorId?: true
+    isImage?: true
     externalName?: true
     externalEmail?: true
   }
@@ -10248,6 +10253,7 @@ export namespace Prisma {
     createdAt?: true
     ticketId?: true
     authorId?: true
+    isImage?: true
     externalName?: true
     externalEmail?: true
     _all?: true
@@ -10331,6 +10337,7 @@ export namespace Prisma {
     createdAt: Date
     ticketId: string
     authorId: string | null
+    isImage: boolean | null
     externalName: string | null
     externalEmail: string | null
     _count: CommentCountAggregateOutputType | null
@@ -10358,6 +10365,7 @@ export namespace Prisma {
     createdAt?: boolean
     ticketId?: boolean
     authorId?: boolean
+    isImage?: boolean
     externalName?: boolean
     externalEmail?: boolean
     ticket?: boolean | TicketDefaultArgs<ExtArgs>
@@ -10370,6 +10378,7 @@ export namespace Prisma {
     createdAt?: boolean
     ticketId?: boolean
     authorId?: boolean
+    isImage?: boolean
     externalName?: boolean
     externalEmail?: boolean
     ticket?: boolean | TicketDefaultArgs<ExtArgs>
@@ -10382,6 +10391,7 @@ export namespace Prisma {
     createdAt?: boolean
     ticketId?: boolean
     authorId?: boolean
+    isImage?: boolean
     externalName?: boolean
     externalEmail?: boolean
     ticket?: boolean | TicketDefaultArgs<ExtArgs>
@@ -10394,11 +10404,12 @@ export namespace Prisma {
     createdAt?: boolean
     ticketId?: boolean
     authorId?: boolean
+    isImage?: boolean
     externalName?: boolean
     externalEmail?: boolean
   }
 
-  export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "createdAt" | "ticketId" | "authorId" | "externalName" | "externalEmail", ExtArgs["result"]["comment"]>
+  export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "createdAt" | "ticketId" | "authorId" | "isImage" | "externalName" | "externalEmail", ExtArgs["result"]["comment"]>
   export type CommentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ticket?: boolean | TicketDefaultArgs<ExtArgs>
     author?: boolean | Comment$authorArgs<ExtArgs>
@@ -10424,6 +10435,7 @@ export namespace Prisma {
       createdAt: Date
       ticketId: string
       authorId: string | null
+      isImage: boolean | null
       externalName: string | null
       externalEmail: string | null
     }, ExtArgs["result"]["comment"]>
@@ -10856,6 +10868,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"Comment", 'DateTime'>
     readonly ticketId: FieldRef<"Comment", 'String'>
     readonly authorId: FieldRef<"Comment", 'String'>
+    readonly isImage: FieldRef<"Comment", 'Boolean'>
     readonly externalName: FieldRef<"Comment", 'String'>
     readonly externalEmail: FieldRef<"Comment", 'String'>
   }
@@ -12533,6 +12546,7 @@ export namespace Prisma {
     createdAt: 'createdAt',
     ticketId: 'ticketId',
     authorId: 'authorId',
+    isImage: 'isImage',
     externalName: 'externalName',
     externalEmail: 'externalEmail'
   };
@@ -13284,6 +13298,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     ticketId?: StringFilter<"Comment"> | string
     authorId?: StringNullableFilter<"Comment"> | string | null
+    isImage?: BoolNullableFilter<"Comment"> | boolean | null
     externalName?: StringNullableFilter<"Comment"> | string | null
     externalEmail?: StringNullableFilter<"Comment"> | string | null
     ticket?: XOR<TicketScalarRelationFilter, TicketWhereInput>
@@ -13296,6 +13311,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     ticketId?: SortOrder
     authorId?: SortOrderInput | SortOrder
+    isImage?: SortOrderInput | SortOrder
     externalName?: SortOrderInput | SortOrder
     externalEmail?: SortOrderInput | SortOrder
     ticket?: TicketOrderByWithRelationInput
@@ -13311,6 +13327,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     ticketId?: StringFilter<"Comment"> | string
     authorId?: StringNullableFilter<"Comment"> | string | null
+    isImage?: BoolNullableFilter<"Comment"> | boolean | null
     externalName?: StringNullableFilter<"Comment"> | string | null
     externalEmail?: StringNullableFilter<"Comment"> | string | null
     ticket?: XOR<TicketScalarRelationFilter, TicketWhereInput>
@@ -13323,6 +13340,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     ticketId?: SortOrder
     authorId?: SortOrderInput | SortOrder
+    isImage?: SortOrderInput | SortOrder
     externalName?: SortOrderInput | SortOrder
     externalEmail?: SortOrderInput | SortOrder
     _count?: CommentCountOrderByAggregateInput
@@ -13339,6 +13357,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Comment"> | Date | string
     ticketId?: StringWithAggregatesFilter<"Comment"> | string
     authorId?: StringNullableWithAggregatesFilter<"Comment"> | string | null
+    isImage?: BoolNullableWithAggregatesFilter<"Comment"> | boolean | null
     externalName?: StringNullableWithAggregatesFilter<"Comment"> | string | null
     externalEmail?: StringNullableWithAggregatesFilter<"Comment"> | string | null
   }
@@ -14062,6 +14081,7 @@ export namespace Prisma {
     id?: string
     content: string
     createdAt?: Date | string
+    isImage?: boolean | null
     externalName?: string | null
     externalEmail?: string | null
     ticket: TicketCreateNestedOneWithoutCommentsInput
@@ -14074,6 +14094,7 @@ export namespace Prisma {
     createdAt?: Date | string
     ticketId: string
     authorId?: string | null
+    isImage?: boolean | null
     externalName?: string | null
     externalEmail?: string | null
   }
@@ -14082,6 +14103,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isImage?: NullableBoolFieldUpdateOperationsInput | boolean | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
     externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
     ticket?: TicketUpdateOneRequiredWithoutCommentsNestedInput
@@ -14094,6 +14116,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ticketId?: StringFieldUpdateOperationsInput | string
     authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    isImage?: NullableBoolFieldUpdateOperationsInput | boolean | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
     externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -14104,6 +14127,7 @@ export namespace Prisma {
     createdAt?: Date | string
     ticketId: string
     authorId?: string | null
+    isImage?: boolean | null
     externalName?: string | null
     externalEmail?: string | null
   }
@@ -14112,6 +14136,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isImage?: NullableBoolFieldUpdateOperationsInput | boolean | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
     externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -14122,6 +14147,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ticketId?: StringFieldUpdateOperationsInput | string
     authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    isImage?: NullableBoolFieldUpdateOperationsInput | boolean | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
     externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -14842,6 +14868,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     ticketId?: SortOrder
     authorId?: SortOrder
+    isImage?: SortOrder
     externalName?: SortOrder
     externalEmail?: SortOrder
   }
@@ -14852,6 +14879,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     ticketId?: SortOrder
     authorId?: SortOrder
+    isImage?: SortOrder
     externalName?: SortOrder
     externalEmail?: SortOrder
   }
@@ -14862,6 +14890,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     ticketId?: SortOrder
     authorId?: SortOrder
+    isImage?: SortOrder
     externalName?: SortOrder
     externalEmail?: SortOrder
   }
@@ -16585,6 +16614,7 @@ export namespace Prisma {
     id?: string
     content: string
     createdAt?: Date | string
+    isImage?: boolean | null
     externalName?: string | null
     externalEmail?: string | null
     ticket: TicketCreateNestedOneWithoutCommentsInput
@@ -16595,6 +16625,7 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     ticketId: string
+    isImage?: boolean | null
     externalName?: string | null
     externalEmail?: string | null
   }
@@ -16703,6 +16734,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     ticketId?: StringFilter<"Comment"> | string
     authorId?: StringNullableFilter<"Comment"> | string | null
+    isImage?: BoolNullableFilter<"Comment"> | boolean | null
     externalName?: StringNullableFilter<"Comment"> | string | null
     externalEmail?: StringNullableFilter<"Comment"> | string | null
   }
@@ -17286,6 +17318,7 @@ export namespace Prisma {
     id?: string
     content: string
     createdAt?: Date | string
+    isImage?: boolean | null
     externalName?: string | null
     externalEmail?: string | null
     author?: UserCreateNestedOneWithoutCommentsInput
@@ -17296,6 +17329,7 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     authorId?: string | null
+    isImage?: boolean | null
     externalName?: string | null
     externalEmail?: string | null
   }
@@ -18226,6 +18260,7 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     ticketId: string
+    isImage?: boolean | null
     externalName?: string | null
     externalEmail?: string | null
   }
@@ -18332,6 +18367,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isImage?: NullableBoolFieldUpdateOperationsInput | boolean | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
     externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
     ticket?: TicketUpdateOneRequiredWithoutCommentsNestedInput
@@ -18342,6 +18378,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ticketId?: StringFieldUpdateOperationsInput | string
+    isImage?: NullableBoolFieldUpdateOperationsInput | boolean | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
     externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -18351,6 +18388,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ticketId?: StringFieldUpdateOperationsInput | string
+    isImage?: NullableBoolFieldUpdateOperationsInput | boolean | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
     externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -18434,6 +18472,7 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     authorId?: string | null
+    isImage?: boolean | null
     externalName?: string | null
     externalEmail?: string | null
   }
@@ -18449,6 +18488,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isImage?: NullableBoolFieldUpdateOperationsInput | boolean | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
     externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
     author?: UserUpdateOneWithoutCommentsNestedInput
@@ -18459,6 +18499,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    isImage?: NullableBoolFieldUpdateOperationsInput | boolean | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
     externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -18468,6 +18509,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    isImage?: NullableBoolFieldUpdateOperationsInput | boolean | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
     externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
   }

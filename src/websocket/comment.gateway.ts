@@ -9,6 +9,9 @@ import { Server, Socket } from 'socket.io';
 import { forwardRef, Inject, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { TicketsService } from '../tickets/tickets.service'; // Importe o serviço
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
 
 @WebSocketGateway({ cors: true })
 export class CommentGateway {
@@ -30,6 +33,7 @@ export class CommentGateway {
       content: string;
       externalName?: string;
       externalEmail?: string;
+      isImage?: boolean;
     },
     @ConnectedSocket() client: Socket,
   ) {
@@ -41,6 +45,7 @@ export class CommentGateway {
       data.authorId,
       data.externalName,
       data.externalEmail,
+      data.isImage,
     );
 
     // Emite o comentário para todos os clientes

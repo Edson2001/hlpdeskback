@@ -87,7 +87,7 @@ export class TicketsService {
   </body>
   </html>
 `;
-      
+
       await this.emailService.sendEmail(
         creator.email ?? ticket?.externalEmail,
         'Ticket Criado',
@@ -532,6 +532,7 @@ export class TicketsService {
     authorId?: string,
     externalName?: string,
     externalEmail?: string,
+    isImage?: boolean
   ) {
     console.log(
       content,
@@ -539,7 +540,8 @@ export class TicketsService {
       authorId,
       externalName,
       externalEmail,
-      '#################',
+      isImage,
+      "////////////"
     );
     return this.ticketsRepository.addComment(
       ticketId,
@@ -547,6 +549,7 @@ export class TicketsService {
       authorId,
       externalName,
       externalEmail,
+      isImage
     );
   }
 
