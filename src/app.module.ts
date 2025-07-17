@@ -8,6 +8,8 @@ import { WebSocketModule } from './websocket/websocket.module';
 import { EmailService } from './utils/email.service';
 import { PrismaService } from './prisma.service';
 import { OrganizationsModule } from './organizations/organizations.module';
+import { PlansModule } from './plans/plans.module';
+import { PaymentsModule } from './payment/payments.module';
 
 @Module({
   imports: [
@@ -16,6 +18,8 @@ import { OrganizationsModule } from './organizations/organizations.module';
     WebSocketModule,
     TicketsModule,
     OrganizationsModule,
+    PlansModule,
+    PaymentsModule
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService, EmailService],

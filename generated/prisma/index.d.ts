@@ -39,6 +39,11 @@ export type TicketAccessToken = $Result.DefaultSelection<Prisma.$TicketAccessTok
  */
 export type Plan = $Result.DefaultSelection<Prisma.$PlanPayload>
 /**
+ * Model OrganizationPlan
+ * 
+ */
+export type OrganizationPlan = $Result.DefaultSelection<Prisma.$OrganizationPlanPayload>
+/**
  * Model Ticket
  * 
  */
@@ -48,6 +53,11 @@ export type Ticket = $Result.DefaultSelection<Prisma.$TicketPayload>
  * 
  */
 export type Comment = $Result.DefaultSelection<Prisma.$CommentPayload>
+/**
+ * Model Payment
+ * 
+ */
+export type Payment = $Result.DefaultSelection<Prisma.$PaymentPayload>
 
 /**
  * Enums
@@ -270,6 +280,16 @@ export class PrismaClient<
   get plan(): Prisma.PlanDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.organizationPlan`: Exposes CRUD operations for the **OrganizationPlan** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more OrganizationPlans
+    * const organizationPlans = await prisma.organizationPlan.findMany()
+    * ```
+    */
+  get organizationPlan(): Prisma.OrganizationPlanDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.ticket`: Exposes CRUD operations for the **Ticket** model.
     * Example usage:
     * ```ts
@@ -288,6 +308,16 @@ export class PrismaClient<
     * ```
     */
   get comment(): Prisma.CommentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.payment`: Exposes CRUD operations for the **Payment** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Payments
+    * const payments = await prisma.payment.findMany()
+    * ```
+    */
+  get payment(): Prisma.PaymentDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -733,8 +763,10 @@ export namespace Prisma {
     User: 'User',
     TicketAccessToken: 'TicketAccessToken',
     Plan: 'Plan',
+    OrganizationPlan: 'OrganizationPlan',
     Ticket: 'Ticket',
-    Comment: 'Comment'
+    Comment: 'Comment',
+    Payment: 'Payment'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -753,7 +785,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "organization" | "widgetConfig" | "user" | "ticketAccessToken" | "plan" | "ticket" | "comment"
+      modelProps: "organization" | "widgetConfig" | "user" | "ticketAccessToken" | "plan" | "organizationPlan" | "ticket" | "comment" | "payment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1127,6 +1159,80 @@ export namespace Prisma {
           }
         }
       }
+      OrganizationPlan: {
+        payload: Prisma.$OrganizationPlanPayload<ExtArgs>
+        fields: Prisma.OrganizationPlanFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.OrganizationPlanFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPlanPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.OrganizationPlanFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPlanPayload>
+          }
+          findFirst: {
+            args: Prisma.OrganizationPlanFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPlanPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.OrganizationPlanFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPlanPayload>
+          }
+          findMany: {
+            args: Prisma.OrganizationPlanFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPlanPayload>[]
+          }
+          create: {
+            args: Prisma.OrganizationPlanCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPlanPayload>
+          }
+          createMany: {
+            args: Prisma.OrganizationPlanCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.OrganizationPlanCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPlanPayload>[]
+          }
+          delete: {
+            args: Prisma.OrganizationPlanDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPlanPayload>
+          }
+          update: {
+            args: Prisma.OrganizationPlanUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPlanPayload>
+          }
+          deleteMany: {
+            args: Prisma.OrganizationPlanDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.OrganizationPlanUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.OrganizationPlanUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPlanPayload>[]
+          }
+          upsert: {
+            args: Prisma.OrganizationPlanUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPlanPayload>
+          }
+          aggregate: {
+            args: Prisma.OrganizationPlanAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOrganizationPlan>
+          }
+          groupBy: {
+            args: Prisma.OrganizationPlanGroupByArgs<ExtArgs>
+            result: $Utils.Optional<OrganizationPlanGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.OrganizationPlanCountArgs<ExtArgs>
+            result: $Utils.Optional<OrganizationPlanCountAggregateOutputType> | number
+          }
+        }
+      }
       Ticket: {
         payload: Prisma.$TicketPayload<ExtArgs>
         fields: Prisma.TicketFieldRefs
@@ -1275,6 +1381,80 @@ export namespace Prisma {
           }
         }
       }
+      Payment: {
+        payload: Prisma.$PaymentPayload<ExtArgs>
+        fields: Prisma.PaymentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PaymentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PaymentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPayload>
+          }
+          findFirst: {
+            args: Prisma.PaymentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PaymentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPayload>
+          }
+          findMany: {
+            args: Prisma.PaymentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPayload>[]
+          }
+          create: {
+            args: Prisma.PaymentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPayload>
+          }
+          createMany: {
+            args: Prisma.PaymentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PaymentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPayload>[]
+          }
+          delete: {
+            args: Prisma.PaymentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPayload>
+          }
+          update: {
+            args: Prisma.PaymentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPayload>
+          }
+          deleteMany: {
+            args: Prisma.PaymentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PaymentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PaymentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPayload>[]
+          }
+          upsert: {
+            args: Prisma.PaymentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPayload>
+          }
+          aggregate: {
+            args: Prisma.PaymentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePayment>
+          }
+          groupBy: {
+            args: Prisma.PaymentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PaymentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PaymentCountArgs<ExtArgs>
+            result: $Utils.Optional<PaymentCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1364,8 +1544,10 @@ export namespace Prisma {
     user?: UserOmit
     ticketAccessToken?: TicketAccessTokenOmit
     plan?: PlanOmit
+    organizationPlan?: OrganizationPlanOmit
     ticket?: TicketOmit
     comment?: CommentOmit
+    payment?: PaymentOmit
   }
 
   /* Types for Logging */
@@ -1464,6 +1646,8 @@ export namespace Prisma {
     plans: number
     tickets: number
     widgetConfig: number
+    OrganizationPlan: number
+    payments: number
   }
 
   export type OrganizationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1471,6 +1655,8 @@ export namespace Prisma {
     plans?: boolean | OrganizationCountOutputTypeCountPlansArgs
     tickets?: boolean | OrganizationCountOutputTypeCountTicketsArgs
     widgetConfig?: boolean | OrganizationCountOutputTypeCountWidgetConfigArgs
+    OrganizationPlan?: boolean | OrganizationCountOutputTypeCountOrganizationPlanArgs
+    payments?: boolean | OrganizationCountOutputTypeCountPaymentsArgs
   }
 
   // Custom InputTypes
@@ -1510,6 +1696,20 @@ export namespace Prisma {
    */
   export type OrganizationCountOutputTypeCountWidgetConfigArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: WidgetConfigWhereInput
+  }
+
+  /**
+   * OrganizationCountOutputType without action
+   */
+  export type OrganizationCountOutputTypeCountOrganizationPlanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrganizationPlanWhereInput
+  }
+
+  /**
+   * OrganizationCountOutputType without action
+   */
+  export type OrganizationCountOutputTypeCountPaymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaymentWhereInput
   }
 
 
@@ -1559,6 +1759,46 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CommentWhereInput
+  }
+
+
+  /**
+   * Count Type PlanCountOutputType
+   */
+
+  export type PlanCountOutputType = {
+    organizationPlans: number
+    payments: number
+  }
+
+  export type PlanCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organizationPlans?: boolean | PlanCountOutputTypeCountOrganizationPlansArgs
+    payments?: boolean | PlanCountOutputTypeCountPaymentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PlanCountOutputType without action
+   */
+  export type PlanCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlanCountOutputType
+     */
+    select?: PlanCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PlanCountOutputType without action
+   */
+  export type PlanCountOutputTypeCountOrganizationPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrganizationPlanWhereInput
+  }
+
+  /**
+   * PlanCountOutputType without action
+   */
+  export type PlanCountOutputTypeCountPaymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaymentWhereInput
   }
 
 
@@ -1798,6 +2038,8 @@ export namespace Prisma {
     plans?: boolean | Organization$plansArgs<ExtArgs>
     tickets?: boolean | Organization$ticketsArgs<ExtArgs>
     widgetConfig?: boolean | Organization$widgetConfigArgs<ExtArgs>
+    OrganizationPlan?: boolean | Organization$OrganizationPlanArgs<ExtArgs>
+    payments?: boolean | Organization$paymentsArgs<ExtArgs>
     _count?: boolean | OrganizationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["organization"]>
 
@@ -1840,6 +2082,8 @@ export namespace Prisma {
     plans?: boolean | Organization$plansArgs<ExtArgs>
     tickets?: boolean | Organization$ticketsArgs<ExtArgs>
     widgetConfig?: boolean | Organization$widgetConfigArgs<ExtArgs>
+    OrganizationPlan?: boolean | Organization$OrganizationPlanArgs<ExtArgs>
+    payments?: boolean | Organization$paymentsArgs<ExtArgs>
     _count?: boolean | OrganizationCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type OrganizationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1852,6 +2096,8 @@ export namespace Prisma {
       plans: Prisma.$PlanPayload<ExtArgs>[]
       tickets: Prisma.$TicketPayload<ExtArgs>[]
       widgetConfig: Prisma.$WidgetConfigPayload<ExtArgs>[]
+      OrganizationPlan: Prisma.$OrganizationPlanPayload<ExtArgs>[]
+      payments: Prisma.$PaymentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2260,6 +2506,8 @@ export namespace Prisma {
     plans<T extends Organization$plansArgs<ExtArgs> = {}>(args?: Subset<T, Organization$plansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     tickets<T extends Organization$ticketsArgs<ExtArgs> = {}>(args?: Subset<T, Organization$ticketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     widgetConfig<T extends Organization$widgetConfigArgs<ExtArgs> = {}>(args?: Subset<T, Organization$widgetConfigArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WidgetConfigPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    OrganizationPlan<T extends Organization$OrganizationPlanArgs<ExtArgs> = {}>(args?: Subset<T, Organization$OrganizationPlanArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrganizationPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    payments<T extends Organization$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, Organization$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2778,6 +3026,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: WidgetConfigScalarFieldEnum | WidgetConfigScalarFieldEnum[]
+  }
+
+  /**
+   * Organization.OrganizationPlan
+   */
+  export type Organization$OrganizationPlanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrganizationPlan
+     */
+    select?: OrganizationPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrganizationPlan
+     */
+    omit?: OrganizationPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationPlanInclude<ExtArgs> | null
+    where?: OrganizationPlanWhereInput
+    orderBy?: OrganizationPlanOrderByWithRelationInput | OrganizationPlanOrderByWithRelationInput[]
+    cursor?: OrganizationPlanWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OrganizationPlanScalarFieldEnum | OrganizationPlanScalarFieldEnum[]
+  }
+
+  /**
+   * Organization.payments
+   */
+  export type Organization$paymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    where?: PaymentWhereInput
+    orderBy?: PaymentOrderByWithRelationInput | PaymentOrderByWithRelationInput[]
+    cursor?: PaymentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PaymentScalarFieldEnum | PaymentScalarFieldEnum[]
   }
 
   /**
@@ -6208,24 +6504,26 @@ export namespace Prisma {
   }
 
   export type PlanAvgAggregateOutputType = {
-    price: number | null
-    duration: number | null
-    userLimit: number | null
+    monthlyPrice: number | null
+    annualPrice: number | null
+    durationMonths: number | null
   }
 
   export type PlanSumAggregateOutputType = {
-    price: number | null
-    duration: number | null
-    userLimit: number | null
+    monthlyPrice: number | null
+    annualPrice: number | null
+    durationMonths: number | null
   }
 
   export type PlanMinAggregateOutputType = {
     id: string | null
-    name: string | null
+    title: string | null
+    monthlyPrice: number | null
+    annualPrice: number | null
+    durationMonths: number | null
     description: string | null
-    price: number | null
-    duration: number | null
-    userLimit: number | null
+    buttonText: string | null
+    highlight: boolean | null
     isActive: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -6234,11 +6532,13 @@ export namespace Prisma {
 
   export type PlanMaxAggregateOutputType = {
     id: string | null
-    name: string | null
+    title: string | null
+    monthlyPrice: number | null
+    annualPrice: number | null
+    durationMonths: number | null
     description: string | null
-    price: number | null
-    duration: number | null
-    userLimit: number | null
+    buttonText: string | null
+    highlight: boolean | null
     isActive: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -6247,11 +6547,14 @@ export namespace Prisma {
 
   export type PlanCountAggregateOutputType = {
     id: number
-    name: number
+    title: number
+    monthlyPrice: number
+    annualPrice: number
+    durationMonths: number
     description: number
-    price: number
-    duration: number
-    userLimit: number
+    features: number
+    buttonText: number
+    highlight: number
     isActive: number
     createdAt: number
     updatedAt: number
@@ -6261,24 +6564,26 @@ export namespace Prisma {
 
 
   export type PlanAvgAggregateInputType = {
-    price?: true
-    duration?: true
-    userLimit?: true
+    monthlyPrice?: true
+    annualPrice?: true
+    durationMonths?: true
   }
 
   export type PlanSumAggregateInputType = {
-    price?: true
-    duration?: true
-    userLimit?: true
+    monthlyPrice?: true
+    annualPrice?: true
+    durationMonths?: true
   }
 
   export type PlanMinAggregateInputType = {
     id?: true
-    name?: true
+    title?: true
+    monthlyPrice?: true
+    annualPrice?: true
+    durationMonths?: true
     description?: true
-    price?: true
-    duration?: true
-    userLimit?: true
+    buttonText?: true
+    highlight?: true
     isActive?: true
     createdAt?: true
     updatedAt?: true
@@ -6287,11 +6592,13 @@ export namespace Prisma {
 
   export type PlanMaxAggregateInputType = {
     id?: true
-    name?: true
+    title?: true
+    monthlyPrice?: true
+    annualPrice?: true
+    durationMonths?: true
     description?: true
-    price?: true
-    duration?: true
-    userLimit?: true
+    buttonText?: true
+    highlight?: true
     isActive?: true
     createdAt?: true
     updatedAt?: true
@@ -6300,11 +6607,14 @@ export namespace Prisma {
 
   export type PlanCountAggregateInputType = {
     id?: true
-    name?: true
+    title?: true
+    monthlyPrice?: true
+    annualPrice?: true
+    durationMonths?: true
     description?: true
-    price?: true
-    duration?: true
-    userLimit?: true
+    features?: true
+    buttonText?: true
+    highlight?: true
     isActive?: true
     createdAt?: true
     updatedAt?: true
@@ -6400,11 +6710,14 @@ export namespace Prisma {
 
   export type PlanGroupByOutputType = {
     id: string
-    name: string
+    title: string
+    monthlyPrice: number
+    annualPrice: number
+    durationMonths: number
     description: string
-    price: number
-    duration: number
-    userLimit: number
+    features: string[]
+    buttonText: string
+    highlight: boolean
     isActive: boolean
     createdAt: Date
     updatedAt: Date
@@ -6432,25 +6745,34 @@ export namespace Prisma {
 
   export type PlanSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
+    title?: boolean
+    monthlyPrice?: boolean
+    annualPrice?: boolean
+    durationMonths?: boolean
     description?: boolean
-    price?: boolean
-    duration?: boolean
-    userLimit?: boolean
+    features?: boolean
+    buttonText?: boolean
+    highlight?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     organizationId?: boolean
+    organizationPlans?: boolean | Plan$organizationPlansArgs<ExtArgs>
     Organization?: boolean | Plan$OrganizationArgs<ExtArgs>
+    payments?: boolean | Plan$paymentsArgs<ExtArgs>
+    _count?: boolean | PlanCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["plan"]>
 
   export type PlanSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
+    title?: boolean
+    monthlyPrice?: boolean
+    annualPrice?: boolean
+    durationMonths?: boolean
     description?: boolean
-    price?: boolean
-    duration?: boolean
-    userLimit?: boolean
+    features?: boolean
+    buttonText?: boolean
+    highlight?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -6460,11 +6782,14 @@ export namespace Prisma {
 
   export type PlanSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
+    title?: boolean
+    monthlyPrice?: boolean
+    annualPrice?: boolean
+    durationMonths?: boolean
     description?: boolean
-    price?: boolean
-    duration?: boolean
-    userLimit?: boolean
+    features?: boolean
+    buttonText?: boolean
+    highlight?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -6474,20 +6799,26 @@ export namespace Prisma {
 
   export type PlanSelectScalar = {
     id?: boolean
-    name?: boolean
+    title?: boolean
+    monthlyPrice?: boolean
+    annualPrice?: boolean
+    durationMonths?: boolean
     description?: boolean
-    price?: boolean
-    duration?: boolean
-    userLimit?: boolean
+    features?: boolean
+    buttonText?: boolean
+    highlight?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     organizationId?: boolean
   }
 
-  export type PlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "price" | "duration" | "userLimit" | "isActive" | "createdAt" | "updatedAt" | "organizationId", ExtArgs["result"]["plan"]>
+  export type PlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "monthlyPrice" | "annualPrice" | "durationMonths" | "description" | "features" | "buttonText" | "highlight" | "isActive" | "createdAt" | "updatedAt" | "organizationId", ExtArgs["result"]["plan"]>
   export type PlanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organizationPlans?: boolean | Plan$organizationPlansArgs<ExtArgs>
     Organization?: boolean | Plan$OrganizationArgs<ExtArgs>
+    payments?: boolean | Plan$paymentsArgs<ExtArgs>
+    _count?: boolean | PlanCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PlanIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Organization?: boolean | Plan$OrganizationArgs<ExtArgs>
@@ -6499,15 +6830,20 @@ export namespace Prisma {
   export type $PlanPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Plan"
     objects: {
+      organizationPlans: Prisma.$OrganizationPlanPayload<ExtArgs>[]
       Organization: Prisma.$OrganizationPayload<ExtArgs> | null
+      payments: Prisma.$PaymentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      name: string
+      title: string
+      monthlyPrice: number
+      annualPrice: number
+      durationMonths: number
       description: string
-      price: number
-      duration: number
-      userLimit: number
+      features: string[]
+      buttonText: string
+      highlight: boolean
       isActive: boolean
       createdAt: Date
       updatedAt: Date
@@ -6906,7 +7242,9 @@ export namespace Prisma {
    */
   export interface Prisma__PlanClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    organizationPlans<T extends Plan$organizationPlansArgs<ExtArgs> = {}>(args?: Subset<T, Plan$organizationPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrganizationPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Organization<T extends Plan$OrganizationArgs<ExtArgs> = {}>(args?: Subset<T, Plan$OrganizationArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    payments<T extends Plan$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, Plan$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6937,11 +7275,14 @@ export namespace Prisma {
    */
   interface PlanFieldRefs {
     readonly id: FieldRef<"Plan", 'String'>
-    readonly name: FieldRef<"Plan", 'String'>
+    readonly title: FieldRef<"Plan", 'String'>
+    readonly monthlyPrice: FieldRef<"Plan", 'Float'>
+    readonly annualPrice: FieldRef<"Plan", 'Float'>
+    readonly durationMonths: FieldRef<"Plan", 'Int'>
     readonly description: FieldRef<"Plan", 'String'>
-    readonly price: FieldRef<"Plan", 'Float'>
-    readonly duration: FieldRef<"Plan", 'Int'>
-    readonly userLimit: FieldRef<"Plan", 'Int'>
+    readonly features: FieldRef<"Plan", 'String[]'>
+    readonly buttonText: FieldRef<"Plan", 'String'>
+    readonly highlight: FieldRef<"Plan", 'Boolean'>
     readonly isActive: FieldRef<"Plan", 'Boolean'>
     readonly createdAt: FieldRef<"Plan", 'DateTime'>
     readonly updatedAt: FieldRef<"Plan", 'DateTime'>
@@ -7342,6 +7683,30 @@ export namespace Prisma {
   }
 
   /**
+   * Plan.organizationPlans
+   */
+  export type Plan$organizationPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrganizationPlan
+     */
+    select?: OrganizationPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrganizationPlan
+     */
+    omit?: OrganizationPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationPlanInclude<ExtArgs> | null
+    where?: OrganizationPlanWhereInput
+    orderBy?: OrganizationPlanOrderByWithRelationInput | OrganizationPlanOrderByWithRelationInput[]
+    cursor?: OrganizationPlanWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OrganizationPlanScalarFieldEnum | OrganizationPlanScalarFieldEnum[]
+  }
+
+  /**
    * Plan.Organization
    */
   export type Plan$OrganizationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7361,6 +7726,30 @@ export namespace Prisma {
   }
 
   /**
+   * Plan.payments
+   */
+  export type Plan$paymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    where?: PaymentWhereInput
+    orderBy?: PaymentOrderByWithRelationInput | PaymentOrderByWithRelationInput[]
+    cursor?: PaymentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PaymentScalarFieldEnum | PaymentScalarFieldEnum[]
+  }
+
+  /**
    * Plan without action
    */
   export type PlanDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7376,6 +7765,1125 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: PlanInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model OrganizationPlan
+   */
+
+  export type AggregateOrganizationPlan = {
+    _count: OrganizationPlanCountAggregateOutputType | null
+    _min: OrganizationPlanMinAggregateOutputType | null
+    _max: OrganizationPlanMaxAggregateOutputType | null
+  }
+
+  export type OrganizationPlanMinAggregateOutputType = {
+    id: string | null
+    organizationId: string | null
+    planId: string | null
+    startDate: Date | null
+    expiresAt: Date | null
+    isActive: boolean | null
+    paymentId: string | null
+  }
+
+  export type OrganizationPlanMaxAggregateOutputType = {
+    id: string | null
+    organizationId: string | null
+    planId: string | null
+    startDate: Date | null
+    expiresAt: Date | null
+    isActive: boolean | null
+    paymentId: string | null
+  }
+
+  export type OrganizationPlanCountAggregateOutputType = {
+    id: number
+    organizationId: number
+    planId: number
+    startDate: number
+    expiresAt: number
+    isActive: number
+    paymentId: number
+    _all: number
+  }
+
+
+  export type OrganizationPlanMinAggregateInputType = {
+    id?: true
+    organizationId?: true
+    planId?: true
+    startDate?: true
+    expiresAt?: true
+    isActive?: true
+    paymentId?: true
+  }
+
+  export type OrganizationPlanMaxAggregateInputType = {
+    id?: true
+    organizationId?: true
+    planId?: true
+    startDate?: true
+    expiresAt?: true
+    isActive?: true
+    paymentId?: true
+  }
+
+  export type OrganizationPlanCountAggregateInputType = {
+    id?: true
+    organizationId?: true
+    planId?: true
+    startDate?: true
+    expiresAt?: true
+    isActive?: true
+    paymentId?: true
+    _all?: true
+  }
+
+  export type OrganizationPlanAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OrganizationPlan to aggregate.
+     */
+    where?: OrganizationPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OrganizationPlans to fetch.
+     */
+    orderBy?: OrganizationPlanOrderByWithRelationInput | OrganizationPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: OrganizationPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OrganizationPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OrganizationPlans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned OrganizationPlans
+    **/
+    _count?: true | OrganizationPlanCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: OrganizationPlanMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: OrganizationPlanMaxAggregateInputType
+  }
+
+  export type GetOrganizationPlanAggregateType<T extends OrganizationPlanAggregateArgs> = {
+        [P in keyof T & keyof AggregateOrganizationPlan]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateOrganizationPlan[P]>
+      : GetScalarType<T[P], AggregateOrganizationPlan[P]>
+  }
+
+
+
+
+  export type OrganizationPlanGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrganizationPlanWhereInput
+    orderBy?: OrganizationPlanOrderByWithAggregationInput | OrganizationPlanOrderByWithAggregationInput[]
+    by: OrganizationPlanScalarFieldEnum[] | OrganizationPlanScalarFieldEnum
+    having?: OrganizationPlanScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: OrganizationPlanCountAggregateInputType | true
+    _min?: OrganizationPlanMinAggregateInputType
+    _max?: OrganizationPlanMaxAggregateInputType
+  }
+
+  export type OrganizationPlanGroupByOutputType = {
+    id: string
+    organizationId: string
+    planId: string
+    startDate: Date
+    expiresAt: Date
+    isActive: boolean
+    paymentId: string | null
+    _count: OrganizationPlanCountAggregateOutputType | null
+    _min: OrganizationPlanMinAggregateOutputType | null
+    _max: OrganizationPlanMaxAggregateOutputType | null
+  }
+
+  type GetOrganizationPlanGroupByPayload<T extends OrganizationPlanGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OrganizationPlanGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof OrganizationPlanGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], OrganizationPlanGroupByOutputType[P]>
+            : GetScalarType<T[P], OrganizationPlanGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type OrganizationPlanSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    organizationId?: boolean
+    planId?: boolean
+    startDate?: boolean
+    expiresAt?: boolean
+    isActive?: boolean
+    paymentId?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    plan?: boolean | PlanDefaultArgs<ExtArgs>
+    payment?: boolean | OrganizationPlan$paymentArgs<ExtArgs>
+  }, ExtArgs["result"]["organizationPlan"]>
+
+  export type OrganizationPlanSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    organizationId?: boolean
+    planId?: boolean
+    startDate?: boolean
+    expiresAt?: boolean
+    isActive?: boolean
+    paymentId?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    plan?: boolean | PlanDefaultArgs<ExtArgs>
+    payment?: boolean | OrganizationPlan$paymentArgs<ExtArgs>
+  }, ExtArgs["result"]["organizationPlan"]>
+
+  export type OrganizationPlanSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    organizationId?: boolean
+    planId?: boolean
+    startDate?: boolean
+    expiresAt?: boolean
+    isActive?: boolean
+    paymentId?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    plan?: boolean | PlanDefaultArgs<ExtArgs>
+    payment?: boolean | OrganizationPlan$paymentArgs<ExtArgs>
+  }, ExtArgs["result"]["organizationPlan"]>
+
+  export type OrganizationPlanSelectScalar = {
+    id?: boolean
+    organizationId?: boolean
+    planId?: boolean
+    startDate?: boolean
+    expiresAt?: boolean
+    isActive?: boolean
+    paymentId?: boolean
+  }
+
+  export type OrganizationPlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "organizationId" | "planId" | "startDate" | "expiresAt" | "isActive" | "paymentId", ExtArgs["result"]["organizationPlan"]>
+  export type OrganizationPlanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    plan?: boolean | PlanDefaultArgs<ExtArgs>
+    payment?: boolean | OrganizationPlan$paymentArgs<ExtArgs>
+  }
+  export type OrganizationPlanIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    plan?: boolean | PlanDefaultArgs<ExtArgs>
+    payment?: boolean | OrganizationPlan$paymentArgs<ExtArgs>
+  }
+  export type OrganizationPlanIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    plan?: boolean | PlanDefaultArgs<ExtArgs>
+    payment?: boolean | OrganizationPlan$paymentArgs<ExtArgs>
+  }
+
+  export type $OrganizationPlanPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "OrganizationPlan"
+    objects: {
+      organization: Prisma.$OrganizationPayload<ExtArgs>
+      plan: Prisma.$PlanPayload<ExtArgs>
+      payment: Prisma.$PaymentPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      organizationId: string
+      planId: string
+      startDate: Date
+      expiresAt: Date
+      isActive: boolean
+      paymentId: string | null
+    }, ExtArgs["result"]["organizationPlan"]>
+    composites: {}
+  }
+
+  type OrganizationPlanGetPayload<S extends boolean | null | undefined | OrganizationPlanDefaultArgs> = $Result.GetResult<Prisma.$OrganizationPlanPayload, S>
+
+  type OrganizationPlanCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<OrganizationPlanFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: OrganizationPlanCountAggregateInputType | true
+    }
+
+  export interface OrganizationPlanDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['OrganizationPlan'], meta: { name: 'OrganizationPlan' } }
+    /**
+     * Find zero or one OrganizationPlan that matches the filter.
+     * @param {OrganizationPlanFindUniqueArgs} args - Arguments to find a OrganizationPlan
+     * @example
+     * // Get one OrganizationPlan
+     * const organizationPlan = await prisma.organizationPlan.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends OrganizationPlanFindUniqueArgs>(args: SelectSubset<T, OrganizationPlanFindUniqueArgs<ExtArgs>>): Prisma__OrganizationPlanClient<$Result.GetResult<Prisma.$OrganizationPlanPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one OrganizationPlan that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {OrganizationPlanFindUniqueOrThrowArgs} args - Arguments to find a OrganizationPlan
+     * @example
+     * // Get one OrganizationPlan
+     * const organizationPlan = await prisma.organizationPlan.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends OrganizationPlanFindUniqueOrThrowArgs>(args: SelectSubset<T, OrganizationPlanFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OrganizationPlanClient<$Result.GetResult<Prisma.$OrganizationPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OrganizationPlan that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrganizationPlanFindFirstArgs} args - Arguments to find a OrganizationPlan
+     * @example
+     * // Get one OrganizationPlan
+     * const organizationPlan = await prisma.organizationPlan.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends OrganizationPlanFindFirstArgs>(args?: SelectSubset<T, OrganizationPlanFindFirstArgs<ExtArgs>>): Prisma__OrganizationPlanClient<$Result.GetResult<Prisma.$OrganizationPlanPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OrganizationPlan that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrganizationPlanFindFirstOrThrowArgs} args - Arguments to find a OrganizationPlan
+     * @example
+     * // Get one OrganizationPlan
+     * const organizationPlan = await prisma.organizationPlan.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends OrganizationPlanFindFirstOrThrowArgs>(args?: SelectSubset<T, OrganizationPlanFindFirstOrThrowArgs<ExtArgs>>): Prisma__OrganizationPlanClient<$Result.GetResult<Prisma.$OrganizationPlanPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more OrganizationPlans that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrganizationPlanFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all OrganizationPlans
+     * const organizationPlans = await prisma.organizationPlan.findMany()
+     * 
+     * // Get first 10 OrganizationPlans
+     * const organizationPlans = await prisma.organizationPlan.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const organizationPlanWithIdOnly = await prisma.organizationPlan.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends OrganizationPlanFindManyArgs>(args?: SelectSubset<T, OrganizationPlanFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrganizationPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a OrganizationPlan.
+     * @param {OrganizationPlanCreateArgs} args - Arguments to create a OrganizationPlan.
+     * @example
+     * // Create one OrganizationPlan
+     * const OrganizationPlan = await prisma.organizationPlan.create({
+     *   data: {
+     *     // ... data to create a OrganizationPlan
+     *   }
+     * })
+     * 
+     */
+    create<T extends OrganizationPlanCreateArgs>(args: SelectSubset<T, OrganizationPlanCreateArgs<ExtArgs>>): Prisma__OrganizationPlanClient<$Result.GetResult<Prisma.$OrganizationPlanPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many OrganizationPlans.
+     * @param {OrganizationPlanCreateManyArgs} args - Arguments to create many OrganizationPlans.
+     * @example
+     * // Create many OrganizationPlans
+     * const organizationPlan = await prisma.organizationPlan.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends OrganizationPlanCreateManyArgs>(args?: SelectSubset<T, OrganizationPlanCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many OrganizationPlans and returns the data saved in the database.
+     * @param {OrganizationPlanCreateManyAndReturnArgs} args - Arguments to create many OrganizationPlans.
+     * @example
+     * // Create many OrganizationPlans
+     * const organizationPlan = await prisma.organizationPlan.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many OrganizationPlans and only return the `id`
+     * const organizationPlanWithIdOnly = await prisma.organizationPlan.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends OrganizationPlanCreateManyAndReturnArgs>(args?: SelectSubset<T, OrganizationPlanCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrganizationPlanPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a OrganizationPlan.
+     * @param {OrganizationPlanDeleteArgs} args - Arguments to delete one OrganizationPlan.
+     * @example
+     * // Delete one OrganizationPlan
+     * const OrganizationPlan = await prisma.organizationPlan.delete({
+     *   where: {
+     *     // ... filter to delete one OrganizationPlan
+     *   }
+     * })
+     * 
+     */
+    delete<T extends OrganizationPlanDeleteArgs>(args: SelectSubset<T, OrganizationPlanDeleteArgs<ExtArgs>>): Prisma__OrganizationPlanClient<$Result.GetResult<Prisma.$OrganizationPlanPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one OrganizationPlan.
+     * @param {OrganizationPlanUpdateArgs} args - Arguments to update one OrganizationPlan.
+     * @example
+     * // Update one OrganizationPlan
+     * const organizationPlan = await prisma.organizationPlan.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends OrganizationPlanUpdateArgs>(args: SelectSubset<T, OrganizationPlanUpdateArgs<ExtArgs>>): Prisma__OrganizationPlanClient<$Result.GetResult<Prisma.$OrganizationPlanPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more OrganizationPlans.
+     * @param {OrganizationPlanDeleteManyArgs} args - Arguments to filter OrganizationPlans to delete.
+     * @example
+     * // Delete a few OrganizationPlans
+     * const { count } = await prisma.organizationPlan.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends OrganizationPlanDeleteManyArgs>(args?: SelectSubset<T, OrganizationPlanDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OrganizationPlans.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrganizationPlanUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many OrganizationPlans
+     * const organizationPlan = await prisma.organizationPlan.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends OrganizationPlanUpdateManyArgs>(args: SelectSubset<T, OrganizationPlanUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OrganizationPlans and returns the data updated in the database.
+     * @param {OrganizationPlanUpdateManyAndReturnArgs} args - Arguments to update many OrganizationPlans.
+     * @example
+     * // Update many OrganizationPlans
+     * const organizationPlan = await prisma.organizationPlan.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more OrganizationPlans and only return the `id`
+     * const organizationPlanWithIdOnly = await prisma.organizationPlan.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends OrganizationPlanUpdateManyAndReturnArgs>(args: SelectSubset<T, OrganizationPlanUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrganizationPlanPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one OrganizationPlan.
+     * @param {OrganizationPlanUpsertArgs} args - Arguments to update or create a OrganizationPlan.
+     * @example
+     * // Update or create a OrganizationPlan
+     * const organizationPlan = await prisma.organizationPlan.upsert({
+     *   create: {
+     *     // ... data to create a OrganizationPlan
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the OrganizationPlan we want to update
+     *   }
+     * })
+     */
+    upsert<T extends OrganizationPlanUpsertArgs>(args: SelectSubset<T, OrganizationPlanUpsertArgs<ExtArgs>>): Prisma__OrganizationPlanClient<$Result.GetResult<Prisma.$OrganizationPlanPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of OrganizationPlans.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrganizationPlanCountArgs} args - Arguments to filter OrganizationPlans to count.
+     * @example
+     * // Count the number of OrganizationPlans
+     * const count = await prisma.organizationPlan.count({
+     *   where: {
+     *     // ... the filter for the OrganizationPlans we want to count
+     *   }
+     * })
+    **/
+    count<T extends OrganizationPlanCountArgs>(
+      args?: Subset<T, OrganizationPlanCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], OrganizationPlanCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a OrganizationPlan.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrganizationPlanAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends OrganizationPlanAggregateArgs>(args: Subset<T, OrganizationPlanAggregateArgs>): Prisma.PrismaPromise<GetOrganizationPlanAggregateType<T>>
+
+    /**
+     * Group by OrganizationPlan.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrganizationPlanGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends OrganizationPlanGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: OrganizationPlanGroupByArgs['orderBy'] }
+        : { orderBy?: OrganizationPlanGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, OrganizationPlanGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOrganizationPlanGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the OrganizationPlan model
+   */
+  readonly fields: OrganizationPlanFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for OrganizationPlan.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__OrganizationPlanClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    organization<T extends OrganizationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrganizationDefaultArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    plan<T extends PlanDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PlanDefaultArgs<ExtArgs>>): Prisma__PlanClient<$Result.GetResult<Prisma.$PlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    payment<T extends OrganizationPlan$paymentArgs<ExtArgs> = {}>(args?: Subset<T, OrganizationPlan$paymentArgs<ExtArgs>>): Prisma__PaymentClient<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the OrganizationPlan model
+   */
+  interface OrganizationPlanFieldRefs {
+    readonly id: FieldRef<"OrganizationPlan", 'String'>
+    readonly organizationId: FieldRef<"OrganizationPlan", 'String'>
+    readonly planId: FieldRef<"OrganizationPlan", 'String'>
+    readonly startDate: FieldRef<"OrganizationPlan", 'DateTime'>
+    readonly expiresAt: FieldRef<"OrganizationPlan", 'DateTime'>
+    readonly isActive: FieldRef<"OrganizationPlan", 'Boolean'>
+    readonly paymentId: FieldRef<"OrganizationPlan", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * OrganizationPlan findUnique
+   */
+  export type OrganizationPlanFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrganizationPlan
+     */
+    select?: OrganizationPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrganizationPlan
+     */
+    omit?: OrganizationPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which OrganizationPlan to fetch.
+     */
+    where: OrganizationPlanWhereUniqueInput
+  }
+
+  /**
+   * OrganizationPlan findUniqueOrThrow
+   */
+  export type OrganizationPlanFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrganizationPlan
+     */
+    select?: OrganizationPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrganizationPlan
+     */
+    omit?: OrganizationPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which OrganizationPlan to fetch.
+     */
+    where: OrganizationPlanWhereUniqueInput
+  }
+
+  /**
+   * OrganizationPlan findFirst
+   */
+  export type OrganizationPlanFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrganizationPlan
+     */
+    select?: OrganizationPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrganizationPlan
+     */
+    omit?: OrganizationPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which OrganizationPlan to fetch.
+     */
+    where?: OrganizationPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OrganizationPlans to fetch.
+     */
+    orderBy?: OrganizationPlanOrderByWithRelationInput | OrganizationPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OrganizationPlans.
+     */
+    cursor?: OrganizationPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OrganizationPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OrganizationPlans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OrganizationPlans.
+     */
+    distinct?: OrganizationPlanScalarFieldEnum | OrganizationPlanScalarFieldEnum[]
+  }
+
+  /**
+   * OrganizationPlan findFirstOrThrow
+   */
+  export type OrganizationPlanFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrganizationPlan
+     */
+    select?: OrganizationPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrganizationPlan
+     */
+    omit?: OrganizationPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which OrganizationPlan to fetch.
+     */
+    where?: OrganizationPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OrganizationPlans to fetch.
+     */
+    orderBy?: OrganizationPlanOrderByWithRelationInput | OrganizationPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OrganizationPlans.
+     */
+    cursor?: OrganizationPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OrganizationPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OrganizationPlans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OrganizationPlans.
+     */
+    distinct?: OrganizationPlanScalarFieldEnum | OrganizationPlanScalarFieldEnum[]
+  }
+
+  /**
+   * OrganizationPlan findMany
+   */
+  export type OrganizationPlanFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrganizationPlan
+     */
+    select?: OrganizationPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrganizationPlan
+     */
+    omit?: OrganizationPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which OrganizationPlans to fetch.
+     */
+    where?: OrganizationPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OrganizationPlans to fetch.
+     */
+    orderBy?: OrganizationPlanOrderByWithRelationInput | OrganizationPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing OrganizationPlans.
+     */
+    cursor?: OrganizationPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OrganizationPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OrganizationPlans.
+     */
+    skip?: number
+    distinct?: OrganizationPlanScalarFieldEnum | OrganizationPlanScalarFieldEnum[]
+  }
+
+  /**
+   * OrganizationPlan create
+   */
+  export type OrganizationPlanCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrganizationPlan
+     */
+    select?: OrganizationPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrganizationPlan
+     */
+    omit?: OrganizationPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationPlanInclude<ExtArgs> | null
+    /**
+     * The data needed to create a OrganizationPlan.
+     */
+    data: XOR<OrganizationPlanCreateInput, OrganizationPlanUncheckedCreateInput>
+  }
+
+  /**
+   * OrganizationPlan createMany
+   */
+  export type OrganizationPlanCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many OrganizationPlans.
+     */
+    data: OrganizationPlanCreateManyInput | OrganizationPlanCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * OrganizationPlan createManyAndReturn
+   */
+  export type OrganizationPlanCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrganizationPlan
+     */
+    select?: OrganizationPlanSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrganizationPlan
+     */
+    omit?: OrganizationPlanOmit<ExtArgs> | null
+    /**
+     * The data used to create many OrganizationPlans.
+     */
+    data: OrganizationPlanCreateManyInput | OrganizationPlanCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationPlanIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * OrganizationPlan update
+   */
+  export type OrganizationPlanUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrganizationPlan
+     */
+    select?: OrganizationPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrganizationPlan
+     */
+    omit?: OrganizationPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationPlanInclude<ExtArgs> | null
+    /**
+     * The data needed to update a OrganizationPlan.
+     */
+    data: XOR<OrganizationPlanUpdateInput, OrganizationPlanUncheckedUpdateInput>
+    /**
+     * Choose, which OrganizationPlan to update.
+     */
+    where: OrganizationPlanWhereUniqueInput
+  }
+
+  /**
+   * OrganizationPlan updateMany
+   */
+  export type OrganizationPlanUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update OrganizationPlans.
+     */
+    data: XOR<OrganizationPlanUpdateManyMutationInput, OrganizationPlanUncheckedUpdateManyInput>
+    /**
+     * Filter which OrganizationPlans to update
+     */
+    where?: OrganizationPlanWhereInput
+    /**
+     * Limit how many OrganizationPlans to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * OrganizationPlan updateManyAndReturn
+   */
+  export type OrganizationPlanUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrganizationPlan
+     */
+    select?: OrganizationPlanSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrganizationPlan
+     */
+    omit?: OrganizationPlanOmit<ExtArgs> | null
+    /**
+     * The data used to update OrganizationPlans.
+     */
+    data: XOR<OrganizationPlanUpdateManyMutationInput, OrganizationPlanUncheckedUpdateManyInput>
+    /**
+     * Filter which OrganizationPlans to update
+     */
+    where?: OrganizationPlanWhereInput
+    /**
+     * Limit how many OrganizationPlans to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationPlanIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * OrganizationPlan upsert
+   */
+  export type OrganizationPlanUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrganizationPlan
+     */
+    select?: OrganizationPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrganizationPlan
+     */
+    omit?: OrganizationPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationPlanInclude<ExtArgs> | null
+    /**
+     * The filter to search for the OrganizationPlan to update in case it exists.
+     */
+    where: OrganizationPlanWhereUniqueInput
+    /**
+     * In case the OrganizationPlan found by the `where` argument doesn't exist, create a new OrganizationPlan with this data.
+     */
+    create: XOR<OrganizationPlanCreateInput, OrganizationPlanUncheckedCreateInput>
+    /**
+     * In case the OrganizationPlan was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<OrganizationPlanUpdateInput, OrganizationPlanUncheckedUpdateInput>
+  }
+
+  /**
+   * OrganizationPlan delete
+   */
+  export type OrganizationPlanDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrganizationPlan
+     */
+    select?: OrganizationPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrganizationPlan
+     */
+    omit?: OrganizationPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationPlanInclude<ExtArgs> | null
+    /**
+     * Filter which OrganizationPlan to delete.
+     */
+    where: OrganizationPlanWhereUniqueInput
+  }
+
+  /**
+   * OrganizationPlan deleteMany
+   */
+  export type OrganizationPlanDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OrganizationPlans to delete
+     */
+    where?: OrganizationPlanWhereInput
+    /**
+     * Limit how many OrganizationPlans to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * OrganizationPlan.payment
+   */
+  export type OrganizationPlan$paymentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    where?: PaymentWhereInput
+  }
+
+  /**
+   * OrganizationPlan without action
+   */
+  export type OrganizationPlanDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrganizationPlan
+     */
+    select?: OrganizationPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrganizationPlan
+     */
+    omit?: OrganizationPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationPlanInclude<ExtArgs> | null
   }
 
 
@@ -9784,6 +11292,1121 @@ export namespace Prisma {
 
 
   /**
+   * Model Payment
+   */
+
+  export type AggregatePayment = {
+    _count: PaymentCountAggregateOutputType | null
+    _min: PaymentMinAggregateOutputType | null
+    _max: PaymentMaxAggregateOutputType | null
+  }
+
+  export type PaymentMinAggregateOutputType = {
+    id: string | null
+    paymentReference: string | null
+    organizationId: string | null
+    planId: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PaymentMaxAggregateOutputType = {
+    id: string | null
+    paymentReference: string | null
+    organizationId: string | null
+    planId: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PaymentCountAggregateOutputType = {
+    id: number
+    paymentReference: number
+    organizationId: number
+    planId: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PaymentMinAggregateInputType = {
+    id?: true
+    paymentReference?: true
+    organizationId?: true
+    planId?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PaymentMaxAggregateInputType = {
+    id?: true
+    paymentReference?: true
+    organizationId?: true
+    planId?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PaymentCountAggregateInputType = {
+    id?: true
+    paymentReference?: true
+    organizationId?: true
+    planId?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PaymentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Payment to aggregate.
+     */
+    where?: PaymentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Payments to fetch.
+     */
+    orderBy?: PaymentOrderByWithRelationInput | PaymentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PaymentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Payments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Payments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Payments
+    **/
+    _count?: true | PaymentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PaymentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PaymentMaxAggregateInputType
+  }
+
+  export type GetPaymentAggregateType<T extends PaymentAggregateArgs> = {
+        [P in keyof T & keyof AggregatePayment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePayment[P]>
+      : GetScalarType<T[P], AggregatePayment[P]>
+  }
+
+
+
+
+  export type PaymentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaymentWhereInput
+    orderBy?: PaymentOrderByWithAggregationInput | PaymentOrderByWithAggregationInput[]
+    by: PaymentScalarFieldEnum[] | PaymentScalarFieldEnum
+    having?: PaymentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PaymentCountAggregateInputType | true
+    _min?: PaymentMinAggregateInputType
+    _max?: PaymentMaxAggregateInputType
+  }
+
+  export type PaymentGroupByOutputType = {
+    id: string
+    paymentReference: string
+    organizationId: string
+    planId: string
+    status: string
+    createdAt: Date
+    updatedAt: Date
+    _count: PaymentCountAggregateOutputType | null
+    _min: PaymentMinAggregateOutputType | null
+    _max: PaymentMaxAggregateOutputType | null
+  }
+
+  type GetPaymentGroupByPayload<T extends PaymentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PaymentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PaymentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PaymentGroupByOutputType[P]>
+            : GetScalarType<T[P], PaymentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PaymentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    paymentReference?: boolean
+    organizationId?: boolean
+    planId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    plan?: boolean | PlanDefaultArgs<ExtArgs>
+    organizationPlan?: boolean | Payment$organizationPlanArgs<ExtArgs>
+  }, ExtArgs["result"]["payment"]>
+
+  export type PaymentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    paymentReference?: boolean
+    organizationId?: boolean
+    planId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    plan?: boolean | PlanDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["payment"]>
+
+  export type PaymentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    paymentReference?: boolean
+    organizationId?: boolean
+    planId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    plan?: boolean | PlanDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["payment"]>
+
+  export type PaymentSelectScalar = {
+    id?: boolean
+    paymentReference?: boolean
+    organizationId?: boolean
+    planId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PaymentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "paymentReference" | "organizationId" | "planId" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["payment"]>
+  export type PaymentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    plan?: boolean | PlanDefaultArgs<ExtArgs>
+    organizationPlan?: boolean | Payment$organizationPlanArgs<ExtArgs>
+  }
+  export type PaymentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    plan?: boolean | PlanDefaultArgs<ExtArgs>
+  }
+  export type PaymentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    plan?: boolean | PlanDefaultArgs<ExtArgs>
+  }
+
+  export type $PaymentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Payment"
+    objects: {
+      organization: Prisma.$OrganizationPayload<ExtArgs>
+      plan: Prisma.$PlanPayload<ExtArgs>
+      organizationPlan: Prisma.$OrganizationPlanPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      paymentReference: string
+      organizationId: string
+      planId: string
+      status: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["payment"]>
+    composites: {}
+  }
+
+  type PaymentGetPayload<S extends boolean | null | undefined | PaymentDefaultArgs> = $Result.GetResult<Prisma.$PaymentPayload, S>
+
+  type PaymentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PaymentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PaymentCountAggregateInputType | true
+    }
+
+  export interface PaymentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Payment'], meta: { name: 'Payment' } }
+    /**
+     * Find zero or one Payment that matches the filter.
+     * @param {PaymentFindUniqueArgs} args - Arguments to find a Payment
+     * @example
+     * // Get one Payment
+     * const payment = await prisma.payment.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PaymentFindUniqueArgs>(args: SelectSubset<T, PaymentFindUniqueArgs<ExtArgs>>): Prisma__PaymentClient<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Payment that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PaymentFindUniqueOrThrowArgs} args - Arguments to find a Payment
+     * @example
+     * // Get one Payment
+     * const payment = await prisma.payment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PaymentFindUniqueOrThrowArgs>(args: SelectSubset<T, PaymentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PaymentClient<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Payment that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentFindFirstArgs} args - Arguments to find a Payment
+     * @example
+     * // Get one Payment
+     * const payment = await prisma.payment.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PaymentFindFirstArgs>(args?: SelectSubset<T, PaymentFindFirstArgs<ExtArgs>>): Prisma__PaymentClient<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Payment that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentFindFirstOrThrowArgs} args - Arguments to find a Payment
+     * @example
+     * // Get one Payment
+     * const payment = await prisma.payment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PaymentFindFirstOrThrowArgs>(args?: SelectSubset<T, PaymentFindFirstOrThrowArgs<ExtArgs>>): Prisma__PaymentClient<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Payments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Payments
+     * const payments = await prisma.payment.findMany()
+     * 
+     * // Get first 10 Payments
+     * const payments = await prisma.payment.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const paymentWithIdOnly = await prisma.payment.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PaymentFindManyArgs>(args?: SelectSubset<T, PaymentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Payment.
+     * @param {PaymentCreateArgs} args - Arguments to create a Payment.
+     * @example
+     * // Create one Payment
+     * const Payment = await prisma.payment.create({
+     *   data: {
+     *     // ... data to create a Payment
+     *   }
+     * })
+     * 
+     */
+    create<T extends PaymentCreateArgs>(args: SelectSubset<T, PaymentCreateArgs<ExtArgs>>): Prisma__PaymentClient<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Payments.
+     * @param {PaymentCreateManyArgs} args - Arguments to create many Payments.
+     * @example
+     * // Create many Payments
+     * const payment = await prisma.payment.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PaymentCreateManyArgs>(args?: SelectSubset<T, PaymentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Payments and returns the data saved in the database.
+     * @param {PaymentCreateManyAndReturnArgs} args - Arguments to create many Payments.
+     * @example
+     * // Create many Payments
+     * const payment = await prisma.payment.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Payments and only return the `id`
+     * const paymentWithIdOnly = await prisma.payment.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PaymentCreateManyAndReturnArgs>(args?: SelectSubset<T, PaymentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Payment.
+     * @param {PaymentDeleteArgs} args - Arguments to delete one Payment.
+     * @example
+     * // Delete one Payment
+     * const Payment = await prisma.payment.delete({
+     *   where: {
+     *     // ... filter to delete one Payment
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PaymentDeleteArgs>(args: SelectSubset<T, PaymentDeleteArgs<ExtArgs>>): Prisma__PaymentClient<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Payment.
+     * @param {PaymentUpdateArgs} args - Arguments to update one Payment.
+     * @example
+     * // Update one Payment
+     * const payment = await prisma.payment.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PaymentUpdateArgs>(args: SelectSubset<T, PaymentUpdateArgs<ExtArgs>>): Prisma__PaymentClient<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Payments.
+     * @param {PaymentDeleteManyArgs} args - Arguments to filter Payments to delete.
+     * @example
+     * // Delete a few Payments
+     * const { count } = await prisma.payment.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PaymentDeleteManyArgs>(args?: SelectSubset<T, PaymentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Payments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Payments
+     * const payment = await prisma.payment.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PaymentUpdateManyArgs>(args: SelectSubset<T, PaymentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Payments and returns the data updated in the database.
+     * @param {PaymentUpdateManyAndReturnArgs} args - Arguments to update many Payments.
+     * @example
+     * // Update many Payments
+     * const payment = await prisma.payment.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Payments and only return the `id`
+     * const paymentWithIdOnly = await prisma.payment.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PaymentUpdateManyAndReturnArgs>(args: SelectSubset<T, PaymentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Payment.
+     * @param {PaymentUpsertArgs} args - Arguments to update or create a Payment.
+     * @example
+     * // Update or create a Payment
+     * const payment = await prisma.payment.upsert({
+     *   create: {
+     *     // ... data to create a Payment
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Payment we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PaymentUpsertArgs>(args: SelectSubset<T, PaymentUpsertArgs<ExtArgs>>): Prisma__PaymentClient<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Payments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentCountArgs} args - Arguments to filter Payments to count.
+     * @example
+     * // Count the number of Payments
+     * const count = await prisma.payment.count({
+     *   where: {
+     *     // ... the filter for the Payments we want to count
+     *   }
+     * })
+    **/
+    count<T extends PaymentCountArgs>(
+      args?: Subset<T, PaymentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PaymentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Payment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PaymentAggregateArgs>(args: Subset<T, PaymentAggregateArgs>): Prisma.PrismaPromise<GetPaymentAggregateType<T>>
+
+    /**
+     * Group by Payment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PaymentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PaymentGroupByArgs['orderBy'] }
+        : { orderBy?: PaymentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PaymentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPaymentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Payment model
+   */
+  readonly fields: PaymentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Payment.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PaymentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    organization<T extends OrganizationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrganizationDefaultArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    plan<T extends PlanDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PlanDefaultArgs<ExtArgs>>): Prisma__PlanClient<$Result.GetResult<Prisma.$PlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    organizationPlan<T extends Payment$organizationPlanArgs<ExtArgs> = {}>(args?: Subset<T, Payment$organizationPlanArgs<ExtArgs>>): Prisma__OrganizationPlanClient<$Result.GetResult<Prisma.$OrganizationPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Payment model
+   */
+  interface PaymentFieldRefs {
+    readonly id: FieldRef<"Payment", 'String'>
+    readonly paymentReference: FieldRef<"Payment", 'String'>
+    readonly organizationId: FieldRef<"Payment", 'String'>
+    readonly planId: FieldRef<"Payment", 'String'>
+    readonly status: FieldRef<"Payment", 'String'>
+    readonly createdAt: FieldRef<"Payment", 'DateTime'>
+    readonly updatedAt: FieldRef<"Payment", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Payment findUnique
+   */
+  export type PaymentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which Payment to fetch.
+     */
+    where: PaymentWhereUniqueInput
+  }
+
+  /**
+   * Payment findUniqueOrThrow
+   */
+  export type PaymentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which Payment to fetch.
+     */
+    where: PaymentWhereUniqueInput
+  }
+
+  /**
+   * Payment findFirst
+   */
+  export type PaymentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which Payment to fetch.
+     */
+    where?: PaymentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Payments to fetch.
+     */
+    orderBy?: PaymentOrderByWithRelationInput | PaymentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Payments.
+     */
+    cursor?: PaymentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Payments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Payments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Payments.
+     */
+    distinct?: PaymentScalarFieldEnum | PaymentScalarFieldEnum[]
+  }
+
+  /**
+   * Payment findFirstOrThrow
+   */
+  export type PaymentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which Payment to fetch.
+     */
+    where?: PaymentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Payments to fetch.
+     */
+    orderBy?: PaymentOrderByWithRelationInput | PaymentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Payments.
+     */
+    cursor?: PaymentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Payments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Payments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Payments.
+     */
+    distinct?: PaymentScalarFieldEnum | PaymentScalarFieldEnum[]
+  }
+
+  /**
+   * Payment findMany
+   */
+  export type PaymentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which Payments to fetch.
+     */
+    where?: PaymentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Payments to fetch.
+     */
+    orderBy?: PaymentOrderByWithRelationInput | PaymentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Payments.
+     */
+    cursor?: PaymentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Payments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Payments.
+     */
+    skip?: number
+    distinct?: PaymentScalarFieldEnum | PaymentScalarFieldEnum[]
+  }
+
+  /**
+   * Payment create
+   */
+  export type PaymentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Payment.
+     */
+    data: XOR<PaymentCreateInput, PaymentUncheckedCreateInput>
+  }
+
+  /**
+   * Payment createMany
+   */
+  export type PaymentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Payments.
+     */
+    data: PaymentCreateManyInput | PaymentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Payment createManyAndReturn
+   */
+  export type PaymentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * The data used to create many Payments.
+     */
+    data: PaymentCreateManyInput | PaymentCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Payment update
+   */
+  export type PaymentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Payment.
+     */
+    data: XOR<PaymentUpdateInput, PaymentUncheckedUpdateInput>
+    /**
+     * Choose, which Payment to update.
+     */
+    where: PaymentWhereUniqueInput
+  }
+
+  /**
+   * Payment updateMany
+   */
+  export type PaymentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Payments.
+     */
+    data: XOR<PaymentUpdateManyMutationInput, PaymentUncheckedUpdateManyInput>
+    /**
+     * Filter which Payments to update
+     */
+    where?: PaymentWhereInput
+    /**
+     * Limit how many Payments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Payment updateManyAndReturn
+   */
+  export type PaymentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * The data used to update Payments.
+     */
+    data: XOR<PaymentUpdateManyMutationInput, PaymentUncheckedUpdateManyInput>
+    /**
+     * Filter which Payments to update
+     */
+    where?: PaymentWhereInput
+    /**
+     * Limit how many Payments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Payment upsert
+   */
+  export type PaymentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Payment to update in case it exists.
+     */
+    where: PaymentWhereUniqueInput
+    /**
+     * In case the Payment found by the `where` argument doesn't exist, create a new Payment with this data.
+     */
+    create: XOR<PaymentCreateInput, PaymentUncheckedCreateInput>
+    /**
+     * In case the Payment was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PaymentUpdateInput, PaymentUncheckedUpdateInput>
+  }
+
+  /**
+   * Payment delete
+   */
+  export type PaymentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    /**
+     * Filter which Payment to delete.
+     */
+    where: PaymentWhereUniqueInput
+  }
+
+  /**
+   * Payment deleteMany
+   */
+  export type PaymentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Payments to delete
+     */
+    where?: PaymentWhereInput
+    /**
+     * Limit how many Payments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Payment.organizationPlan
+   */
+  export type Payment$organizationPlanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrganizationPlan
+     */
+    select?: OrganizationPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrganizationPlan
+     */
+    omit?: OrganizationPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationPlanInclude<ExtArgs> | null
+    where?: OrganizationPlanWhereInput
+  }
+
+  /**
+   * Payment without action
+   */
+  export type PaymentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -9855,11 +12478,14 @@ export namespace Prisma {
 
   export const PlanScalarFieldEnum: {
     id: 'id',
-    name: 'name',
+    title: 'title',
+    monthlyPrice: 'monthlyPrice',
+    annualPrice: 'annualPrice',
+    durationMonths: 'durationMonths',
     description: 'description',
-    price: 'price',
-    duration: 'duration',
-    userLimit: 'userLimit',
+    features: 'features',
+    buttonText: 'buttonText',
+    highlight: 'highlight',
     isActive: 'isActive',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
@@ -9867,6 +12493,19 @@ export namespace Prisma {
   };
 
   export type PlanScalarFieldEnum = (typeof PlanScalarFieldEnum)[keyof typeof PlanScalarFieldEnum]
+
+
+  export const OrganizationPlanScalarFieldEnum: {
+    id: 'id',
+    organizationId: 'organizationId',
+    planId: 'planId',
+    startDate: 'startDate',
+    expiresAt: 'expiresAt',
+    isActive: 'isActive',
+    paymentId: 'paymentId'
+  };
+
+  export type OrganizationPlanScalarFieldEnum = (typeof OrganizationPlanScalarFieldEnum)[keyof typeof OrganizationPlanScalarFieldEnum]
 
 
   export const TicketScalarFieldEnum: {
@@ -9899,6 +12538,19 @@ export namespace Prisma {
   };
 
   export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
+
+
+  export const PaymentScalarFieldEnum: {
+    id: 'id',
+    paymentReference: 'paymentReference',
+    organizationId: 'organizationId',
+    planId: 'planId',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -10054,6 +12706,8 @@ export namespace Prisma {
     plans?: PlanListRelationFilter
     tickets?: TicketListRelationFilter
     widgetConfig?: WidgetConfigListRelationFilter
+    OrganizationPlan?: OrganizationPlanListRelationFilter
+    payments?: PaymentListRelationFilter
   }
 
   export type OrganizationOrderByWithRelationInput = {
@@ -10069,6 +12723,8 @@ export namespace Prisma {
     plans?: PlanOrderByRelationAggregateInput
     tickets?: TicketOrderByRelationAggregateInput
     widgetConfig?: WidgetConfigOrderByRelationAggregateInput
+    OrganizationPlan?: OrganizationPlanOrderByRelationAggregateInput
+    payments?: PaymentOrderByRelationAggregateInput
   }
 
   export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
@@ -10087,6 +12743,8 @@ export namespace Prisma {
     plans?: PlanListRelationFilter
     tickets?: TicketListRelationFilter
     widgetConfig?: WidgetConfigListRelationFilter
+    OrganizationPlan?: OrganizationPlanListRelationFilter
+    payments?: PaymentListRelationFilter
   }, "id" | "slug">
 
   export type OrganizationOrderByWithAggregationInput = {
@@ -10341,30 +12999,40 @@ export namespace Prisma {
     OR?: PlanWhereInput[]
     NOT?: PlanWhereInput | PlanWhereInput[]
     id?: StringFilter<"Plan"> | string
-    name?: StringFilter<"Plan"> | string
+    title?: StringFilter<"Plan"> | string
+    monthlyPrice?: FloatFilter<"Plan"> | number
+    annualPrice?: FloatFilter<"Plan"> | number
+    durationMonths?: IntFilter<"Plan"> | number
     description?: StringFilter<"Plan"> | string
-    price?: FloatFilter<"Plan"> | number
-    duration?: IntFilter<"Plan"> | number
-    userLimit?: IntFilter<"Plan"> | number
+    features?: StringNullableListFilter<"Plan">
+    buttonText?: StringFilter<"Plan"> | string
+    highlight?: BoolFilter<"Plan"> | boolean
     isActive?: BoolFilter<"Plan"> | boolean
     createdAt?: DateTimeFilter<"Plan"> | Date | string
     updatedAt?: DateTimeFilter<"Plan"> | Date | string
     organizationId?: StringNullableFilter<"Plan"> | string | null
+    organizationPlans?: OrganizationPlanListRelationFilter
     Organization?: XOR<OrganizationNullableScalarRelationFilter, OrganizationWhereInput> | null
+    payments?: PaymentListRelationFilter
   }
 
   export type PlanOrderByWithRelationInput = {
     id?: SortOrder
-    name?: SortOrder
+    title?: SortOrder
+    monthlyPrice?: SortOrder
+    annualPrice?: SortOrder
+    durationMonths?: SortOrder
     description?: SortOrder
-    price?: SortOrder
-    duration?: SortOrder
-    userLimit?: SortOrder
+    features?: SortOrder
+    buttonText?: SortOrder
+    highlight?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     organizationId?: SortOrderInput | SortOrder
+    organizationPlans?: OrganizationPlanOrderByRelationAggregateInput
     Organization?: OrganizationOrderByWithRelationInput
+    payments?: PaymentOrderByRelationAggregateInput
   }
 
   export type PlanWhereUniqueInput = Prisma.AtLeast<{
@@ -10372,25 +13040,33 @@ export namespace Prisma {
     AND?: PlanWhereInput | PlanWhereInput[]
     OR?: PlanWhereInput[]
     NOT?: PlanWhereInput | PlanWhereInput[]
-    name?: StringFilter<"Plan"> | string
+    title?: StringFilter<"Plan"> | string
+    monthlyPrice?: FloatFilter<"Plan"> | number
+    annualPrice?: FloatFilter<"Plan"> | number
+    durationMonths?: IntFilter<"Plan"> | number
     description?: StringFilter<"Plan"> | string
-    price?: FloatFilter<"Plan"> | number
-    duration?: IntFilter<"Plan"> | number
-    userLimit?: IntFilter<"Plan"> | number
+    features?: StringNullableListFilter<"Plan">
+    buttonText?: StringFilter<"Plan"> | string
+    highlight?: BoolFilter<"Plan"> | boolean
     isActive?: BoolFilter<"Plan"> | boolean
     createdAt?: DateTimeFilter<"Plan"> | Date | string
     updatedAt?: DateTimeFilter<"Plan"> | Date | string
     organizationId?: StringNullableFilter<"Plan"> | string | null
+    organizationPlans?: OrganizationPlanListRelationFilter
     Organization?: XOR<OrganizationNullableScalarRelationFilter, OrganizationWhereInput> | null
+    payments?: PaymentListRelationFilter
   }, "id">
 
   export type PlanOrderByWithAggregationInput = {
     id?: SortOrder
-    name?: SortOrder
+    title?: SortOrder
+    monthlyPrice?: SortOrder
+    annualPrice?: SortOrder
+    durationMonths?: SortOrder
     description?: SortOrder
-    price?: SortOrder
-    duration?: SortOrder
-    userLimit?: SortOrder
+    features?: SortOrder
+    buttonText?: SortOrder
+    highlight?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -10407,15 +13083,90 @@ export namespace Prisma {
     OR?: PlanScalarWhereWithAggregatesInput[]
     NOT?: PlanScalarWhereWithAggregatesInput | PlanScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Plan"> | string
-    name?: StringWithAggregatesFilter<"Plan"> | string
+    title?: StringWithAggregatesFilter<"Plan"> | string
+    monthlyPrice?: FloatWithAggregatesFilter<"Plan"> | number
+    annualPrice?: FloatWithAggregatesFilter<"Plan"> | number
+    durationMonths?: IntWithAggregatesFilter<"Plan"> | number
     description?: StringWithAggregatesFilter<"Plan"> | string
-    price?: FloatWithAggregatesFilter<"Plan"> | number
-    duration?: IntWithAggregatesFilter<"Plan"> | number
-    userLimit?: IntWithAggregatesFilter<"Plan"> | number
+    features?: StringNullableListFilter<"Plan">
+    buttonText?: StringWithAggregatesFilter<"Plan"> | string
+    highlight?: BoolWithAggregatesFilter<"Plan"> | boolean
     isActive?: BoolWithAggregatesFilter<"Plan"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Plan"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Plan"> | Date | string
     organizationId?: StringNullableWithAggregatesFilter<"Plan"> | string | null
+  }
+
+  export type OrganizationPlanWhereInput = {
+    AND?: OrganizationPlanWhereInput | OrganizationPlanWhereInput[]
+    OR?: OrganizationPlanWhereInput[]
+    NOT?: OrganizationPlanWhereInput | OrganizationPlanWhereInput[]
+    id?: StringFilter<"OrganizationPlan"> | string
+    organizationId?: StringFilter<"OrganizationPlan"> | string
+    planId?: StringFilter<"OrganizationPlan"> | string
+    startDate?: DateTimeFilter<"OrganizationPlan"> | Date | string
+    expiresAt?: DateTimeFilter<"OrganizationPlan"> | Date | string
+    isActive?: BoolFilter<"OrganizationPlan"> | boolean
+    paymentId?: StringNullableFilter<"OrganizationPlan"> | string | null
+    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
+    plan?: XOR<PlanScalarRelationFilter, PlanWhereInput>
+    payment?: XOR<PaymentNullableScalarRelationFilter, PaymentWhereInput> | null
+  }
+
+  export type OrganizationPlanOrderByWithRelationInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    planId?: SortOrder
+    startDate?: SortOrder
+    expiresAt?: SortOrder
+    isActive?: SortOrder
+    paymentId?: SortOrderInput | SortOrder
+    organization?: OrganizationOrderByWithRelationInput
+    plan?: PlanOrderByWithRelationInput
+    payment?: PaymentOrderByWithRelationInput
+  }
+
+  export type OrganizationPlanWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    paymentId?: string
+    organizationId_planId?: OrganizationPlanOrganizationIdPlanIdCompoundUniqueInput
+    AND?: OrganizationPlanWhereInput | OrganizationPlanWhereInput[]
+    OR?: OrganizationPlanWhereInput[]
+    NOT?: OrganizationPlanWhereInput | OrganizationPlanWhereInput[]
+    organizationId?: StringFilter<"OrganizationPlan"> | string
+    planId?: StringFilter<"OrganizationPlan"> | string
+    startDate?: DateTimeFilter<"OrganizationPlan"> | Date | string
+    expiresAt?: DateTimeFilter<"OrganizationPlan"> | Date | string
+    isActive?: BoolFilter<"OrganizationPlan"> | boolean
+    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
+    plan?: XOR<PlanScalarRelationFilter, PlanWhereInput>
+    payment?: XOR<PaymentNullableScalarRelationFilter, PaymentWhereInput> | null
+  }, "id" | "paymentId" | "organizationId_planId">
+
+  export type OrganizationPlanOrderByWithAggregationInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    planId?: SortOrder
+    startDate?: SortOrder
+    expiresAt?: SortOrder
+    isActive?: SortOrder
+    paymentId?: SortOrderInput | SortOrder
+    _count?: OrganizationPlanCountOrderByAggregateInput
+    _max?: OrganizationPlanMaxOrderByAggregateInput
+    _min?: OrganizationPlanMinOrderByAggregateInput
+  }
+
+  export type OrganizationPlanScalarWhereWithAggregatesInput = {
+    AND?: OrganizationPlanScalarWhereWithAggregatesInput | OrganizationPlanScalarWhereWithAggregatesInput[]
+    OR?: OrganizationPlanScalarWhereWithAggregatesInput[]
+    NOT?: OrganizationPlanScalarWhereWithAggregatesInput | OrganizationPlanScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"OrganizationPlan"> | string
+    organizationId?: StringWithAggregatesFilter<"OrganizationPlan"> | string
+    planId?: StringWithAggregatesFilter<"OrganizationPlan"> | string
+    startDate?: DateTimeWithAggregatesFilter<"OrganizationPlan"> | Date | string
+    expiresAt?: DateTimeWithAggregatesFilter<"OrganizationPlan"> | Date | string
+    isActive?: BoolWithAggregatesFilter<"OrganizationPlan"> | boolean
+    paymentId?: StringNullableWithAggregatesFilter<"OrganizationPlan"> | string | null
   }
 
   export type TicketWhereInput = {
@@ -10593,6 +13344,77 @@ export namespace Prisma {
     externalEmail?: StringNullableWithAggregatesFilter<"Comment"> | string | null
   }
 
+  export type PaymentWhereInput = {
+    AND?: PaymentWhereInput | PaymentWhereInput[]
+    OR?: PaymentWhereInput[]
+    NOT?: PaymentWhereInput | PaymentWhereInput[]
+    id?: StringFilter<"Payment"> | string
+    paymentReference?: StringFilter<"Payment"> | string
+    organizationId?: StringFilter<"Payment"> | string
+    planId?: StringFilter<"Payment"> | string
+    status?: StringFilter<"Payment"> | string
+    createdAt?: DateTimeFilter<"Payment"> | Date | string
+    updatedAt?: DateTimeFilter<"Payment"> | Date | string
+    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
+    plan?: XOR<PlanScalarRelationFilter, PlanWhereInput>
+    organizationPlan?: XOR<OrganizationPlanNullableScalarRelationFilter, OrganizationPlanWhereInput> | null
+  }
+
+  export type PaymentOrderByWithRelationInput = {
+    id?: SortOrder
+    paymentReference?: SortOrder
+    organizationId?: SortOrder
+    planId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    organization?: OrganizationOrderByWithRelationInput
+    plan?: PlanOrderByWithRelationInput
+    organizationPlan?: OrganizationPlanOrderByWithRelationInput
+  }
+
+  export type PaymentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    paymentReference?: string
+    AND?: PaymentWhereInput | PaymentWhereInput[]
+    OR?: PaymentWhereInput[]
+    NOT?: PaymentWhereInput | PaymentWhereInput[]
+    organizationId?: StringFilter<"Payment"> | string
+    planId?: StringFilter<"Payment"> | string
+    status?: StringFilter<"Payment"> | string
+    createdAt?: DateTimeFilter<"Payment"> | Date | string
+    updatedAt?: DateTimeFilter<"Payment"> | Date | string
+    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
+    plan?: XOR<PlanScalarRelationFilter, PlanWhereInput>
+    organizationPlan?: XOR<OrganizationPlanNullableScalarRelationFilter, OrganizationPlanWhereInput> | null
+  }, "id" | "paymentReference">
+
+  export type PaymentOrderByWithAggregationInput = {
+    id?: SortOrder
+    paymentReference?: SortOrder
+    organizationId?: SortOrder
+    planId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PaymentCountOrderByAggregateInput
+    _max?: PaymentMaxOrderByAggregateInput
+    _min?: PaymentMinOrderByAggregateInput
+  }
+
+  export type PaymentScalarWhereWithAggregatesInput = {
+    AND?: PaymentScalarWhereWithAggregatesInput | PaymentScalarWhereWithAggregatesInput[]
+    OR?: PaymentScalarWhereWithAggregatesInput[]
+    NOT?: PaymentScalarWhereWithAggregatesInput | PaymentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Payment"> | string
+    paymentReference?: StringWithAggregatesFilter<"Payment"> | string
+    organizationId?: StringWithAggregatesFilter<"Payment"> | string
+    planId?: StringWithAggregatesFilter<"Payment"> | string
+    status?: StringWithAggregatesFilter<"Payment"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Payment"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Payment"> | Date | string
+  }
+
   export type OrganizationCreateInput = {
     id?: string
     name: string
@@ -10606,6 +13428,8 @@ export namespace Prisma {
     plans?: PlanCreateNestedManyWithoutOrganizationInput
     tickets?: TicketCreateNestedManyWithoutOrganizationInput
     widgetConfig?: WidgetConfigCreateNestedManyWithoutOrgInput
+    OrganizationPlan?: OrganizationPlanCreateNestedManyWithoutOrganizationInput
+    payments?: PaymentCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateInput = {
@@ -10621,6 +13445,8 @@ export namespace Prisma {
     plans?: PlanUncheckedCreateNestedManyWithoutOrganizationInput
     tickets?: TicketUncheckedCreateNestedManyWithoutOrganizationInput
     widgetConfig?: WidgetConfigUncheckedCreateNestedManyWithoutOrgInput
+    OrganizationPlan?: OrganizationPlanUncheckedCreateNestedManyWithoutOrganizationInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUpdateInput = {
@@ -10636,6 +13462,8 @@ export namespace Prisma {
     plans?: PlanUpdateManyWithoutOrganizationNestedInput
     tickets?: TicketUpdateManyWithoutOrganizationNestedInput
     widgetConfig?: WidgetConfigUpdateManyWithoutOrgNestedInput
+    OrganizationPlan?: OrganizationPlanUpdateManyWithoutOrganizationNestedInput
+    payments?: PaymentUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateInput = {
@@ -10651,6 +13479,8 @@ export namespace Prisma {
     plans?: PlanUncheckedUpdateManyWithoutOrganizationNestedInput
     tickets?: TicketUncheckedUpdateManyWithoutOrganizationNestedInput
     widgetConfig?: WidgetConfigUncheckedUpdateManyWithoutOrgNestedInput
+    OrganizationPlan?: OrganizationPlanUncheckedUpdateManyWithoutOrganizationNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationCreateManyInput = {
@@ -10928,63 +13758,86 @@ export namespace Prisma {
 
   export type PlanCreateInput = {
     id?: string
-    name: string
+    title: string
+    monthlyPrice: number
+    annualPrice: number
+    durationMonths?: number
     description: string
-    price: number
-    duration: number
-    userLimit: number
+    features?: PlanCreatefeaturesInput | string[]
+    buttonText: string
+    highlight?: boolean
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    organizationPlans?: OrganizationPlanCreateNestedManyWithoutPlanInput
     Organization?: OrganizationCreateNestedOneWithoutPlansInput
+    payments?: PaymentCreateNestedManyWithoutPlanInput
   }
 
   export type PlanUncheckedCreateInput = {
     id?: string
-    name: string
+    title: string
+    monthlyPrice: number
+    annualPrice: number
+    durationMonths?: number
     description: string
-    price: number
-    duration: number
-    userLimit: number
+    features?: PlanCreatefeaturesInput | string[]
+    buttonText: string
+    highlight?: boolean
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     organizationId?: string | null
+    organizationPlans?: OrganizationPlanUncheckedCreateNestedManyWithoutPlanInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutPlanInput
   }
 
   export type PlanUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    monthlyPrice?: FloatFieldUpdateOperationsInput | number
+    annualPrice?: FloatFieldUpdateOperationsInput | number
+    durationMonths?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    duration?: IntFieldUpdateOperationsInput | number
-    userLimit?: IntFieldUpdateOperationsInput | number
+    features?: PlanUpdatefeaturesInput | string[]
+    buttonText?: StringFieldUpdateOperationsInput | string
+    highlight?: BoolFieldUpdateOperationsInput | boolean
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organizationPlans?: OrganizationPlanUpdateManyWithoutPlanNestedInput
     Organization?: OrganizationUpdateOneWithoutPlansNestedInput
+    payments?: PaymentUpdateManyWithoutPlanNestedInput
   }
 
   export type PlanUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    monthlyPrice?: FloatFieldUpdateOperationsInput | number
+    annualPrice?: FloatFieldUpdateOperationsInput | number
+    durationMonths?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    duration?: IntFieldUpdateOperationsInput | number
-    userLimit?: IntFieldUpdateOperationsInput | number
+    features?: PlanUpdatefeaturesInput | string[]
+    buttonText?: StringFieldUpdateOperationsInput | string
+    highlight?: BoolFieldUpdateOperationsInput | boolean
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     organizationId?: NullableStringFieldUpdateOperationsInput | string | null
+    organizationPlans?: OrganizationPlanUncheckedUpdateManyWithoutPlanNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutPlanNestedInput
   }
 
   export type PlanCreateManyInput = {
     id?: string
-    name: string
+    title: string
+    monthlyPrice: number
+    annualPrice: number
+    durationMonths?: number
     description: string
-    price: number
-    duration: number
-    userLimit: number
+    features?: PlanCreatefeaturesInput | string[]
+    buttonText: string
+    highlight?: boolean
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -10993,11 +13846,14 @@ export namespace Prisma {
 
   export type PlanUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    monthlyPrice?: FloatFieldUpdateOperationsInput | number
+    annualPrice?: FloatFieldUpdateOperationsInput | number
+    durationMonths?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    duration?: IntFieldUpdateOperationsInput | number
-    userLimit?: IntFieldUpdateOperationsInput | number
+    features?: PlanUpdatefeaturesInput | string[]
+    buttonText?: StringFieldUpdateOperationsInput | string
+    highlight?: BoolFieldUpdateOperationsInput | boolean
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11005,15 +13861,85 @@ export namespace Prisma {
 
   export type PlanUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    monthlyPrice?: FloatFieldUpdateOperationsInput | number
+    annualPrice?: FloatFieldUpdateOperationsInput | number
+    durationMonths?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    duration?: IntFieldUpdateOperationsInput | number
-    userLimit?: IntFieldUpdateOperationsInput | number
+    features?: PlanUpdatefeaturesInput | string[]
+    buttonText?: StringFieldUpdateOperationsInput | string
+    highlight?: BoolFieldUpdateOperationsInput | boolean
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     organizationId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type OrganizationPlanCreateInput = {
+    id?: string
+    startDate?: Date | string
+    expiresAt: Date | string
+    isActive?: boolean
+    organization: OrganizationCreateNestedOneWithoutOrganizationPlanInput
+    plan: PlanCreateNestedOneWithoutOrganizationPlansInput
+    payment?: PaymentCreateNestedOneWithoutOrganizationPlanInput
+  }
+
+  export type OrganizationPlanUncheckedCreateInput = {
+    id?: string
+    organizationId: string
+    planId: string
+    startDate?: Date | string
+    expiresAt: Date | string
+    isActive?: boolean
+    paymentId?: string | null
+  }
+
+  export type OrganizationPlanUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    organization?: OrganizationUpdateOneRequiredWithoutOrganizationPlanNestedInput
+    plan?: PlanUpdateOneRequiredWithoutOrganizationPlansNestedInput
+    payment?: PaymentUpdateOneWithoutOrganizationPlanNestedInput
+  }
+
+  export type OrganizationPlanUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    planId?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type OrganizationPlanCreateManyInput = {
+    id?: string
+    organizationId: string
+    planId: string
+    startDate?: Date | string
+    expiresAt: Date | string
+    isActive?: boolean
+    paymentId?: string | null
+  }
+
+  export type OrganizationPlanUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type OrganizationPlanUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    planId?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TicketCreateInput = {
@@ -11201,6 +14127,78 @@ export namespace Prisma {
     externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type PaymentCreateInput = {
+    id?: string
+    paymentReference: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organization: OrganizationCreateNestedOneWithoutPaymentsInput
+    plan: PlanCreateNestedOneWithoutPaymentsInput
+    organizationPlan?: OrganizationPlanCreateNestedOneWithoutPaymentInput
+  }
+
+  export type PaymentUncheckedCreateInput = {
+    id?: string
+    paymentReference: string
+    organizationId: string
+    planId: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organizationPlan?: OrganizationPlanUncheckedCreateNestedOneWithoutPaymentInput
+  }
+
+  export type PaymentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentReference?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organization?: OrganizationUpdateOneRequiredWithoutPaymentsNestedInput
+    plan?: PlanUpdateOneRequiredWithoutPaymentsNestedInput
+    organizationPlan?: OrganizationPlanUpdateOneWithoutPaymentNestedInput
+  }
+
+  export type PaymentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentReference?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    planId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organizationPlan?: OrganizationPlanUncheckedUpdateOneWithoutPaymentNestedInput
+  }
+
+  export type PaymentCreateManyInput = {
+    id?: string
+    paymentReference: string
+    organizationId: string
+    planId: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PaymentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentReference?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentReference?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    planId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -11256,6 +14254,18 @@ export namespace Prisma {
     none?: WidgetConfigWhereInput
   }
 
+  export type OrganizationPlanListRelationFilter = {
+    every?: OrganizationPlanWhereInput
+    some?: OrganizationPlanWhereInput
+    none?: OrganizationPlanWhereInput
+  }
+
+  export type PaymentListRelationFilter = {
+    every?: PaymentWhereInput
+    some?: PaymentWhereInput
+    none?: PaymentWhereInput
+  }
+
   export type UserOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -11269,6 +14279,14 @@ export namespace Prisma {
   }
 
   export type WidgetConfigOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type OrganizationPlanOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PaymentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -11584,13 +14602,24 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type PlanCountOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    title?: SortOrder
+    monthlyPrice?: SortOrder
+    annualPrice?: SortOrder
+    durationMonths?: SortOrder
     description?: SortOrder
-    price?: SortOrder
-    duration?: SortOrder
-    userLimit?: SortOrder
+    features?: SortOrder
+    buttonText?: SortOrder
+    highlight?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -11598,18 +14627,20 @@ export namespace Prisma {
   }
 
   export type PlanAvgOrderByAggregateInput = {
-    price?: SortOrder
-    duration?: SortOrder
-    userLimit?: SortOrder
+    monthlyPrice?: SortOrder
+    annualPrice?: SortOrder
+    durationMonths?: SortOrder
   }
 
   export type PlanMaxOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    title?: SortOrder
+    monthlyPrice?: SortOrder
+    annualPrice?: SortOrder
+    durationMonths?: SortOrder
     description?: SortOrder
-    price?: SortOrder
-    duration?: SortOrder
-    userLimit?: SortOrder
+    buttonText?: SortOrder
+    highlight?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -11618,11 +14649,13 @@ export namespace Prisma {
 
   export type PlanMinOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    title?: SortOrder
+    monthlyPrice?: SortOrder
+    annualPrice?: SortOrder
+    durationMonths?: SortOrder
     description?: SortOrder
-    price?: SortOrder
-    duration?: SortOrder
-    userLimit?: SortOrder
+    buttonText?: SortOrder
+    highlight?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -11630,9 +14663,9 @@ export namespace Prisma {
   }
 
   export type PlanSumOrderByAggregateInput = {
-    price?: SortOrder
-    duration?: SortOrder
-    userLimit?: SortOrder
+    monthlyPrice?: SortOrder
+    annualPrice?: SortOrder
+    durationMonths?: SortOrder
   }
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -11665,6 +14698,51 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type PlanScalarRelationFilter = {
+    is?: PlanWhereInput
+    isNot?: PlanWhereInput
+  }
+
+  export type PaymentNullableScalarRelationFilter = {
+    is?: PaymentWhereInput | null
+    isNot?: PaymentWhereInput | null
+  }
+
+  export type OrganizationPlanOrganizationIdPlanIdCompoundUniqueInput = {
+    organizationId: string
+    planId: string
+  }
+
+  export type OrganizationPlanCountOrderByAggregateInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    planId?: SortOrder
+    startDate?: SortOrder
+    expiresAt?: SortOrder
+    isActive?: SortOrder
+    paymentId?: SortOrder
+  }
+
+  export type OrganizationPlanMaxOrderByAggregateInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    planId?: SortOrder
+    startDate?: SortOrder
+    expiresAt?: SortOrder
+    isActive?: SortOrder
+    paymentId?: SortOrder
+  }
+
+  export type OrganizationPlanMinOrderByAggregateInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    planId?: SortOrder
+    startDate?: SortOrder
+    expiresAt?: SortOrder
+    isActive?: SortOrder
+    paymentId?: SortOrder
   }
 
   export type EnumTicketStatusFilter<$PrismaModel = never> = {
@@ -11794,6 +14872,41 @@ export namespace Prisma {
     externalEmail?: SortOrder
   }
 
+  export type OrganizationPlanNullableScalarRelationFilter = {
+    is?: OrganizationPlanWhereInput | null
+    isNot?: OrganizationPlanWhereInput | null
+  }
+
+  export type PaymentCountOrderByAggregateInput = {
+    id?: SortOrder
+    paymentReference?: SortOrder
+    organizationId?: SortOrder
+    planId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PaymentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    paymentReference?: SortOrder
+    organizationId?: SortOrder
+    planId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PaymentMinOrderByAggregateInput = {
+    id?: SortOrder
+    paymentReference?: SortOrder
+    organizationId?: SortOrder
+    planId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type UserCreateNestedManyWithoutOrganizationInput = {
     create?: XOR<UserCreateWithoutOrganizationInput, UserUncheckedCreateWithoutOrganizationInput> | UserCreateWithoutOrganizationInput[] | UserUncheckedCreateWithoutOrganizationInput[]
     connectOrCreate?: UserCreateOrConnectWithoutOrganizationInput | UserCreateOrConnectWithoutOrganizationInput[]
@@ -11822,6 +14935,20 @@ export namespace Prisma {
     connect?: WidgetConfigWhereUniqueInput | WidgetConfigWhereUniqueInput[]
   }
 
+  export type OrganizationPlanCreateNestedManyWithoutOrganizationInput = {
+    create?: XOR<OrganizationPlanCreateWithoutOrganizationInput, OrganizationPlanUncheckedCreateWithoutOrganizationInput> | OrganizationPlanCreateWithoutOrganizationInput[] | OrganizationPlanUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: OrganizationPlanCreateOrConnectWithoutOrganizationInput | OrganizationPlanCreateOrConnectWithoutOrganizationInput[]
+    createMany?: OrganizationPlanCreateManyOrganizationInputEnvelope
+    connect?: OrganizationPlanWhereUniqueInput | OrganizationPlanWhereUniqueInput[]
+  }
+
+  export type PaymentCreateNestedManyWithoutOrganizationInput = {
+    create?: XOR<PaymentCreateWithoutOrganizationInput, PaymentUncheckedCreateWithoutOrganizationInput> | PaymentCreateWithoutOrganizationInput[] | PaymentUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutOrganizationInput | PaymentCreateOrConnectWithoutOrganizationInput[]
+    createMany?: PaymentCreateManyOrganizationInputEnvelope
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+  }
+
   export type UserUncheckedCreateNestedManyWithoutOrganizationInput = {
     create?: XOR<UserCreateWithoutOrganizationInput, UserUncheckedCreateWithoutOrganizationInput> | UserCreateWithoutOrganizationInput[] | UserUncheckedCreateWithoutOrganizationInput[]
     connectOrCreate?: UserCreateOrConnectWithoutOrganizationInput | UserCreateOrConnectWithoutOrganizationInput[]
@@ -11848,6 +14975,20 @@ export namespace Prisma {
     connectOrCreate?: WidgetConfigCreateOrConnectWithoutOrgInput | WidgetConfigCreateOrConnectWithoutOrgInput[]
     createMany?: WidgetConfigCreateManyOrgInputEnvelope
     connect?: WidgetConfigWhereUniqueInput | WidgetConfigWhereUniqueInput[]
+  }
+
+  export type OrganizationPlanUncheckedCreateNestedManyWithoutOrganizationInput = {
+    create?: XOR<OrganizationPlanCreateWithoutOrganizationInput, OrganizationPlanUncheckedCreateWithoutOrganizationInput> | OrganizationPlanCreateWithoutOrganizationInput[] | OrganizationPlanUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: OrganizationPlanCreateOrConnectWithoutOrganizationInput | OrganizationPlanCreateOrConnectWithoutOrganizationInput[]
+    createMany?: OrganizationPlanCreateManyOrganizationInputEnvelope
+    connect?: OrganizationPlanWhereUniqueInput | OrganizationPlanWhereUniqueInput[]
+  }
+
+  export type PaymentUncheckedCreateNestedManyWithoutOrganizationInput = {
+    create?: XOR<PaymentCreateWithoutOrganizationInput, PaymentUncheckedCreateWithoutOrganizationInput> | PaymentCreateWithoutOrganizationInput[] | PaymentUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutOrganizationInput | PaymentCreateOrConnectWithoutOrganizationInput[]
+    createMany?: PaymentCreateManyOrganizationInputEnvelope
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -11918,6 +15059,34 @@ export namespace Prisma {
     deleteMany?: WidgetConfigScalarWhereInput | WidgetConfigScalarWhereInput[]
   }
 
+  export type OrganizationPlanUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<OrganizationPlanCreateWithoutOrganizationInput, OrganizationPlanUncheckedCreateWithoutOrganizationInput> | OrganizationPlanCreateWithoutOrganizationInput[] | OrganizationPlanUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: OrganizationPlanCreateOrConnectWithoutOrganizationInput | OrganizationPlanCreateOrConnectWithoutOrganizationInput[]
+    upsert?: OrganizationPlanUpsertWithWhereUniqueWithoutOrganizationInput | OrganizationPlanUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: OrganizationPlanCreateManyOrganizationInputEnvelope
+    set?: OrganizationPlanWhereUniqueInput | OrganizationPlanWhereUniqueInput[]
+    disconnect?: OrganizationPlanWhereUniqueInput | OrganizationPlanWhereUniqueInput[]
+    delete?: OrganizationPlanWhereUniqueInput | OrganizationPlanWhereUniqueInput[]
+    connect?: OrganizationPlanWhereUniqueInput | OrganizationPlanWhereUniqueInput[]
+    update?: OrganizationPlanUpdateWithWhereUniqueWithoutOrganizationInput | OrganizationPlanUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: OrganizationPlanUpdateManyWithWhereWithoutOrganizationInput | OrganizationPlanUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: OrganizationPlanScalarWhereInput | OrganizationPlanScalarWhereInput[]
+  }
+
+  export type PaymentUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<PaymentCreateWithoutOrganizationInput, PaymentUncheckedCreateWithoutOrganizationInput> | PaymentCreateWithoutOrganizationInput[] | PaymentUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutOrganizationInput | PaymentCreateOrConnectWithoutOrganizationInput[]
+    upsert?: PaymentUpsertWithWhereUniqueWithoutOrganizationInput | PaymentUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: PaymentCreateManyOrganizationInputEnvelope
+    set?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    disconnect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    delete?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    update?: PaymentUpdateWithWhereUniqueWithoutOrganizationInput | PaymentUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: PaymentUpdateManyWithWhereWithoutOrganizationInput | PaymentUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateManyWithoutOrganizationNestedInput = {
     create?: XOR<UserCreateWithoutOrganizationInput, UserUncheckedCreateWithoutOrganizationInput> | UserCreateWithoutOrganizationInput[] | UserUncheckedCreateWithoutOrganizationInput[]
     connectOrCreate?: UserCreateOrConnectWithoutOrganizationInput | UserCreateOrConnectWithoutOrganizationInput[]
@@ -11972,6 +15141,34 @@ export namespace Prisma {
     update?: WidgetConfigUpdateWithWhereUniqueWithoutOrgInput | WidgetConfigUpdateWithWhereUniqueWithoutOrgInput[]
     updateMany?: WidgetConfigUpdateManyWithWhereWithoutOrgInput | WidgetConfigUpdateManyWithWhereWithoutOrgInput[]
     deleteMany?: WidgetConfigScalarWhereInput | WidgetConfigScalarWhereInput[]
+  }
+
+  export type OrganizationPlanUncheckedUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<OrganizationPlanCreateWithoutOrganizationInput, OrganizationPlanUncheckedCreateWithoutOrganizationInput> | OrganizationPlanCreateWithoutOrganizationInput[] | OrganizationPlanUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: OrganizationPlanCreateOrConnectWithoutOrganizationInput | OrganizationPlanCreateOrConnectWithoutOrganizationInput[]
+    upsert?: OrganizationPlanUpsertWithWhereUniqueWithoutOrganizationInput | OrganizationPlanUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: OrganizationPlanCreateManyOrganizationInputEnvelope
+    set?: OrganizationPlanWhereUniqueInput | OrganizationPlanWhereUniqueInput[]
+    disconnect?: OrganizationPlanWhereUniqueInput | OrganizationPlanWhereUniqueInput[]
+    delete?: OrganizationPlanWhereUniqueInput | OrganizationPlanWhereUniqueInput[]
+    connect?: OrganizationPlanWhereUniqueInput | OrganizationPlanWhereUniqueInput[]
+    update?: OrganizationPlanUpdateWithWhereUniqueWithoutOrganizationInput | OrganizationPlanUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: OrganizationPlanUpdateManyWithWhereWithoutOrganizationInput | OrganizationPlanUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: OrganizationPlanScalarWhereInput | OrganizationPlanScalarWhereInput[]
+  }
+
+  export type PaymentUncheckedUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<PaymentCreateWithoutOrganizationInput, PaymentUncheckedCreateWithoutOrganizationInput> | PaymentCreateWithoutOrganizationInput[] | PaymentUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutOrganizationInput | PaymentCreateOrConnectWithoutOrganizationInput[]
+    upsert?: PaymentUpsertWithWhereUniqueWithoutOrganizationInput | PaymentUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: PaymentCreateManyOrganizationInputEnvelope
+    set?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    disconnect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    delete?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    update?: PaymentUpdateWithWhereUniqueWithoutOrganizationInput | PaymentUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: PaymentUpdateManyWithWhereWithoutOrganizationInput | PaymentUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
   }
 
   export type OrganizationCreateNestedOneWithoutWidgetConfigInput = {
@@ -12160,10 +15357,42 @@ export namespace Prisma {
     update?: XOR<XOR<TicketUpdateToOneWithWhereWithoutTicketAccessTokensInput, TicketUpdateWithoutTicketAccessTokensInput>, TicketUncheckedUpdateWithoutTicketAccessTokensInput>
   }
 
+  export type PlanCreatefeaturesInput = {
+    set: string[]
+  }
+
+  export type OrganizationPlanCreateNestedManyWithoutPlanInput = {
+    create?: XOR<OrganizationPlanCreateWithoutPlanInput, OrganizationPlanUncheckedCreateWithoutPlanInput> | OrganizationPlanCreateWithoutPlanInput[] | OrganizationPlanUncheckedCreateWithoutPlanInput[]
+    connectOrCreate?: OrganizationPlanCreateOrConnectWithoutPlanInput | OrganizationPlanCreateOrConnectWithoutPlanInput[]
+    createMany?: OrganizationPlanCreateManyPlanInputEnvelope
+    connect?: OrganizationPlanWhereUniqueInput | OrganizationPlanWhereUniqueInput[]
+  }
+
   export type OrganizationCreateNestedOneWithoutPlansInput = {
     create?: XOR<OrganizationCreateWithoutPlansInput, OrganizationUncheckedCreateWithoutPlansInput>
     connectOrCreate?: OrganizationCreateOrConnectWithoutPlansInput
     connect?: OrganizationWhereUniqueInput
+  }
+
+  export type PaymentCreateNestedManyWithoutPlanInput = {
+    create?: XOR<PaymentCreateWithoutPlanInput, PaymentUncheckedCreateWithoutPlanInput> | PaymentCreateWithoutPlanInput[] | PaymentUncheckedCreateWithoutPlanInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutPlanInput | PaymentCreateOrConnectWithoutPlanInput[]
+    createMany?: PaymentCreateManyPlanInputEnvelope
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+  }
+
+  export type OrganizationPlanUncheckedCreateNestedManyWithoutPlanInput = {
+    create?: XOR<OrganizationPlanCreateWithoutPlanInput, OrganizationPlanUncheckedCreateWithoutPlanInput> | OrganizationPlanCreateWithoutPlanInput[] | OrganizationPlanUncheckedCreateWithoutPlanInput[]
+    connectOrCreate?: OrganizationPlanCreateOrConnectWithoutPlanInput | OrganizationPlanCreateOrConnectWithoutPlanInput[]
+    createMany?: OrganizationPlanCreateManyPlanInputEnvelope
+    connect?: OrganizationPlanWhereUniqueInput | OrganizationPlanWhereUniqueInput[]
+  }
+
+  export type PaymentUncheckedCreateNestedManyWithoutPlanInput = {
+    create?: XOR<PaymentCreateWithoutPlanInput, PaymentUncheckedCreateWithoutPlanInput> | PaymentCreateWithoutPlanInput[] | PaymentUncheckedCreateWithoutPlanInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutPlanInput | PaymentCreateOrConnectWithoutPlanInput[]
+    createMany?: PaymentCreateManyPlanInputEnvelope
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -12182,6 +15411,25 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type PlanUpdatefeaturesInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type OrganizationPlanUpdateManyWithoutPlanNestedInput = {
+    create?: XOR<OrganizationPlanCreateWithoutPlanInput, OrganizationPlanUncheckedCreateWithoutPlanInput> | OrganizationPlanCreateWithoutPlanInput[] | OrganizationPlanUncheckedCreateWithoutPlanInput[]
+    connectOrCreate?: OrganizationPlanCreateOrConnectWithoutPlanInput | OrganizationPlanCreateOrConnectWithoutPlanInput[]
+    upsert?: OrganizationPlanUpsertWithWhereUniqueWithoutPlanInput | OrganizationPlanUpsertWithWhereUniqueWithoutPlanInput[]
+    createMany?: OrganizationPlanCreateManyPlanInputEnvelope
+    set?: OrganizationPlanWhereUniqueInput | OrganizationPlanWhereUniqueInput[]
+    disconnect?: OrganizationPlanWhereUniqueInput | OrganizationPlanWhereUniqueInput[]
+    delete?: OrganizationPlanWhereUniqueInput | OrganizationPlanWhereUniqueInput[]
+    connect?: OrganizationPlanWhereUniqueInput | OrganizationPlanWhereUniqueInput[]
+    update?: OrganizationPlanUpdateWithWhereUniqueWithoutPlanInput | OrganizationPlanUpdateWithWhereUniqueWithoutPlanInput[]
+    updateMany?: OrganizationPlanUpdateManyWithWhereWithoutPlanInput | OrganizationPlanUpdateManyWithWhereWithoutPlanInput[]
+    deleteMany?: OrganizationPlanScalarWhereInput | OrganizationPlanScalarWhereInput[]
+  }
+
   export type OrganizationUpdateOneWithoutPlansNestedInput = {
     create?: XOR<OrganizationCreateWithoutPlansInput, OrganizationUncheckedCreateWithoutPlansInput>
     connectOrCreate?: OrganizationCreateOrConnectWithoutPlansInput
@@ -12190,6 +15438,92 @@ export namespace Prisma {
     delete?: OrganizationWhereInput | boolean
     connect?: OrganizationWhereUniqueInput
     update?: XOR<XOR<OrganizationUpdateToOneWithWhereWithoutPlansInput, OrganizationUpdateWithoutPlansInput>, OrganizationUncheckedUpdateWithoutPlansInput>
+  }
+
+  export type PaymentUpdateManyWithoutPlanNestedInput = {
+    create?: XOR<PaymentCreateWithoutPlanInput, PaymentUncheckedCreateWithoutPlanInput> | PaymentCreateWithoutPlanInput[] | PaymentUncheckedCreateWithoutPlanInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutPlanInput | PaymentCreateOrConnectWithoutPlanInput[]
+    upsert?: PaymentUpsertWithWhereUniqueWithoutPlanInput | PaymentUpsertWithWhereUniqueWithoutPlanInput[]
+    createMany?: PaymentCreateManyPlanInputEnvelope
+    set?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    disconnect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    delete?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    update?: PaymentUpdateWithWhereUniqueWithoutPlanInput | PaymentUpdateWithWhereUniqueWithoutPlanInput[]
+    updateMany?: PaymentUpdateManyWithWhereWithoutPlanInput | PaymentUpdateManyWithWhereWithoutPlanInput[]
+    deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
+  }
+
+  export type OrganizationPlanUncheckedUpdateManyWithoutPlanNestedInput = {
+    create?: XOR<OrganizationPlanCreateWithoutPlanInput, OrganizationPlanUncheckedCreateWithoutPlanInput> | OrganizationPlanCreateWithoutPlanInput[] | OrganizationPlanUncheckedCreateWithoutPlanInput[]
+    connectOrCreate?: OrganizationPlanCreateOrConnectWithoutPlanInput | OrganizationPlanCreateOrConnectWithoutPlanInput[]
+    upsert?: OrganizationPlanUpsertWithWhereUniqueWithoutPlanInput | OrganizationPlanUpsertWithWhereUniqueWithoutPlanInput[]
+    createMany?: OrganizationPlanCreateManyPlanInputEnvelope
+    set?: OrganizationPlanWhereUniqueInput | OrganizationPlanWhereUniqueInput[]
+    disconnect?: OrganizationPlanWhereUniqueInput | OrganizationPlanWhereUniqueInput[]
+    delete?: OrganizationPlanWhereUniqueInput | OrganizationPlanWhereUniqueInput[]
+    connect?: OrganizationPlanWhereUniqueInput | OrganizationPlanWhereUniqueInput[]
+    update?: OrganizationPlanUpdateWithWhereUniqueWithoutPlanInput | OrganizationPlanUpdateWithWhereUniqueWithoutPlanInput[]
+    updateMany?: OrganizationPlanUpdateManyWithWhereWithoutPlanInput | OrganizationPlanUpdateManyWithWhereWithoutPlanInput[]
+    deleteMany?: OrganizationPlanScalarWhereInput | OrganizationPlanScalarWhereInput[]
+  }
+
+  export type PaymentUncheckedUpdateManyWithoutPlanNestedInput = {
+    create?: XOR<PaymentCreateWithoutPlanInput, PaymentUncheckedCreateWithoutPlanInput> | PaymentCreateWithoutPlanInput[] | PaymentUncheckedCreateWithoutPlanInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutPlanInput | PaymentCreateOrConnectWithoutPlanInput[]
+    upsert?: PaymentUpsertWithWhereUniqueWithoutPlanInput | PaymentUpsertWithWhereUniqueWithoutPlanInput[]
+    createMany?: PaymentCreateManyPlanInputEnvelope
+    set?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    disconnect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    delete?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    update?: PaymentUpdateWithWhereUniqueWithoutPlanInput | PaymentUpdateWithWhereUniqueWithoutPlanInput[]
+    updateMany?: PaymentUpdateManyWithWhereWithoutPlanInput | PaymentUpdateManyWithWhereWithoutPlanInput[]
+    deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
+  }
+
+  export type OrganizationCreateNestedOneWithoutOrganizationPlanInput = {
+    create?: XOR<OrganizationCreateWithoutOrganizationPlanInput, OrganizationUncheckedCreateWithoutOrganizationPlanInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutOrganizationPlanInput
+    connect?: OrganizationWhereUniqueInput
+  }
+
+  export type PlanCreateNestedOneWithoutOrganizationPlansInput = {
+    create?: XOR<PlanCreateWithoutOrganizationPlansInput, PlanUncheckedCreateWithoutOrganizationPlansInput>
+    connectOrCreate?: PlanCreateOrConnectWithoutOrganizationPlansInput
+    connect?: PlanWhereUniqueInput
+  }
+
+  export type PaymentCreateNestedOneWithoutOrganizationPlanInput = {
+    create?: XOR<PaymentCreateWithoutOrganizationPlanInput, PaymentUncheckedCreateWithoutOrganizationPlanInput>
+    connectOrCreate?: PaymentCreateOrConnectWithoutOrganizationPlanInput
+    connect?: PaymentWhereUniqueInput
+  }
+
+  export type OrganizationUpdateOneRequiredWithoutOrganizationPlanNestedInput = {
+    create?: XOR<OrganizationCreateWithoutOrganizationPlanInput, OrganizationUncheckedCreateWithoutOrganizationPlanInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutOrganizationPlanInput
+    upsert?: OrganizationUpsertWithoutOrganizationPlanInput
+    connect?: OrganizationWhereUniqueInput
+    update?: XOR<XOR<OrganizationUpdateToOneWithWhereWithoutOrganizationPlanInput, OrganizationUpdateWithoutOrganizationPlanInput>, OrganizationUncheckedUpdateWithoutOrganizationPlanInput>
+  }
+
+  export type PlanUpdateOneRequiredWithoutOrganizationPlansNestedInput = {
+    create?: XOR<PlanCreateWithoutOrganizationPlansInput, PlanUncheckedCreateWithoutOrganizationPlansInput>
+    connectOrCreate?: PlanCreateOrConnectWithoutOrganizationPlansInput
+    upsert?: PlanUpsertWithoutOrganizationPlansInput
+    connect?: PlanWhereUniqueInput
+    update?: XOR<XOR<PlanUpdateToOneWithWhereWithoutOrganizationPlansInput, PlanUpdateWithoutOrganizationPlansInput>, PlanUncheckedUpdateWithoutOrganizationPlansInput>
+  }
+
+  export type PaymentUpdateOneWithoutOrganizationPlanNestedInput = {
+    create?: XOR<PaymentCreateWithoutOrganizationPlanInput, PaymentUncheckedCreateWithoutOrganizationPlanInput>
+    connectOrCreate?: PaymentCreateOrConnectWithoutOrganizationPlanInput
+    upsert?: PaymentUpsertWithoutOrganizationPlanInput
+    disconnect?: PaymentWhereInput | boolean
+    delete?: PaymentWhereInput | boolean
+    connect?: PaymentWhereUniqueInput
+    update?: XOR<XOR<PaymentUpdateToOneWithWhereWithoutOrganizationPlanInput, PaymentUpdateWithoutOrganizationPlanInput>, PaymentUncheckedUpdateWithoutOrganizationPlanInput>
   }
 
   export type UserCreateNestedOneWithoutTicketsInput = {
@@ -12360,6 +15694,66 @@ export namespace Prisma {
     delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCommentsInput, UserUpdateWithoutCommentsInput>, UserUncheckedUpdateWithoutCommentsInput>
+  }
+
+  export type OrganizationCreateNestedOneWithoutPaymentsInput = {
+    create?: XOR<OrganizationCreateWithoutPaymentsInput, OrganizationUncheckedCreateWithoutPaymentsInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutPaymentsInput
+    connect?: OrganizationWhereUniqueInput
+  }
+
+  export type PlanCreateNestedOneWithoutPaymentsInput = {
+    create?: XOR<PlanCreateWithoutPaymentsInput, PlanUncheckedCreateWithoutPaymentsInput>
+    connectOrCreate?: PlanCreateOrConnectWithoutPaymentsInput
+    connect?: PlanWhereUniqueInput
+  }
+
+  export type OrganizationPlanCreateNestedOneWithoutPaymentInput = {
+    create?: XOR<OrganizationPlanCreateWithoutPaymentInput, OrganizationPlanUncheckedCreateWithoutPaymentInput>
+    connectOrCreate?: OrganizationPlanCreateOrConnectWithoutPaymentInput
+    connect?: OrganizationPlanWhereUniqueInput
+  }
+
+  export type OrganizationPlanUncheckedCreateNestedOneWithoutPaymentInput = {
+    create?: XOR<OrganizationPlanCreateWithoutPaymentInput, OrganizationPlanUncheckedCreateWithoutPaymentInput>
+    connectOrCreate?: OrganizationPlanCreateOrConnectWithoutPaymentInput
+    connect?: OrganizationPlanWhereUniqueInput
+  }
+
+  export type OrganizationUpdateOneRequiredWithoutPaymentsNestedInput = {
+    create?: XOR<OrganizationCreateWithoutPaymentsInput, OrganizationUncheckedCreateWithoutPaymentsInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutPaymentsInput
+    upsert?: OrganizationUpsertWithoutPaymentsInput
+    connect?: OrganizationWhereUniqueInput
+    update?: XOR<XOR<OrganizationUpdateToOneWithWhereWithoutPaymentsInput, OrganizationUpdateWithoutPaymentsInput>, OrganizationUncheckedUpdateWithoutPaymentsInput>
+  }
+
+  export type PlanUpdateOneRequiredWithoutPaymentsNestedInput = {
+    create?: XOR<PlanCreateWithoutPaymentsInput, PlanUncheckedCreateWithoutPaymentsInput>
+    connectOrCreate?: PlanCreateOrConnectWithoutPaymentsInput
+    upsert?: PlanUpsertWithoutPaymentsInput
+    connect?: PlanWhereUniqueInput
+    update?: XOR<XOR<PlanUpdateToOneWithWhereWithoutPaymentsInput, PlanUpdateWithoutPaymentsInput>, PlanUncheckedUpdateWithoutPaymentsInput>
+  }
+
+  export type OrganizationPlanUpdateOneWithoutPaymentNestedInput = {
+    create?: XOR<OrganizationPlanCreateWithoutPaymentInput, OrganizationPlanUncheckedCreateWithoutPaymentInput>
+    connectOrCreate?: OrganizationPlanCreateOrConnectWithoutPaymentInput
+    upsert?: OrganizationPlanUpsertWithoutPaymentInput
+    disconnect?: OrganizationPlanWhereInput | boolean
+    delete?: OrganizationPlanWhereInput | boolean
+    connect?: OrganizationPlanWhereUniqueInput
+    update?: XOR<XOR<OrganizationPlanUpdateToOneWithWhereWithoutPaymentInput, OrganizationPlanUpdateWithoutPaymentInput>, OrganizationPlanUncheckedUpdateWithoutPaymentInput>
+  }
+
+  export type OrganizationPlanUncheckedUpdateOneWithoutPaymentNestedInput = {
+    create?: XOR<OrganizationPlanCreateWithoutPaymentInput, OrganizationPlanUncheckedCreateWithoutPaymentInput>
+    connectOrCreate?: OrganizationPlanCreateOrConnectWithoutPaymentInput
+    upsert?: OrganizationPlanUpsertWithoutPaymentInput
+    disconnect?: OrganizationPlanWhereInput | boolean
+    delete?: OrganizationPlanWhereInput | boolean
+    connect?: OrganizationPlanWhereUniqueInput
+    update?: XOR<XOR<OrganizationPlanUpdateToOneWithWhereWithoutPaymentInput, OrganizationPlanUpdateWithoutPaymentInput>, OrganizationPlanUncheckedUpdateWithoutPaymentInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -12652,26 +16046,36 @@ export namespace Prisma {
 
   export type PlanCreateWithoutOrganizationInput = {
     id?: string
-    name: string
+    title: string
+    monthlyPrice: number
+    annualPrice: number
+    durationMonths?: number
     description: string
-    price: number
-    duration: number
-    userLimit: number
+    features?: PlanCreatefeaturesInput | string[]
+    buttonText: string
+    highlight?: boolean
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    organizationPlans?: OrganizationPlanCreateNestedManyWithoutPlanInput
+    payments?: PaymentCreateNestedManyWithoutPlanInput
   }
 
   export type PlanUncheckedCreateWithoutOrganizationInput = {
     id?: string
-    name: string
+    title: string
+    monthlyPrice: number
+    annualPrice: number
+    durationMonths?: number
     description: string
-    price: number
-    duration: number
-    userLimit: number
+    features?: PlanCreatefeaturesInput | string[]
+    buttonText: string
+    highlight?: boolean
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    organizationPlans?: OrganizationPlanUncheckedCreateNestedManyWithoutPlanInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutPlanInput
   }
 
   export type PlanCreateOrConnectWithoutOrganizationInput = {
@@ -12766,6 +16170,64 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type OrganizationPlanCreateWithoutOrganizationInput = {
+    id?: string
+    startDate?: Date | string
+    expiresAt: Date | string
+    isActive?: boolean
+    plan: PlanCreateNestedOneWithoutOrganizationPlansInput
+    payment?: PaymentCreateNestedOneWithoutOrganizationPlanInput
+  }
+
+  export type OrganizationPlanUncheckedCreateWithoutOrganizationInput = {
+    id?: string
+    planId: string
+    startDate?: Date | string
+    expiresAt: Date | string
+    isActive?: boolean
+    paymentId?: string | null
+  }
+
+  export type OrganizationPlanCreateOrConnectWithoutOrganizationInput = {
+    where: OrganizationPlanWhereUniqueInput
+    create: XOR<OrganizationPlanCreateWithoutOrganizationInput, OrganizationPlanUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type OrganizationPlanCreateManyOrganizationInputEnvelope = {
+    data: OrganizationPlanCreateManyOrganizationInput | OrganizationPlanCreateManyOrganizationInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PaymentCreateWithoutOrganizationInput = {
+    id?: string
+    paymentReference: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    plan: PlanCreateNestedOneWithoutPaymentsInput
+    organizationPlan?: OrganizationPlanCreateNestedOneWithoutPaymentInput
+  }
+
+  export type PaymentUncheckedCreateWithoutOrganizationInput = {
+    id?: string
+    paymentReference: string
+    planId: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organizationPlan?: OrganizationPlanUncheckedCreateNestedOneWithoutPaymentInput
+  }
+
+  export type PaymentCreateOrConnectWithoutOrganizationInput = {
+    where: PaymentWhereUniqueInput
+    create: XOR<PaymentCreateWithoutOrganizationInput, PaymentUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type PaymentCreateManyOrganizationInputEnvelope = {
+    data: PaymentCreateManyOrganizationInput | PaymentCreateManyOrganizationInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithWhereUniqueWithoutOrganizationInput = {
     where: UserWhereUniqueInput
     update: XOR<UserUpdateWithoutOrganizationInput, UserUncheckedUpdateWithoutOrganizationInput>
@@ -12816,11 +16278,14 @@ export namespace Prisma {
     OR?: PlanScalarWhereInput[]
     NOT?: PlanScalarWhereInput | PlanScalarWhereInput[]
     id?: StringFilter<"Plan"> | string
-    name?: StringFilter<"Plan"> | string
+    title?: StringFilter<"Plan"> | string
+    monthlyPrice?: FloatFilter<"Plan"> | number
+    annualPrice?: FloatFilter<"Plan"> | number
+    durationMonths?: IntFilter<"Plan"> | number
     description?: StringFilter<"Plan"> | string
-    price?: FloatFilter<"Plan"> | number
-    duration?: IntFilter<"Plan"> | number
-    userLimit?: IntFilter<"Plan"> | number
+    features?: StringNullableListFilter<"Plan">
+    buttonText?: StringFilter<"Plan"> | string
+    highlight?: BoolFilter<"Plan"> | boolean
     isActive?: BoolFilter<"Plan"> | boolean
     createdAt?: DateTimeFilter<"Plan"> | Date | string
     updatedAt?: DateTimeFilter<"Plan"> | Date | string
@@ -12896,6 +16361,64 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"WidgetConfig"> | Date | string
   }
 
+  export type OrganizationPlanUpsertWithWhereUniqueWithoutOrganizationInput = {
+    where: OrganizationPlanWhereUniqueInput
+    update: XOR<OrganizationPlanUpdateWithoutOrganizationInput, OrganizationPlanUncheckedUpdateWithoutOrganizationInput>
+    create: XOR<OrganizationPlanCreateWithoutOrganizationInput, OrganizationPlanUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type OrganizationPlanUpdateWithWhereUniqueWithoutOrganizationInput = {
+    where: OrganizationPlanWhereUniqueInput
+    data: XOR<OrganizationPlanUpdateWithoutOrganizationInput, OrganizationPlanUncheckedUpdateWithoutOrganizationInput>
+  }
+
+  export type OrganizationPlanUpdateManyWithWhereWithoutOrganizationInput = {
+    where: OrganizationPlanScalarWhereInput
+    data: XOR<OrganizationPlanUpdateManyMutationInput, OrganizationPlanUncheckedUpdateManyWithoutOrganizationInput>
+  }
+
+  export type OrganizationPlanScalarWhereInput = {
+    AND?: OrganizationPlanScalarWhereInput | OrganizationPlanScalarWhereInput[]
+    OR?: OrganizationPlanScalarWhereInput[]
+    NOT?: OrganizationPlanScalarWhereInput | OrganizationPlanScalarWhereInput[]
+    id?: StringFilter<"OrganizationPlan"> | string
+    organizationId?: StringFilter<"OrganizationPlan"> | string
+    planId?: StringFilter<"OrganizationPlan"> | string
+    startDate?: DateTimeFilter<"OrganizationPlan"> | Date | string
+    expiresAt?: DateTimeFilter<"OrganizationPlan"> | Date | string
+    isActive?: BoolFilter<"OrganizationPlan"> | boolean
+    paymentId?: StringNullableFilter<"OrganizationPlan"> | string | null
+  }
+
+  export type PaymentUpsertWithWhereUniqueWithoutOrganizationInput = {
+    where: PaymentWhereUniqueInput
+    update: XOR<PaymentUpdateWithoutOrganizationInput, PaymentUncheckedUpdateWithoutOrganizationInput>
+    create: XOR<PaymentCreateWithoutOrganizationInput, PaymentUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type PaymentUpdateWithWhereUniqueWithoutOrganizationInput = {
+    where: PaymentWhereUniqueInput
+    data: XOR<PaymentUpdateWithoutOrganizationInput, PaymentUncheckedUpdateWithoutOrganizationInput>
+  }
+
+  export type PaymentUpdateManyWithWhereWithoutOrganizationInput = {
+    where: PaymentScalarWhereInput
+    data: XOR<PaymentUpdateManyMutationInput, PaymentUncheckedUpdateManyWithoutOrganizationInput>
+  }
+
+  export type PaymentScalarWhereInput = {
+    AND?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
+    OR?: PaymentScalarWhereInput[]
+    NOT?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
+    id?: StringFilter<"Payment"> | string
+    paymentReference?: StringFilter<"Payment"> | string
+    organizationId?: StringFilter<"Payment"> | string
+    planId?: StringFilter<"Payment"> | string
+    status?: StringFilter<"Payment"> | string
+    createdAt?: DateTimeFilter<"Payment"> | Date | string
+    updatedAt?: DateTimeFilter<"Payment"> | Date | string
+  }
+
   export type OrganizationCreateWithoutWidgetConfigInput = {
     id?: string
     name: string
@@ -12908,6 +16431,8 @@ export namespace Prisma {
     users?: UserCreateNestedManyWithoutOrganizationInput
     plans?: PlanCreateNestedManyWithoutOrganizationInput
     tickets?: TicketCreateNestedManyWithoutOrganizationInput
+    OrganizationPlan?: OrganizationPlanCreateNestedManyWithoutOrganizationInput
+    payments?: PaymentCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutWidgetConfigInput = {
@@ -12922,6 +16447,8 @@ export namespace Prisma {
     users?: UserUncheckedCreateNestedManyWithoutOrganizationInput
     plans?: PlanUncheckedCreateNestedManyWithoutOrganizationInput
     tickets?: TicketUncheckedCreateNestedManyWithoutOrganizationInput
+    OrganizationPlan?: OrganizationPlanUncheckedCreateNestedManyWithoutOrganizationInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutWidgetConfigInput = {
@@ -12952,6 +16479,8 @@ export namespace Prisma {
     users?: UserUpdateManyWithoutOrganizationNestedInput
     plans?: PlanUpdateManyWithoutOrganizationNestedInput
     tickets?: TicketUpdateManyWithoutOrganizationNestedInput
+    OrganizationPlan?: OrganizationPlanUpdateManyWithoutOrganizationNestedInput
+    payments?: PaymentUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutWidgetConfigInput = {
@@ -12966,6 +16495,8 @@ export namespace Prisma {
     users?: UserUncheckedUpdateManyWithoutOrganizationNestedInput
     plans?: PlanUncheckedUpdateManyWithoutOrganizationNestedInput
     tickets?: TicketUncheckedUpdateManyWithoutOrganizationNestedInput
+    OrganizationPlan?: OrganizationPlanUncheckedUpdateManyWithoutOrganizationNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type TicketCreateWithoutCreatedByInput = {
@@ -13096,6 +16627,8 @@ export namespace Prisma {
     plans?: PlanCreateNestedManyWithoutOrganizationInput
     tickets?: TicketCreateNestedManyWithoutOrganizationInput
     widgetConfig?: WidgetConfigCreateNestedManyWithoutOrgInput
+    OrganizationPlan?: OrganizationPlanCreateNestedManyWithoutOrganizationInput
+    payments?: PaymentCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutUsersInput = {
@@ -13110,6 +16643,8 @@ export namespace Prisma {
     plans?: PlanUncheckedCreateNestedManyWithoutOrganizationInput
     tickets?: TicketUncheckedCreateNestedManyWithoutOrganizationInput
     widgetConfig?: WidgetConfigUncheckedCreateNestedManyWithoutOrgInput
+    OrganizationPlan?: OrganizationPlanUncheckedCreateNestedManyWithoutOrganizationInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutUsersInput = {
@@ -13201,6 +16736,8 @@ export namespace Prisma {
     plans?: PlanUpdateManyWithoutOrganizationNestedInput
     tickets?: TicketUpdateManyWithoutOrganizationNestedInput
     widgetConfig?: WidgetConfigUpdateManyWithoutOrgNestedInput
+    OrganizationPlan?: OrganizationPlanUpdateManyWithoutOrganizationNestedInput
+    payments?: PaymentUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutUsersInput = {
@@ -13215,6 +16752,8 @@ export namespace Prisma {
     plans?: PlanUncheckedUpdateManyWithoutOrganizationNestedInput
     tickets?: TicketUncheckedUpdateManyWithoutOrganizationNestedInput
     widgetConfig?: WidgetConfigUncheckedUpdateManyWithoutOrgNestedInput
+    OrganizationPlan?: OrganizationPlanUncheckedUpdateManyWithoutOrganizationNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type TicketCreateWithoutTicketAccessTokensInput = {
@@ -13301,6 +16840,34 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutTicketNestedInput
   }
 
+  export type OrganizationPlanCreateWithoutPlanInput = {
+    id?: string
+    startDate?: Date | string
+    expiresAt: Date | string
+    isActive?: boolean
+    organization: OrganizationCreateNestedOneWithoutOrganizationPlanInput
+    payment?: PaymentCreateNestedOneWithoutOrganizationPlanInput
+  }
+
+  export type OrganizationPlanUncheckedCreateWithoutPlanInput = {
+    id?: string
+    organizationId: string
+    startDate?: Date | string
+    expiresAt: Date | string
+    isActive?: boolean
+    paymentId?: string | null
+  }
+
+  export type OrganizationPlanCreateOrConnectWithoutPlanInput = {
+    where: OrganizationPlanWhereUniqueInput
+    create: XOR<OrganizationPlanCreateWithoutPlanInput, OrganizationPlanUncheckedCreateWithoutPlanInput>
+  }
+
+  export type OrganizationPlanCreateManyPlanInputEnvelope = {
+    data: OrganizationPlanCreateManyPlanInput | OrganizationPlanCreateManyPlanInput[]
+    skipDuplicates?: boolean
+  }
+
   export type OrganizationCreateWithoutPlansInput = {
     id?: string
     name: string
@@ -13313,6 +16880,8 @@ export namespace Prisma {
     users?: UserCreateNestedManyWithoutOrganizationInput
     tickets?: TicketCreateNestedManyWithoutOrganizationInput
     widgetConfig?: WidgetConfigCreateNestedManyWithoutOrgInput
+    OrganizationPlan?: OrganizationPlanCreateNestedManyWithoutOrganizationInput
+    payments?: PaymentCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutPlansInput = {
@@ -13327,11 +16896,59 @@ export namespace Prisma {
     users?: UserUncheckedCreateNestedManyWithoutOrganizationInput
     tickets?: TicketUncheckedCreateNestedManyWithoutOrganizationInput
     widgetConfig?: WidgetConfigUncheckedCreateNestedManyWithoutOrgInput
+    OrganizationPlan?: OrganizationPlanUncheckedCreateNestedManyWithoutOrganizationInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutPlansInput = {
     where: OrganizationWhereUniqueInput
     create: XOR<OrganizationCreateWithoutPlansInput, OrganizationUncheckedCreateWithoutPlansInput>
+  }
+
+  export type PaymentCreateWithoutPlanInput = {
+    id?: string
+    paymentReference: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organization: OrganizationCreateNestedOneWithoutPaymentsInput
+    organizationPlan?: OrganizationPlanCreateNestedOneWithoutPaymentInput
+  }
+
+  export type PaymentUncheckedCreateWithoutPlanInput = {
+    id?: string
+    paymentReference: string
+    organizationId: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organizationPlan?: OrganizationPlanUncheckedCreateNestedOneWithoutPaymentInput
+  }
+
+  export type PaymentCreateOrConnectWithoutPlanInput = {
+    where: PaymentWhereUniqueInput
+    create: XOR<PaymentCreateWithoutPlanInput, PaymentUncheckedCreateWithoutPlanInput>
+  }
+
+  export type PaymentCreateManyPlanInputEnvelope = {
+    data: PaymentCreateManyPlanInput | PaymentCreateManyPlanInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type OrganizationPlanUpsertWithWhereUniqueWithoutPlanInput = {
+    where: OrganizationPlanWhereUniqueInput
+    update: XOR<OrganizationPlanUpdateWithoutPlanInput, OrganizationPlanUncheckedUpdateWithoutPlanInput>
+    create: XOR<OrganizationPlanCreateWithoutPlanInput, OrganizationPlanUncheckedCreateWithoutPlanInput>
+  }
+
+  export type OrganizationPlanUpdateWithWhereUniqueWithoutPlanInput = {
+    where: OrganizationPlanWhereUniqueInput
+    data: XOR<OrganizationPlanUpdateWithoutPlanInput, OrganizationPlanUncheckedUpdateWithoutPlanInput>
+  }
+
+  export type OrganizationPlanUpdateManyWithWhereWithoutPlanInput = {
+    where: OrganizationPlanScalarWhereInput
+    data: XOR<OrganizationPlanUpdateManyMutationInput, OrganizationPlanUncheckedUpdateManyWithoutPlanInput>
   }
 
   export type OrganizationUpsertWithoutPlansInput = {
@@ -13357,6 +16974,8 @@ export namespace Prisma {
     users?: UserUpdateManyWithoutOrganizationNestedInput
     tickets?: TicketUpdateManyWithoutOrganizationNestedInput
     widgetConfig?: WidgetConfigUpdateManyWithoutOrgNestedInput
+    OrganizationPlan?: OrganizationPlanUpdateManyWithoutOrganizationNestedInput
+    payments?: PaymentUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutPlansInput = {
@@ -13371,6 +16990,244 @@ export namespace Prisma {
     users?: UserUncheckedUpdateManyWithoutOrganizationNestedInput
     tickets?: TicketUncheckedUpdateManyWithoutOrganizationNestedInput
     widgetConfig?: WidgetConfigUncheckedUpdateManyWithoutOrgNestedInput
+    OrganizationPlan?: OrganizationPlanUncheckedUpdateManyWithoutOrganizationNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type PaymentUpsertWithWhereUniqueWithoutPlanInput = {
+    where: PaymentWhereUniqueInput
+    update: XOR<PaymentUpdateWithoutPlanInput, PaymentUncheckedUpdateWithoutPlanInput>
+    create: XOR<PaymentCreateWithoutPlanInput, PaymentUncheckedCreateWithoutPlanInput>
+  }
+
+  export type PaymentUpdateWithWhereUniqueWithoutPlanInput = {
+    where: PaymentWhereUniqueInput
+    data: XOR<PaymentUpdateWithoutPlanInput, PaymentUncheckedUpdateWithoutPlanInput>
+  }
+
+  export type PaymentUpdateManyWithWhereWithoutPlanInput = {
+    where: PaymentScalarWhereInput
+    data: XOR<PaymentUpdateManyMutationInput, PaymentUncheckedUpdateManyWithoutPlanInput>
+  }
+
+  export type OrganizationCreateWithoutOrganizationPlanInput = {
+    id?: string
+    name: string
+    email: string
+    slug: string
+    phoneNumber: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserCreateNestedManyWithoutOrganizationInput
+    plans?: PlanCreateNestedManyWithoutOrganizationInput
+    tickets?: TicketCreateNestedManyWithoutOrganizationInput
+    widgetConfig?: WidgetConfigCreateNestedManyWithoutOrgInput
+    payments?: PaymentCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationUncheckedCreateWithoutOrganizationPlanInput = {
+    id?: string
+    name: string
+    email: string
+    slug: string
+    phoneNumber: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutOrganizationInput
+    plans?: PlanUncheckedCreateNestedManyWithoutOrganizationInput
+    tickets?: TicketUncheckedCreateNestedManyWithoutOrganizationInput
+    widgetConfig?: WidgetConfigUncheckedCreateNestedManyWithoutOrgInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationCreateOrConnectWithoutOrganizationPlanInput = {
+    where: OrganizationWhereUniqueInput
+    create: XOR<OrganizationCreateWithoutOrganizationPlanInput, OrganizationUncheckedCreateWithoutOrganizationPlanInput>
+  }
+
+  export type PlanCreateWithoutOrganizationPlansInput = {
+    id?: string
+    title: string
+    monthlyPrice: number
+    annualPrice: number
+    durationMonths?: number
+    description: string
+    features?: PlanCreatefeaturesInput | string[]
+    buttonText: string
+    highlight?: boolean
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Organization?: OrganizationCreateNestedOneWithoutPlansInput
+    payments?: PaymentCreateNestedManyWithoutPlanInput
+  }
+
+  export type PlanUncheckedCreateWithoutOrganizationPlansInput = {
+    id?: string
+    title: string
+    monthlyPrice: number
+    annualPrice: number
+    durationMonths?: number
+    description: string
+    features?: PlanCreatefeaturesInput | string[]
+    buttonText: string
+    highlight?: boolean
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organizationId?: string | null
+    payments?: PaymentUncheckedCreateNestedManyWithoutPlanInput
+  }
+
+  export type PlanCreateOrConnectWithoutOrganizationPlansInput = {
+    where: PlanWhereUniqueInput
+    create: XOR<PlanCreateWithoutOrganizationPlansInput, PlanUncheckedCreateWithoutOrganizationPlansInput>
+  }
+
+  export type PaymentCreateWithoutOrganizationPlanInput = {
+    id?: string
+    paymentReference: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organization: OrganizationCreateNestedOneWithoutPaymentsInput
+    plan: PlanCreateNestedOneWithoutPaymentsInput
+  }
+
+  export type PaymentUncheckedCreateWithoutOrganizationPlanInput = {
+    id?: string
+    paymentReference: string
+    organizationId: string
+    planId: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PaymentCreateOrConnectWithoutOrganizationPlanInput = {
+    where: PaymentWhereUniqueInput
+    create: XOR<PaymentCreateWithoutOrganizationPlanInput, PaymentUncheckedCreateWithoutOrganizationPlanInput>
+  }
+
+  export type OrganizationUpsertWithoutOrganizationPlanInput = {
+    update: XOR<OrganizationUpdateWithoutOrganizationPlanInput, OrganizationUncheckedUpdateWithoutOrganizationPlanInput>
+    create: XOR<OrganizationCreateWithoutOrganizationPlanInput, OrganizationUncheckedCreateWithoutOrganizationPlanInput>
+    where?: OrganizationWhereInput
+  }
+
+  export type OrganizationUpdateToOneWithWhereWithoutOrganizationPlanInput = {
+    where?: OrganizationWhereInput
+    data: XOR<OrganizationUpdateWithoutOrganizationPlanInput, OrganizationUncheckedUpdateWithoutOrganizationPlanInput>
+  }
+
+  export type OrganizationUpdateWithoutOrganizationPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutOrganizationNestedInput
+    plans?: PlanUpdateManyWithoutOrganizationNestedInput
+    tickets?: TicketUpdateManyWithoutOrganizationNestedInput
+    widgetConfig?: WidgetConfigUpdateManyWithoutOrgNestedInput
+    payments?: PaymentUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type OrganizationUncheckedUpdateWithoutOrganizationPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutOrganizationNestedInput
+    plans?: PlanUncheckedUpdateManyWithoutOrganizationNestedInput
+    tickets?: TicketUncheckedUpdateManyWithoutOrganizationNestedInput
+    widgetConfig?: WidgetConfigUncheckedUpdateManyWithoutOrgNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type PlanUpsertWithoutOrganizationPlansInput = {
+    update: XOR<PlanUpdateWithoutOrganizationPlansInput, PlanUncheckedUpdateWithoutOrganizationPlansInput>
+    create: XOR<PlanCreateWithoutOrganizationPlansInput, PlanUncheckedCreateWithoutOrganizationPlansInput>
+    where?: PlanWhereInput
+  }
+
+  export type PlanUpdateToOneWithWhereWithoutOrganizationPlansInput = {
+    where?: PlanWhereInput
+    data: XOR<PlanUpdateWithoutOrganizationPlansInput, PlanUncheckedUpdateWithoutOrganizationPlansInput>
+  }
+
+  export type PlanUpdateWithoutOrganizationPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    monthlyPrice?: FloatFieldUpdateOperationsInput | number
+    annualPrice?: FloatFieldUpdateOperationsInput | number
+    durationMonths?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    features?: PlanUpdatefeaturesInput | string[]
+    buttonText?: StringFieldUpdateOperationsInput | string
+    highlight?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Organization?: OrganizationUpdateOneWithoutPlansNestedInput
+    payments?: PaymentUpdateManyWithoutPlanNestedInput
+  }
+
+  export type PlanUncheckedUpdateWithoutOrganizationPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    monthlyPrice?: FloatFieldUpdateOperationsInput | number
+    annualPrice?: FloatFieldUpdateOperationsInput | number
+    durationMonths?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    features?: PlanUpdatefeaturesInput | string[]
+    buttonText?: StringFieldUpdateOperationsInput | string
+    highlight?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organizationId?: NullableStringFieldUpdateOperationsInput | string | null
+    payments?: PaymentUncheckedUpdateManyWithoutPlanNestedInput
+  }
+
+  export type PaymentUpsertWithoutOrganizationPlanInput = {
+    update: XOR<PaymentUpdateWithoutOrganizationPlanInput, PaymentUncheckedUpdateWithoutOrganizationPlanInput>
+    create: XOR<PaymentCreateWithoutOrganizationPlanInput, PaymentUncheckedCreateWithoutOrganizationPlanInput>
+    where?: PaymentWhereInput
+  }
+
+  export type PaymentUpdateToOneWithWhereWithoutOrganizationPlanInput = {
+    where?: PaymentWhereInput
+    data: XOR<PaymentUpdateWithoutOrganizationPlanInput, PaymentUncheckedUpdateWithoutOrganizationPlanInput>
+  }
+
+  export type PaymentUpdateWithoutOrganizationPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentReference?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organization?: OrganizationUpdateOneRequiredWithoutPaymentsNestedInput
+    plan?: PlanUpdateOneRequiredWithoutPaymentsNestedInput
+  }
+
+  export type PaymentUncheckedUpdateWithoutOrganizationPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentReference?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    planId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserCreateWithoutTicketsInput = {
@@ -13495,6 +17352,8 @@ export namespace Prisma {
     users?: UserCreateNestedManyWithoutOrganizationInput
     plans?: PlanCreateNestedManyWithoutOrganizationInput
     widgetConfig?: WidgetConfigCreateNestedManyWithoutOrgInput
+    OrganizationPlan?: OrganizationPlanCreateNestedManyWithoutOrganizationInput
+    payments?: PaymentCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutTicketsInput = {
@@ -13509,6 +17368,8 @@ export namespace Prisma {
     users?: UserUncheckedCreateNestedManyWithoutOrganizationInput
     plans?: PlanUncheckedCreateNestedManyWithoutOrganizationInput
     widgetConfig?: WidgetConfigUncheckedCreateNestedManyWithoutOrgInput
+    OrganizationPlan?: OrganizationPlanUncheckedCreateNestedManyWithoutOrganizationInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutTicketsInput = {
@@ -13652,6 +17513,8 @@ export namespace Prisma {
     users?: UserUpdateManyWithoutOrganizationNestedInput
     plans?: PlanUpdateManyWithoutOrganizationNestedInput
     widgetConfig?: WidgetConfigUpdateManyWithoutOrgNestedInput
+    OrganizationPlan?: OrganizationPlanUpdateManyWithoutOrganizationNestedInput
+    payments?: PaymentUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutTicketsInput = {
@@ -13666,6 +17529,8 @@ export namespace Prisma {
     users?: UserUncheckedUpdateManyWithoutOrganizationNestedInput
     plans?: PlanUncheckedUpdateManyWithoutOrganizationNestedInput
     widgetConfig?: WidgetConfigUncheckedUpdateManyWithoutOrgNestedInput
+    OrganizationPlan?: OrganizationPlanUncheckedUpdateManyWithoutOrganizationNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type TicketCreateWithoutCommentsInput = {
@@ -13816,6 +17681,222 @@ export namespace Prisma {
     assigned?: TicketUncheckedUpdateManyWithoutAssignedToNestedInput
   }
 
+  export type OrganizationCreateWithoutPaymentsInput = {
+    id?: string
+    name: string
+    email: string
+    slug: string
+    phoneNumber: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserCreateNestedManyWithoutOrganizationInput
+    plans?: PlanCreateNestedManyWithoutOrganizationInput
+    tickets?: TicketCreateNestedManyWithoutOrganizationInput
+    widgetConfig?: WidgetConfigCreateNestedManyWithoutOrgInput
+    OrganizationPlan?: OrganizationPlanCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationUncheckedCreateWithoutPaymentsInput = {
+    id?: string
+    name: string
+    email: string
+    slug: string
+    phoneNumber: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutOrganizationInput
+    plans?: PlanUncheckedCreateNestedManyWithoutOrganizationInput
+    tickets?: TicketUncheckedCreateNestedManyWithoutOrganizationInput
+    widgetConfig?: WidgetConfigUncheckedCreateNestedManyWithoutOrgInput
+    OrganizationPlan?: OrganizationPlanUncheckedCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationCreateOrConnectWithoutPaymentsInput = {
+    where: OrganizationWhereUniqueInput
+    create: XOR<OrganizationCreateWithoutPaymentsInput, OrganizationUncheckedCreateWithoutPaymentsInput>
+  }
+
+  export type PlanCreateWithoutPaymentsInput = {
+    id?: string
+    title: string
+    monthlyPrice: number
+    annualPrice: number
+    durationMonths?: number
+    description: string
+    features?: PlanCreatefeaturesInput | string[]
+    buttonText: string
+    highlight?: boolean
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organizationPlans?: OrganizationPlanCreateNestedManyWithoutPlanInput
+    Organization?: OrganizationCreateNestedOneWithoutPlansInput
+  }
+
+  export type PlanUncheckedCreateWithoutPaymentsInput = {
+    id?: string
+    title: string
+    monthlyPrice: number
+    annualPrice: number
+    durationMonths?: number
+    description: string
+    features?: PlanCreatefeaturesInput | string[]
+    buttonText: string
+    highlight?: boolean
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organizationId?: string | null
+    organizationPlans?: OrganizationPlanUncheckedCreateNestedManyWithoutPlanInput
+  }
+
+  export type PlanCreateOrConnectWithoutPaymentsInput = {
+    where: PlanWhereUniqueInput
+    create: XOR<PlanCreateWithoutPaymentsInput, PlanUncheckedCreateWithoutPaymentsInput>
+  }
+
+  export type OrganizationPlanCreateWithoutPaymentInput = {
+    id?: string
+    startDate?: Date | string
+    expiresAt: Date | string
+    isActive?: boolean
+    organization: OrganizationCreateNestedOneWithoutOrganizationPlanInput
+    plan: PlanCreateNestedOneWithoutOrganizationPlansInput
+  }
+
+  export type OrganizationPlanUncheckedCreateWithoutPaymentInput = {
+    id?: string
+    organizationId: string
+    planId: string
+    startDate?: Date | string
+    expiresAt: Date | string
+    isActive?: boolean
+  }
+
+  export type OrganizationPlanCreateOrConnectWithoutPaymentInput = {
+    where: OrganizationPlanWhereUniqueInput
+    create: XOR<OrganizationPlanCreateWithoutPaymentInput, OrganizationPlanUncheckedCreateWithoutPaymentInput>
+  }
+
+  export type OrganizationUpsertWithoutPaymentsInput = {
+    update: XOR<OrganizationUpdateWithoutPaymentsInput, OrganizationUncheckedUpdateWithoutPaymentsInput>
+    create: XOR<OrganizationCreateWithoutPaymentsInput, OrganizationUncheckedCreateWithoutPaymentsInput>
+    where?: OrganizationWhereInput
+  }
+
+  export type OrganizationUpdateToOneWithWhereWithoutPaymentsInput = {
+    where?: OrganizationWhereInput
+    data: XOR<OrganizationUpdateWithoutPaymentsInput, OrganizationUncheckedUpdateWithoutPaymentsInput>
+  }
+
+  export type OrganizationUpdateWithoutPaymentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutOrganizationNestedInput
+    plans?: PlanUpdateManyWithoutOrganizationNestedInput
+    tickets?: TicketUpdateManyWithoutOrganizationNestedInput
+    widgetConfig?: WidgetConfigUpdateManyWithoutOrgNestedInput
+    OrganizationPlan?: OrganizationPlanUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type OrganizationUncheckedUpdateWithoutPaymentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutOrganizationNestedInput
+    plans?: PlanUncheckedUpdateManyWithoutOrganizationNestedInput
+    tickets?: TicketUncheckedUpdateManyWithoutOrganizationNestedInput
+    widgetConfig?: WidgetConfigUncheckedUpdateManyWithoutOrgNestedInput
+    OrganizationPlan?: OrganizationPlanUncheckedUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type PlanUpsertWithoutPaymentsInput = {
+    update: XOR<PlanUpdateWithoutPaymentsInput, PlanUncheckedUpdateWithoutPaymentsInput>
+    create: XOR<PlanCreateWithoutPaymentsInput, PlanUncheckedCreateWithoutPaymentsInput>
+    where?: PlanWhereInput
+  }
+
+  export type PlanUpdateToOneWithWhereWithoutPaymentsInput = {
+    where?: PlanWhereInput
+    data: XOR<PlanUpdateWithoutPaymentsInput, PlanUncheckedUpdateWithoutPaymentsInput>
+  }
+
+  export type PlanUpdateWithoutPaymentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    monthlyPrice?: FloatFieldUpdateOperationsInput | number
+    annualPrice?: FloatFieldUpdateOperationsInput | number
+    durationMonths?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    features?: PlanUpdatefeaturesInput | string[]
+    buttonText?: StringFieldUpdateOperationsInput | string
+    highlight?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organizationPlans?: OrganizationPlanUpdateManyWithoutPlanNestedInput
+    Organization?: OrganizationUpdateOneWithoutPlansNestedInput
+  }
+
+  export type PlanUncheckedUpdateWithoutPaymentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    monthlyPrice?: FloatFieldUpdateOperationsInput | number
+    annualPrice?: FloatFieldUpdateOperationsInput | number
+    durationMonths?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    features?: PlanUpdatefeaturesInput | string[]
+    buttonText?: StringFieldUpdateOperationsInput | string
+    highlight?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organizationId?: NullableStringFieldUpdateOperationsInput | string | null
+    organizationPlans?: OrganizationPlanUncheckedUpdateManyWithoutPlanNestedInput
+  }
+
+  export type OrganizationPlanUpsertWithoutPaymentInput = {
+    update: XOR<OrganizationPlanUpdateWithoutPaymentInput, OrganizationPlanUncheckedUpdateWithoutPaymentInput>
+    create: XOR<OrganizationPlanCreateWithoutPaymentInput, OrganizationPlanUncheckedCreateWithoutPaymentInput>
+    where?: OrganizationPlanWhereInput
+  }
+
+  export type OrganizationPlanUpdateToOneWithWhereWithoutPaymentInput = {
+    where?: OrganizationPlanWhereInput
+    data: XOR<OrganizationPlanUpdateWithoutPaymentInput, OrganizationPlanUncheckedUpdateWithoutPaymentInput>
+  }
+
+  export type OrganizationPlanUpdateWithoutPaymentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    organization?: OrganizationUpdateOneRequiredWithoutOrganizationPlanNestedInput
+    plan?: PlanUpdateOneRequiredWithoutOrganizationPlansNestedInput
+  }
+
+  export type OrganizationPlanUncheckedUpdateWithoutPaymentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    planId?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type UserCreateManyOrganizationInput = {
     id?: string
     name: string
@@ -13827,11 +17908,14 @@ export namespace Prisma {
 
   export type PlanCreateManyOrganizationInput = {
     id?: string
-    name: string
+    title: string
+    monthlyPrice: number
+    annualPrice: number
+    durationMonths?: number
     description: string
-    price: number
-    duration: number
-    userLimit: number
+    features?: PlanCreatefeaturesInput | string[]
+    buttonText: string
+    highlight?: boolean
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -13862,6 +17946,24 @@ export namespace Prisma {
     showPriority?: boolean
     theme?: string | null
     successMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OrganizationPlanCreateManyOrganizationInput = {
+    id?: string
+    planId: string
+    startDate?: Date | string
+    expiresAt: Date | string
+    isActive?: boolean
+    paymentId?: string | null
+  }
+
+  export type PaymentCreateManyOrganizationInput = {
+    id?: string
+    paymentReference: string
+    planId: string
+    status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -13901,35 +18003,48 @@ export namespace Prisma {
 
   export type PlanUpdateWithoutOrganizationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    monthlyPrice?: FloatFieldUpdateOperationsInput | number
+    annualPrice?: FloatFieldUpdateOperationsInput | number
+    durationMonths?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    duration?: IntFieldUpdateOperationsInput | number
-    userLimit?: IntFieldUpdateOperationsInput | number
+    features?: PlanUpdatefeaturesInput | string[]
+    buttonText?: StringFieldUpdateOperationsInput | string
+    highlight?: BoolFieldUpdateOperationsInput | boolean
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organizationPlans?: OrganizationPlanUpdateManyWithoutPlanNestedInput
+    payments?: PaymentUpdateManyWithoutPlanNestedInput
   }
 
   export type PlanUncheckedUpdateWithoutOrganizationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    monthlyPrice?: FloatFieldUpdateOperationsInput | number
+    annualPrice?: FloatFieldUpdateOperationsInput | number
+    durationMonths?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    duration?: IntFieldUpdateOperationsInput | number
-    userLimit?: IntFieldUpdateOperationsInput | number
+    features?: PlanUpdatefeaturesInput | string[]
+    buttonText?: StringFieldUpdateOperationsInput | string
+    highlight?: BoolFieldUpdateOperationsInput | boolean
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organizationPlans?: OrganizationPlanUncheckedUpdateManyWithoutPlanNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutPlanNestedInput
   }
 
   export type PlanUncheckedUpdateManyWithoutOrganizationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    monthlyPrice?: FloatFieldUpdateOperationsInput | number
+    annualPrice?: FloatFieldUpdateOperationsInput | number
+    durationMonths?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    duration?: IntFieldUpdateOperationsInput | number
-    userLimit?: IntFieldUpdateOperationsInput | number
+    features?: PlanUpdatefeaturesInput | string[]
+    buttonText?: StringFieldUpdateOperationsInput | string
+    highlight?: BoolFieldUpdateOperationsInput | boolean
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14022,6 +18137,62 @@ export namespace Prisma {
     showPriority?: BoolFieldUpdateOperationsInput | boolean
     theme?: NullableStringFieldUpdateOperationsInput | string | null
     successMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrganizationPlanUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    plan?: PlanUpdateOneRequiredWithoutOrganizationPlansNestedInput
+    payment?: PaymentUpdateOneWithoutOrganizationPlanNestedInput
+  }
+
+  export type OrganizationPlanUncheckedUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    planId?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type OrganizationPlanUncheckedUpdateManyWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    planId?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PaymentUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentReference?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    plan?: PlanUpdateOneRequiredWithoutPaymentsNestedInput
+    organizationPlan?: OrganizationPlanUpdateOneWithoutPaymentNestedInput
+  }
+
+  export type PaymentUncheckedUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentReference?: StringFieldUpdateOperationsInput | string
+    planId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organizationPlan?: OrganizationPlanUncheckedUpdateOneWithoutPaymentNestedInput
+  }
+
+  export type PaymentUncheckedUpdateManyWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentReference?: StringFieldUpdateOperationsInput | string
+    planId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14188,6 +18359,80 @@ export namespace Prisma {
     ticketId?: StringFieldUpdateOperationsInput | string
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
     externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type OrganizationPlanCreateManyPlanInput = {
+    id?: string
+    organizationId: string
+    startDate?: Date | string
+    expiresAt: Date | string
+    isActive?: boolean
+    paymentId?: string | null
+  }
+
+  export type PaymentCreateManyPlanInput = {
+    id?: string
+    paymentReference: string
+    organizationId: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OrganizationPlanUpdateWithoutPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    organization?: OrganizationUpdateOneRequiredWithoutOrganizationPlanNestedInput
+    payment?: PaymentUpdateOneWithoutOrganizationPlanNestedInput
+  }
+
+  export type OrganizationPlanUncheckedUpdateWithoutPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type OrganizationPlanUncheckedUpdateManyWithoutPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PaymentUpdateWithoutPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentReference?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organization?: OrganizationUpdateOneRequiredWithoutPaymentsNestedInput
+    organizationPlan?: OrganizationPlanUpdateOneWithoutPaymentNestedInput
+  }
+
+  export type PaymentUncheckedUpdateWithoutPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentReference?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organizationPlan?: OrganizationPlanUncheckedUpdateOneWithoutPaymentNestedInput
+  }
+
+  export type PaymentUncheckedUpdateManyWithoutPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentReference?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CommentCreateManyTicketInput = {

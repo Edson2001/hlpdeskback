@@ -166,15 +166,28 @@ exports.Prisma.TicketAccessTokenScalarFieldEnum = {
 
 exports.Prisma.PlanScalarFieldEnum = {
   id: 'id',
-  name: 'name',
+  title: 'title',
+  monthlyPrice: 'monthlyPrice',
+  annualPrice: 'annualPrice',
+  durationMonths: 'durationMonths',
   description: 'description',
-  price: 'price',
-  duration: 'duration',
-  userLimit: 'userLimit',
+  features: 'features',
+  buttonText: 'buttonText',
+  highlight: 'highlight',
   isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   organizationId: 'organizationId'
+};
+
+exports.Prisma.OrganizationPlanScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  planId: 'planId',
+  startDate: 'startDate',
+  expiresAt: 'expiresAt',
+  isActive: 'isActive',
+  paymentId: 'paymentId'
 };
 
 exports.Prisma.TicketScalarFieldEnum = {
@@ -201,6 +214,16 @@ exports.Prisma.CommentScalarFieldEnum = {
   authorId: 'authorId',
   externalName: 'externalName',
   externalEmail: 'externalEmail'
+};
+
+exports.Prisma.PaymentScalarFieldEnum = {
+  id: 'id',
+  paymentReference: 'paymentReference',
+  organizationId: 'organizationId',
+  planId: 'planId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -242,8 +265,10 @@ exports.Prisma.ModelName = {
   User: 'User',
   TicketAccessToken: 'TicketAccessToken',
   Plan: 'Plan',
+  OrganizationPlan: 'OrganizationPlan',
   Ticket: 'Ticket',
-  Comment: 'Comment'
+  Comment: 'Comment',
+  Payment: 'Payment'
 };
 
 /**

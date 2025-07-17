@@ -50,6 +50,22 @@ export class UsersRepository {
   async findOneByEmail(email: string) {
     return this.prisma.user.findUnique({
       where: { email },
+      include:{
+        Organization:{
+          include: {
+            OrganizationPlan: {
+              include:{
+                plan: true
+              }
+            },
+            payments: {
+              include:{
+                plan: true
+              }
+            }
+          }
+        }
+      }
     });
   }
 

@@ -15,17 +15,37 @@ datasource db {
 }
 
 model Organization {
-  id          String   @id @default(uuid())
-  name        String
-  email       String
-  slug        String   @unique
-  phoneNumber String
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  users       User[]
-  plans       Plan[]
-  tickets     Ticket[] // Adicionado o campo de relação para Ticket
+  id               String             @id @default(uuid())
+  name             String
+  email            String
+  slug             String             @unique
+  phoneNumber      String
+  isActive         Boolean            @default(true)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  users            User[]
+  plans            Plan[]
+  tickets          Ticket[] // Adicionado o campo de relação para Ticket
+  widgetConfig     WidgetConfig[]
+  OrganizationPlan OrganizationPlan[]
+  payments         Payment[]
+}
+
+model WidgetConfig {
+  id    String       @id @default(cuid())
+  orgId String       @unique
+  org   Organization @relation(fields: [orgId], references: [id])
+
+  buttonText     String?  @default("💬 Suporte")
+  modalTitle     String?  @default("Reportar um Problema")
+  buttonColor    String?  @default("#1f2937")
+  headerColor    String?  @default("#1f2937")
+  logoUrl        String?
+  showPriority   Boolean  @default(true)
+  theme          String?  @default("light") // "light" ou "dark"
+  successMessage String?  @default("Seu ticket foi registrado com sucesso!")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
 
 model User {
@@ -52,18 +72,38 @@ model TicketAccessToken {
 }
 
 model Plan {
-  id          String   @id @default(uuid())
-  name        String
-  description String
-  price       Float
-  duration    Int // Duração em dias
-  userLimit   Int // Limite de usuários permitidos no plano
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           String   @id @default(uuid())
+  title        String
+  monthlyPrice Float
+  annualPrice  Float
+  description  String
+  features     String[]
+  buttonText   String
+  highlight    Boolean  @default(false)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
-  Organization   Organization? @relation(fields: [organizationId], references: [id])
-  organizationId String?
+  // Remova a relação direta com Organization
+  organizationPlans OrganizationPlan[]
+  Organization      Organization?      @relation(fields: [organizationId], references: [id])
+  organizationId    String?
+  payments          Payment[]
+}
+
+model OrganizationPlan {
+  id             String       @id @default(uuid())
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  organizationId String
+  plan           Plan         @relation(fields: [planId], references: [id])
+  planId         String
+  startDate      DateTime     @default(now())
+  expiresAt      DateTime // Data de expiração específica para cada organização
+  isActive       Boolean      @default(true)
+  payment        Payment?     @relation(fields: [paymentId], references: [id])
+  paymentId      String?      @unique
+
+  @@unique([organizationId, planId])
 }
 
 model Ticket {
@@ -102,6 +142,21 @@ model Comment {
 
   externalName  String?
   externalEmail String?
+}
+
+model Payment {
+  id               String       @id @default(uuid())
+  paymentReference String       @unique // Referência única do gateway (ex: "PLAN_abc123_5252")
+  organization     Organization @relation(fields: [organizationId], references: [id])
+  organizationId   String
+  plan             Plan         @relation(fields: [planId], references: [id])
+  planId           String
+  status           String       @default("pending") // "pending", "completed", "failed"
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  // Vincule ao OrganizationPlan (opcional)
+  organizationPlan OrganizationPlan?
 }
 
 enum Role {
