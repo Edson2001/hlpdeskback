@@ -6,7 +6,7 @@ import {
   ConnectedSocket,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
-import { UseGuards } from '@nestjs/common';
+import { forwardRef, Inject, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { TicketsService } from '../tickets/tickets.service'; // Importe o serviço
 
@@ -15,8 +15,11 @@ export class CommentGateway {
   @WebSocketServer()
   server: Server;
 
-  constructor(private readonly ticketsService: TicketsService) {} // Injetar o serviço
-
+  //constructor(private readonly ticketsService: TicketsService) {} // Injetar o serviço
+  constructor(
+    @Inject(forwardRef(() => TicketsService))
+    private readonly ticketsService: TicketsService,
+  ) {}
   //@UseGuards(AuthGuard('jwt'))
   @SubscribeMessage('addComment')
   async handleAddComment(
@@ -43,5 +46,29 @@ export class CommentGateway {
     // Emite o comentário para todos os clientes
     this.server.emit('newComment', comment);
     return comment;
+  }
+
+  @SubscribeMessage('listTickets')
+  async handleListTickets(
+    @MessageBody() data: { token?: string },
+    @ConnectedSocket() client: Socket,
+  ) {
+    try {
+      let tickets;
+      if (data.token) {
+        // Listar tickets específicos do usuário (se um token for fornecido)
+        tickets = await this.ticketsService.findAllByUser(data.token);
+      } else {
+        // Listar todos os tickets (se nenhum token for fornecido)
+        tickets = await this.ticketsService.findAll();
+      }
+      // Emitir os tickets para o cliente que solicitou
+      client.emit('ticketsList', tickets);
+    } catch (error) {
+      client.emit('error', {
+        message: 'Erro ao listar tickets',
+        error: error.message,
+      });
+    }
   }
 }

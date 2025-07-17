@@ -23,8 +23,26 @@ export class TicketsController {
 
   @UseGuards(AuthGuard('jwt'))
   @Post()
-  create(@Body() createTicketDto: CreateTicketDto) {
-    return this.ticketsService.create(createTicketDto);
+  create(@Body() createTicketDto: CreateTicketDto, @Req() req) {
+    const authHeader = req.headers.authorization;
+    console.log(authHeader, 'authHeaderauthHeaderauthHeader');
+    let token: string;
+
+    if (authHeader) {
+      const tokenParts = authHeader.split(' ');
+      if (tokenParts.length !== 2 || tokenParts[0] !== 'Bearer') {
+        throw new UnauthorizedException('Formato do token inválido');
+      }
+      token = tokenParts[1];
+    } else {
+      // Verifica o cookie 'token'
+      token = req.cookies?.token;
+      if (!token) {
+        throw new UnauthorizedException('Token de autenticação não fornecido');
+      }
+    }
+    console.log(token, '*******************');
+    return this.ticketsService.create(createTicketDto, token);
   }
 
   @UseGuards(AuthGuard('jwt'))
@@ -33,7 +51,6 @@ export class TicketsController {
     return this.ticketsService.findAll();
   }
 
-  
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.ticketsService.findOne(id);
@@ -89,7 +106,7 @@ export class TicketsController {
   @UseGuards(AuthGuard('jwt'))
   async getMyTickets(@Req() req) {
     const authHeader = req.headers.authorization;
-    console.log(authHeader, "authHeaderauthHeaderauthHeader")
+    console.log(authHeader, 'authHeaderauthHeaderauthHeader');
     let token: string;
 
     if (authHeader) {
@@ -105,7 +122,7 @@ export class TicketsController {
         throw new UnauthorizedException('Token de autenticação não fornecido');
       }
     }
-    console.log(token, "*******************")
+    console.log(token, '*******************');
 
     return this.ticketsService.findAllByUser(token);
   }

@@ -8,6 +8,7 @@ import { CommentGateway } from 'src/websocket/comment.gateway';
 import { TicketsController } from './tickets.controller';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { AuthModule } from 'src/auth/auth.module';
+import { WebSocketModule } from 'src/websocket/websocket.module';
 
 //export const TICKETS_SERVICE = 'TICKETS_SERVICE';
 
@@ -20,6 +21,7 @@ import { AuthModule } from 'src/auth/auth.module';
       secret: 'sercreto', // 
       signOptions: { expiresIn: '60m' }, // Mesmo tempo de expiração
     }),
+    forwardRef(() => WebSocketModule),
   ],
   providers: [TicketsService, PrismaService, TicketsRepository],
   exports: [TicketsService, TicketsRepository],
