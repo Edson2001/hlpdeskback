@@ -77,8 +77,7 @@ export class PaymentService {
     }
   }
 
-  // ... outros métodos existentes (como generatePayment) ...
-
+  
   private generateInvoiceEmail(
     organization: Organization,
     plan: Plan,
@@ -149,9 +148,9 @@ export class PaymentService {
   ): Promise<{ status: string; message: string }> {
     console.log('entrou na validação', '***************');
     const { status, signature, identifier, ...rest } = data;
-    console.log(data, '##########');
+    
 
-    // Valida a assinatura (código anterior)
+    
     const secret =
       process.env.PAGAMENTO_AO_SECRET_KEY ||
       'test_1yuvu1pg516yltu0cnrwv7agv8r5ypphnbt85gpbg9q13jmh6i2';
@@ -162,7 +161,7 @@ export class PaymentService {
       .toUpperCase();
 
     if (status === 'success' && signature === mySignature) {
-      // Busca o pagamento pelo paymentReference (identifier)
+       
       const payment = await this.prisma.payment.findUnique({
         where: { paymentReference: identifier },
         include: { plan: true, organization: true },
@@ -172,35 +171,34 @@ export class PaymentService {
         throw new Error('Pagamento não encontrado.');
       }
 
-      // Atualiza o status do pagamento para "completed"
+     
       await this.prisma.payment.update({
         where: { id: payment.id },
         data: { status: 'completed' },
       });
 
-      // Cria a associação OrganizationPlan
+      
       const plan = await this.prisma.plan.findUnique({
         where: { id: payment.planId },
       });
 
       if (!plan) throw new Error('Plano não encontrado');
-
-      // Calcula expiresAt com base em durationMonths
+ 
       const expiresAt = new Date();
       expiresAt.setMonth(expiresAt.getMonth() + plan.durationMonths);
 
-      // 1. Desativa todos os OrganizationPlan ativos da organização
+      
       await this.prisma.organizationPlan.updateMany({
         where: {
           organizationId: payment.organizationId,
-          isActive: true, // Apenas desativar os ativos
+          isActive: true,  
         },
         data: {
           isActive: false,
         },
       });
 
-      // 2. Cria e ativa o novo OrganizationPlan
+      
       await this.prisma.organizationPlan.create({
         data: {
           organizationId: payment.organizationId,
@@ -209,20 +207,17 @@ export class PaymentService {
           expiresAt: new Date(
             new Date().setMonth(new Date().getMonth() + plan.durationMonths),
           ),
-          isActive: true, // Ativa o novo plano
+          isActive: true,  
           paymentId: payment.id,
         },
       });
 
-      // Enviar e-mail com a fatura
+      
       const organization = await this.prisma.organization.findUnique({
         where: { id: payment.organizationId },
       });
-      /* 
-      const plan = await this.prisma.plan.findUnique({
-        where: { id: payment.planId },
-      }); */
-      console.log(organization, plan, 'plammmmmmmmmmmmmmmm');
+      
+       
       if (organization && plan) {
         const invoiceHtml = this.generateInvoiceEmail(
           organization,
@@ -238,7 +233,7 @@ export class PaymentService {
 
       return { status: 'success', message: 'Plano ativado e fatura enviada.' };
     } else {
-      // Atualiza o status para "failed" se a validação falhar
+      
       await this.prisma.payment.updateMany({
         where: { paymentReference: identifier },
         data: { status: 'failed' },
