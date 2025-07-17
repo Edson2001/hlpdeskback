@@ -140,7 +140,7 @@ model Comment {
   ticket    Ticket   @relation(fields: [ticketId], references: [id])
   authorId  String?
   author    User?    @relation(fields: [authorId], references: [id])
-
+  isImage Boolean?
   externalName  String?
   externalEmail String?
 }

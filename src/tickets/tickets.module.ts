@@ -9,6 +9,8 @@ import { TicketsController } from './tickets.controller';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { AuthModule } from 'src/auth/auth.module';
 import { WebSocketModule } from 'src/websocket/websocket.module';
+import { R2Service } from 'src/utils/r2.service';
+
 
 //export const TICKETS_SERVICE = 'TICKETS_SERVICE';
 
@@ -18,12 +20,12 @@ import { WebSocketModule } from 'src/websocket/websocket.module';
     EmailModule,
     forwardRef(() => AuthModule),
     JwtModule.register({
-      secret: 'sercreto', // 
+      secret: 'sercreto', //
       signOptions: { expiresIn: '60m' }, // Mesmo tempo de expiração
     }),
     forwardRef(() => WebSocketModule),
   ],
-  providers: [TicketsService, PrismaService, TicketsRepository],
+  providers: [TicketsService, PrismaService, TicketsRepository, R2Service],
   exports: [TicketsService, TicketsRepository],
   controllers: [TicketsController],
 })

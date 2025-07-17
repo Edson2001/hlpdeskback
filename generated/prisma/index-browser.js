@@ -212,6 +212,7 @@ exports.Prisma.CommentScalarFieldEnum = {
   createdAt: 'createdAt',
   ticketId: 'ticketId',
   authorId: 'authorId',
+  isImage: 'isImage',
   externalName: 'externalName',
   externalEmail: 'externalEmail'
 };

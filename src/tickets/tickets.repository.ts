@@ -51,6 +51,7 @@ export class TicketsRepository {
     authorId?: string,
     externalName?: string,
     externalEmail?: string,
+    isImage?: boolean
   ) {
     console.log(content,
       ticketId,
@@ -64,6 +65,7 @@ export class TicketsRepository {
         authorId,
         externalName,
         externalEmail,
+        isImage
       },
       include: {
         author: true,
