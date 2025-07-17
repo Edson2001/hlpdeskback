@@ -18,12 +18,11 @@ export class TicketsService {
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
     private readonly prisma: PrismaService, // Nome consistente
+    private readonly commentGateway: CommentGateway, // Add this line
   ) {}
 
-  async create(createTicketDto: CreateTicketDto) {
-    
-    const user = await this.usersService.findOne(createTicketDto.createdById)
-
+  async create(createTicketDto: CreateTicketDto, token: string) {
+    const user = await this.usersService.findOne(createTicketDto.createdById);
 
     const ticketData = {
       title: createTicketDto.title,
@@ -32,9 +31,8 @@ export class TicketsService {
       status: 'OPEN',
       createdById: createTicketDto.createdById,
       slaDeadline: getSLADate(createTicketDto.priority),
-      organizationId: user?.organizationId as any
+      organizationId: user?.organizationId as any,
     };
-
 
     const ticket = await this.ticketsRepository.create(ticketData);
 
@@ -89,12 +87,13 @@ export class TicketsService {
   </body>
   </html>
 `;
-
+      
       await this.emailService.sendEmail(
         creator.email ?? ticket?.externalEmail,
         'Ticket Criado',
         emailHtml,
       );
+      this.commentGateway.server.emit('newExternalTicket', { ticket, token });
     }
 
     // Emitir evento WebSocket para notificar sobre o novo ticket
@@ -222,6 +221,12 @@ export class TicketsService {
 </html>
     `;
 
+    console.log(
+      '******************************************----------------socket----------------------',
+    );
+    // Emitir evento WebSocket para atualizar a UI de todos os clientes
+    this.commentGateway.server.emit('newExternalTicket', { ticket, token });
+
     await this.emailService.sendEmail(dto.email, 'Ticket Criado', htmlFile);
 
     return { message: 'Ticket criado com sucesso' };
@@ -256,16 +261,15 @@ export class TicketsService {
   }
 
   async findAllByUser(token: string) {
-    
     const payload = this.jwtService.verify(token);
     const user = await this.usersService.findOneByEmail(payload.email);
     const userId = user?.id;
     const userRole = user?.role;
-    
-    console.log(payload, "payload")
+
+    console.log(payload, 'payload');
     const userOrganizationId = user?.organizationId; // Assumindo que o usuário tem um campo organizationId
-    
-    console.log(userOrganizationId, "userOrganizationId")
+
+    console.log(userOrganizationId, 'userOrganizationId');
 
     if (!userId || !userRole) {
       throw new Error('Dados do usuário não encontrados no token');
