@@ -3,12 +3,15 @@ import { PrismaService } from '../prisma.service';
 
 import axios from 'axios';
 import * as crypto from 'crypto';
+import { EmailService } from 'src/utils/email.service';
+import { Organization, Payment, Plan } from 'generated/prisma';
 
 @Injectable()
 export class PaymentService {
-  constructor(private prisma: PrismaService) {}
-
-  
+  constructor(
+    private prisma: PrismaService,
+    private emailService: EmailService,
+  ) {}
 
   async generatePayment(planId: string, customerData: any) {
     const plan = await this.prisma.plan.findUnique({ where: { id: planId } });
@@ -32,7 +35,7 @@ export class PaymentService {
     );
 
     const parameters = {
-      identifier: payment.paymentReference, // Usa a paymentReference como identifier
+      identifier: payment.paymentReference,
       currency: 'kz',
       amount: plan.monthlyPrice,
       gateway_methods: ['MulticaixaExpress'],
@@ -75,6 +78,71 @@ export class PaymentService {
   }
 
   // ... outros métodos existentes (como generatePayment) ...
+
+  private generateInvoiceEmail(
+    organization: Organization,
+    plan: Plan,
+    payment: Payment,
+  ): string {
+    return `
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fatura do Plano</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .invoice-details { margin-bottom: 20px; }
+        .invoice-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        .invoice-table th, .invoice-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        .invoice-table th { background-color: #f2f2f2; }
+        .total { font-weight: bold; text-align: right; }
+        .footer { margin-top: 30px; font-size: 0.9em; color: #666; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Fatura do Plano ${plan.title}</h2>
+            <p>Referência: ${payment.paymentReference}</p>
+        </div>
+        
+        <div class="invoice-details">
+            <p><strong>Organização:</strong> ${organization.name}</p>
+            <p><strong>Data de Pagamento:</strong> ${new Date().toLocaleDateString('pt-BR')}</p>
+        </div>
+        
+        <table class="invoice-table">
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Assinatura do Plano ${plan.title} (${plan.durationMonths} meses)</td>
+                    <td>${plan.monthlyPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'AOA' })}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="total">
+            <p>Total: ${plan.monthlyPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'AOA' })}</p>
+        </div>
+        
+        <div class="footer">
+            <p>Agradecemos pela sua preferência!</p>
+            <p>Em caso de dúvidas, entre em contato com nosso suporte.</p>
+        </div>
+    </div>
+</body>
+</html>
+  `;
+  }
 
   async validateCallback(
     data: any,
@@ -146,10 +214,29 @@ export class PaymentService {
         },
       });
 
-      return {
-        status: 'success',
-        message: 'Plano ativado e planos anteriores desativados.',
-      };
+      // Enviar e-mail com a fatura
+      const organization = await this.prisma.organization.findUnique({
+        where: { id: payment.organizationId },
+      });
+      /* 
+      const plan = await this.prisma.plan.findUnique({
+        where: { id: payment.planId },
+      }); */
+      console.log(organization, plan, 'plammmmmmmmmmmmmmmm');
+      if (organization && plan) {
+        const invoiceHtml = this.generateInvoiceEmail(
+          organization,
+          plan,
+          payment,
+        );
+        await this.emailService.sendEmail(
+          organization.email,
+          `Fatura do Plano ${plan.title}`,
+          invoiceHtml,
+        );
+      }
+
+      return { status: 'success', message: 'Plano ativado e fatura enviada.' };
     } else {
       // Atualiza o status para "failed" se a validação falhar
       await this.prisma.payment.updateMany({

@@ -13129,7 +13129,6 @@ export namespace Prisma {
   export type OrganizationPlanWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     paymentId?: string
-    organizationId_planId?: OrganizationPlanOrganizationIdPlanIdCompoundUniqueInput
     AND?: OrganizationPlanWhereInput | OrganizationPlanWhereInput[]
     OR?: OrganizationPlanWhereInput[]
     NOT?: OrganizationPlanWhereInput | OrganizationPlanWhereInput[]
@@ -13141,7 +13140,7 @@ export namespace Prisma {
     organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
     plan?: XOR<PlanScalarRelationFilter, PlanWhereInput>
     payment?: XOR<PaymentNullableScalarRelationFilter, PaymentWhereInput> | null
-  }, "id" | "paymentId" | "organizationId_planId">
+  }, "id" | "paymentId">
 
   export type OrganizationPlanOrderByWithAggregationInput = {
     id?: SortOrder
@@ -14708,11 +14707,6 @@ export namespace Prisma {
   export type PaymentNullableScalarRelationFilter = {
     is?: PaymentWhereInput | null
     isNot?: PaymentWhereInput | null
-  }
-
-  export type OrganizationPlanOrganizationIdPlanIdCompoundUniqueInput = {
-    organizationId: string
-    planId: string
   }
 
   export type OrganizationPlanCountOrderByAggregateInput = {
