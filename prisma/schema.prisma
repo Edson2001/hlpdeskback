@@ -116,6 +116,7 @@ model Ticket {
   slaDeadline DateTime
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
+  source      TicketSource?   @default(INTERNAL) // Novo campo para rastrear a origem do ticket
 
   createdById String?
   createdBy   User?   @relation("CreatedTickets", fields: [createdById], references: [id])
@@ -133,14 +134,14 @@ model Ticket {
 }
 
 model Comment {
-  id        String   @id @default(uuid())
-  content   String
-  createdAt DateTime @default(now())
-  ticketId  String
-  ticket    Ticket   @relation(fields: [ticketId], references: [id])
-  authorId  String?
-  author    User?    @relation(fields: [authorId], references: [id])
-  isImage Boolean?
+  id            String   @id @default(uuid())
+  content       String
+  createdAt     DateTime @default(now())
+  ticketId      String
+  ticket        Ticket   @relation(fields: [ticketId], references: [id])
+  authorId      String?
+  author        User?    @relation(fields: [authorId], references: [id])
+  isImage       Boolean?
   externalName  String?
   externalEmail String?
 }
@@ -177,4 +178,13 @@ enum TicketPriority {
   MEDIUM
   HIGH
   URGENT
+}
+
+// Adicione este enum para definir as origens possíveis do ticket
+enum TicketSource {
+  INTERNAL // Criado internamente (ex: painel administrativo)
+  WIDGET // Criado via widget
+  API // Criado via API
+  EMAIL // Criado via e-mail (ex: integração com IMAP)
+  OTHER // Outras origens
 }

@@ -90,6 +90,17 @@ export const TicketPriority: {
 
 export type TicketPriority = (typeof TicketPriority)[keyof typeof TicketPriority]
 
+
+export const TicketSource: {
+  INTERNAL: 'INTERNAL',
+  WIDGET: 'WIDGET',
+  API: 'API',
+  EMAIL: 'EMAIL',
+  OTHER: 'OTHER'
+};
+
+export type TicketSource = (typeof TicketSource)[keyof typeof TicketSource]
+
 }
 
 export type Role = $Enums.Role
@@ -103,6 +114,10 @@ export const TicketStatus: typeof $Enums.TicketStatus
 export type TicketPriority = $Enums.TicketPriority
 
 export const TicketPriority: typeof $Enums.TicketPriority
+
+export type TicketSource = $Enums.TicketSource
+
+export const TicketSource: typeof $Enums.TicketSource
 
 /**
  * ##  Prisma Client ʲˢ
@@ -8906,6 +8921,7 @@ export namespace Prisma {
     slaDeadline: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    source: $Enums.TicketSource | null
     createdById: string | null
     assignedToId: string | null
     externalName: string | null
@@ -8922,6 +8938,7 @@ export namespace Prisma {
     slaDeadline: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    source: $Enums.TicketSource | null
     createdById: string | null
     assignedToId: string | null
     externalName: string | null
@@ -8938,6 +8955,7 @@ export namespace Prisma {
     slaDeadline: number
     createdAt: number
     updatedAt: number
+    source: number
     createdById: number
     assignedToId: number
     externalName: number
@@ -8956,6 +8974,7 @@ export namespace Prisma {
     slaDeadline?: true
     createdAt?: true
     updatedAt?: true
+    source?: true
     createdById?: true
     assignedToId?: true
     externalName?: true
@@ -8972,6 +8991,7 @@ export namespace Prisma {
     slaDeadline?: true
     createdAt?: true
     updatedAt?: true
+    source?: true
     createdById?: true
     assignedToId?: true
     externalName?: true
@@ -8988,6 +9008,7 @@ export namespace Prisma {
     slaDeadline?: true
     createdAt?: true
     updatedAt?: true
+    source?: true
     createdById?: true
     assignedToId?: true
     externalName?: true
@@ -9077,6 +9098,7 @@ export namespace Prisma {
     slaDeadline: Date
     createdAt: Date
     updatedAt: Date
+    source: $Enums.TicketSource | null
     createdById: string | null
     assignedToId: string | null
     externalName: string | null
@@ -9110,6 +9132,7 @@ export namespace Prisma {
     slaDeadline?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    source?: boolean
     createdById?: boolean
     assignedToId?: boolean
     externalName?: boolean
@@ -9132,6 +9155,7 @@ export namespace Prisma {
     slaDeadline?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    source?: boolean
     createdById?: boolean
     assignedToId?: boolean
     externalName?: boolean
@@ -9151,6 +9175,7 @@ export namespace Prisma {
     slaDeadline?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    source?: boolean
     createdById?: boolean
     assignedToId?: boolean
     externalName?: boolean
@@ -9170,6 +9195,7 @@ export namespace Prisma {
     slaDeadline?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    source?: boolean
     createdById?: boolean
     assignedToId?: boolean
     externalName?: boolean
@@ -9177,7 +9203,7 @@ export namespace Prisma {
     organizationId?: boolean
   }
 
-  export type TicketOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "status" | "priority" | "slaDeadline" | "createdAt" | "updatedAt" | "createdById" | "assignedToId" | "externalName" | "externalEmail" | "organizationId", ExtArgs["result"]["ticket"]>
+  export type TicketOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "status" | "priority" | "slaDeadline" | "createdAt" | "updatedAt" | "source" | "createdById" | "assignedToId" | "externalName" | "externalEmail" | "organizationId", ExtArgs["result"]["ticket"]>
   export type TicketInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     createdBy?: boolean | Ticket$createdByArgs<ExtArgs>
     assignedTo?: boolean | Ticket$assignedToArgs<ExtArgs>
@@ -9215,6 +9241,7 @@ export namespace Prisma {
       slaDeadline: Date
       createdAt: Date
       updatedAt: Date
+      source: $Enums.TicketSource | null
       createdById: string | null
       assignedToId: string | null
       externalName: string | null
@@ -9656,6 +9683,7 @@ export namespace Prisma {
     readonly slaDeadline: FieldRef<"Ticket", 'DateTime'>
     readonly createdAt: FieldRef<"Ticket", 'DateTime'>
     readonly updatedAt: FieldRef<"Ticket", 'DateTime'>
+    readonly source: FieldRef<"Ticket", 'TicketSource'>
     readonly createdById: FieldRef<"Ticket", 'String'>
     readonly assignedToId: FieldRef<"Ticket", 'String'>
     readonly externalName: FieldRef<"Ticket", 'String'>
@@ -12530,6 +12558,7 @@ export namespace Prisma {
     slaDeadline: 'slaDeadline',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
+    source: 'source',
     createdById: 'createdById',
     assignedToId: 'assignedToId',
     externalName: 'externalName',
@@ -12698,6 +12727,20 @@ export namespace Prisma {
    * Reference to a field of type 'TicketPriority[]'
    */
   export type ListEnumTicketPriorityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TicketPriority[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'TicketSource'
+   */
+  export type EnumTicketSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TicketSource'>
+    
+
+
+  /**
+   * Reference to a field of type 'TicketSource[]'
+   */
+  export type ListEnumTicketSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TicketSource[]'>
     
   /**
    * Deep Input Types
@@ -13194,6 +13237,7 @@ export namespace Prisma {
     slaDeadline?: DateTimeFilter<"Ticket"> | Date | string
     createdAt?: DateTimeFilter<"Ticket"> | Date | string
     updatedAt?: DateTimeFilter<"Ticket"> | Date | string
+    source?: EnumTicketSourceNullableFilter<"Ticket"> | $Enums.TicketSource | null
     createdById?: StringNullableFilter<"Ticket"> | string | null
     assignedToId?: StringNullableFilter<"Ticket"> | string | null
     externalName?: StringNullableFilter<"Ticket"> | string | null
@@ -13215,6 +13259,7 @@ export namespace Prisma {
     slaDeadline?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    source?: SortOrderInput | SortOrder
     createdById?: SortOrderInput | SortOrder
     assignedToId?: SortOrderInput | SortOrder
     externalName?: SortOrderInput | SortOrder
@@ -13239,6 +13284,7 @@ export namespace Prisma {
     slaDeadline?: DateTimeFilter<"Ticket"> | Date | string
     createdAt?: DateTimeFilter<"Ticket"> | Date | string
     updatedAt?: DateTimeFilter<"Ticket"> | Date | string
+    source?: EnumTicketSourceNullableFilter<"Ticket"> | $Enums.TicketSource | null
     createdById?: StringNullableFilter<"Ticket"> | string | null
     assignedToId?: StringNullableFilter<"Ticket"> | string | null
     externalName?: StringNullableFilter<"Ticket"> | string | null
@@ -13260,6 +13306,7 @@ export namespace Prisma {
     slaDeadline?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    source?: SortOrderInput | SortOrder
     createdById?: SortOrderInput | SortOrder
     assignedToId?: SortOrderInput | SortOrder
     externalName?: SortOrderInput | SortOrder
@@ -13282,6 +13329,7 @@ export namespace Prisma {
     slaDeadline?: DateTimeWithAggregatesFilter<"Ticket"> | Date | string
     createdAt?: DateTimeWithAggregatesFilter<"Ticket"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Ticket"> | Date | string
+    source?: EnumTicketSourceNullableWithAggregatesFilter<"Ticket"> | $Enums.TicketSource | null
     createdById?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
     assignedToId?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
     externalName?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
@@ -13969,6 +14017,7 @@ export namespace Prisma {
     slaDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    source?: $Enums.TicketSource | null
     externalName?: string | null
     externalEmail?: string | null
     createdBy?: UserCreateNestedOneWithoutTicketsInput
@@ -13987,6 +14036,7 @@ export namespace Prisma {
     slaDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    source?: $Enums.TicketSource | null
     createdById?: string | null
     assignedToId?: string | null
     externalName?: string | null
@@ -14005,6 +14055,7 @@ export namespace Prisma {
     slaDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    source?: NullableEnumTicketSourceFieldUpdateOperationsInput | $Enums.TicketSource | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
     externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
     createdBy?: UserUpdateOneWithoutTicketsNestedInput
@@ -14023,6 +14074,7 @@ export namespace Prisma {
     slaDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    source?: NullableEnumTicketSourceFieldUpdateOperationsInput | $Enums.TicketSource | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14041,6 +14093,7 @@ export namespace Prisma {
     slaDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    source?: $Enums.TicketSource | null
     createdById?: string | null
     assignedToId?: string | null
     externalName?: string | null
@@ -14057,6 +14110,7 @@ export namespace Prisma {
     slaDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    source?: NullableEnumTicketSourceFieldUpdateOperationsInput | $Enums.TicketSource | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
     externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -14070,6 +14124,7 @@ export namespace Prisma {
     slaDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    source?: NullableEnumTicketSourceFieldUpdateOperationsInput | $Enums.TicketSource | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14779,6 +14834,13 @@ export namespace Prisma {
     not?: NestedEnumTicketPriorityFilter<$PrismaModel> | $Enums.TicketPriority
   }
 
+  export type EnumTicketSourceNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.TicketSource | EnumTicketSourceFieldRefInput<$PrismaModel> | null
+    in?: $Enums.TicketSource[] | ListEnumTicketSourceFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.TicketSource[] | ListEnumTicketSourceFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumTicketSourceNullableFilter<$PrismaModel> | $Enums.TicketSource | null
+  }
+
   export type UserNullableScalarRelationFilter = {
     is?: UserWhereInput | null
     isNot?: UserWhereInput | null
@@ -14803,6 +14865,7 @@ export namespace Prisma {
     slaDeadline?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    source?: SortOrder
     createdById?: SortOrder
     assignedToId?: SortOrder
     externalName?: SortOrder
@@ -14819,6 +14882,7 @@ export namespace Prisma {
     slaDeadline?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    source?: SortOrder
     createdById?: SortOrder
     assignedToId?: SortOrder
     externalName?: SortOrder
@@ -14835,6 +14899,7 @@ export namespace Prisma {
     slaDeadline?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    source?: SortOrder
     createdById?: SortOrder
     assignedToId?: SortOrder
     externalName?: SortOrder
@@ -14860,6 +14925,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTicketPriorityFilter<$PrismaModel>
     _max?: NestedEnumTicketPriorityFilter<$PrismaModel>
+  }
+
+  export type EnumTicketSourceNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TicketSource | EnumTicketSourceFieldRefInput<$PrismaModel> | null
+    in?: $Enums.TicketSource[] | ListEnumTicketSourceFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.TicketSource[] | ListEnumTicketSourceFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumTicketSourceNullableWithAggregatesFilter<$PrismaModel> | $Enums.TicketSource | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumTicketSourceNullableFilter<$PrismaModel>
+    _max?: NestedEnumTicketSourceNullableFilter<$PrismaModel>
   }
 
   export type CommentCountOrderByAggregateInput = {
@@ -15603,6 +15678,10 @@ export namespace Prisma {
     set?: $Enums.TicketPriority
   }
 
+  export type NullableEnumTicketSourceFieldUpdateOperationsInput = {
+    set?: $Enums.TicketSource | null
+  }
+
   export type UserUpdateOneWithoutTicketsNestedInput = {
     create?: XOR<UserCreateWithoutTicketsInput, UserUncheckedCreateWithoutTicketsInput>
     connectOrCreate?: UserCreateOrConnectWithoutTicketsInput
@@ -16013,6 +16092,13 @@ export namespace Prisma {
     not?: NestedEnumTicketPriorityFilter<$PrismaModel> | $Enums.TicketPriority
   }
 
+  export type NestedEnumTicketSourceNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.TicketSource | EnumTicketSourceFieldRefInput<$PrismaModel> | null
+    in?: $Enums.TicketSource[] | ListEnumTicketSourceFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.TicketSource[] | ListEnumTicketSourceFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumTicketSourceNullableFilter<$PrismaModel> | $Enums.TicketSource | null
+  }
+
   export type NestedEnumTicketStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.TicketStatus | EnumTicketStatusFieldRefInput<$PrismaModel>
     in?: $Enums.TicketStatus[] | ListEnumTicketStatusFieldRefInput<$PrismaModel>
@@ -16031,6 +16117,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTicketPriorityFilter<$PrismaModel>
     _max?: NestedEnumTicketPriorityFilter<$PrismaModel>
+  }
+
+  export type NestedEnumTicketSourceNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TicketSource | EnumTicketSourceFieldRefInput<$PrismaModel> | null
+    in?: $Enums.TicketSource[] | ListEnumTicketSourceFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.TicketSource[] | ListEnumTicketSourceFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumTicketSourceNullableWithAggregatesFilter<$PrismaModel> | $Enums.TicketSource | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumTicketSourceNullableFilter<$PrismaModel>
+    _max?: NestedEnumTicketSourceNullableFilter<$PrismaModel>
   }
 
   export type UserCreateWithoutOrganizationInput = {
@@ -16120,6 +16216,7 @@ export namespace Prisma {
     slaDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    source?: $Enums.TicketSource | null
     externalName?: string | null
     externalEmail?: string | null
     createdBy?: UserCreateNestedOneWithoutTicketsInput
@@ -16137,6 +16234,7 @@ export namespace Prisma {
     slaDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    source?: $Enums.TicketSource | null
     createdById?: string | null
     assignedToId?: string | null
     externalName?: string | null
@@ -16343,6 +16441,7 @@ export namespace Prisma {
     slaDeadline?: DateTimeFilter<"Ticket"> | Date | string
     createdAt?: DateTimeFilter<"Ticket"> | Date | string
     updatedAt?: DateTimeFilter<"Ticket"> | Date | string
+    source?: EnumTicketSourceNullableFilter<"Ticket"> | $Enums.TicketSource | null
     createdById?: StringNullableFilter<"Ticket"> | string | null
     assignedToId?: StringNullableFilter<"Ticket"> | string | null
     externalName?: StringNullableFilter<"Ticket"> | string | null
@@ -16531,6 +16630,7 @@ export namespace Prisma {
     slaDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    source?: $Enums.TicketSource | null
     externalName?: string | null
     externalEmail?: string | null
     assignedTo?: UserCreateNestedOneWithoutAssignedInput
@@ -16548,6 +16648,7 @@ export namespace Prisma {
     slaDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    source?: $Enums.TicketSource | null
     assignedToId?: string | null
     externalName?: string | null
     externalEmail?: string | null
@@ -16575,6 +16676,7 @@ export namespace Prisma {
     slaDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    source?: $Enums.TicketSource | null
     externalName?: string | null
     externalEmail?: string | null
     createdBy?: UserCreateNestedOneWithoutTicketsInput
@@ -16592,6 +16694,7 @@ export namespace Prisma {
     slaDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    source?: $Enums.TicketSource | null
     createdById?: string | null
     externalName?: string | null
     externalEmail?: string | null
@@ -16791,6 +16894,7 @@ export namespace Prisma {
     slaDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    source?: $Enums.TicketSource | null
     externalName?: string | null
     externalEmail?: string | null
     createdBy?: UserCreateNestedOneWithoutTicketsInput
@@ -16808,6 +16912,7 @@ export namespace Prisma {
     slaDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    source?: $Enums.TicketSource | null
     createdById?: string | null
     assignedToId?: string | null
     externalName?: string | null
@@ -16841,6 +16946,7 @@ export namespace Prisma {
     slaDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    source?: NullableEnumTicketSourceFieldUpdateOperationsInput | $Enums.TicketSource | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
     externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
     createdBy?: UserUpdateOneWithoutTicketsNestedInput
@@ -16858,6 +16964,7 @@ export namespace Prisma {
     slaDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    source?: NullableEnumTicketSourceFieldUpdateOperationsInput | $Enums.TicketSource | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17570,6 +17677,7 @@ export namespace Prisma {
     slaDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    source?: $Enums.TicketSource | null
     externalName?: string | null
     externalEmail?: string | null
     createdBy?: UserCreateNestedOneWithoutTicketsInput
@@ -17587,6 +17695,7 @@ export namespace Prisma {
     slaDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    source?: $Enums.TicketSource | null
     createdById?: string | null
     assignedToId?: string | null
     externalName?: string | null
@@ -17649,6 +17758,7 @@ export namespace Prisma {
     slaDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    source?: NullableEnumTicketSourceFieldUpdateOperationsInput | $Enums.TicketSource | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
     externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
     createdBy?: UserUpdateOneWithoutTicketsNestedInput
@@ -17666,6 +17776,7 @@ export namespace Prisma {
     slaDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    source?: NullableEnumTicketSourceFieldUpdateOperationsInput | $Enums.TicketSource | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17958,6 +18069,7 @@ export namespace Prisma {
     slaDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    source?: $Enums.TicketSource | null
     createdById?: string | null
     assignedToId?: string | null
     externalName?: string | null
@@ -18087,6 +18199,7 @@ export namespace Prisma {
     slaDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    source?: NullableEnumTicketSourceFieldUpdateOperationsInput | $Enums.TicketSource | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
     externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
     createdBy?: UserUpdateOneWithoutTicketsNestedInput
@@ -18104,6 +18217,7 @@ export namespace Prisma {
     slaDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    source?: NullableEnumTicketSourceFieldUpdateOperationsInput | $Enums.TicketSource | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18121,6 +18235,7 @@ export namespace Prisma {
     slaDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    source?: NullableEnumTicketSourceFieldUpdateOperationsInput | $Enums.TicketSource | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18234,6 +18349,7 @@ export namespace Prisma {
     slaDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    source?: $Enums.TicketSource | null
     assignedToId?: string | null
     externalName?: string | null
     externalEmail?: string | null
@@ -18249,6 +18365,7 @@ export namespace Prisma {
     slaDeadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    source?: $Enums.TicketSource | null
     createdById?: string | null
     externalName?: string | null
     externalEmail?: string | null
@@ -18274,6 +18391,7 @@ export namespace Prisma {
     slaDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    source?: NullableEnumTicketSourceFieldUpdateOperationsInput | $Enums.TicketSource | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
     externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
     assignedTo?: UserUpdateOneWithoutAssignedNestedInput
@@ -18291,6 +18409,7 @@ export namespace Prisma {
     slaDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    source?: NullableEnumTicketSourceFieldUpdateOperationsInput | $Enums.TicketSource | null
     assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
     externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18308,6 +18427,7 @@ export namespace Prisma {
     slaDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    source?: NullableEnumTicketSourceFieldUpdateOperationsInput | $Enums.TicketSource | null
     assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
     externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18323,6 +18443,7 @@ export namespace Prisma {
     slaDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    source?: NullableEnumTicketSourceFieldUpdateOperationsInput | $Enums.TicketSource | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
     externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
     createdBy?: UserUpdateOneWithoutTicketsNestedInput
@@ -18340,6 +18461,7 @@ export namespace Prisma {
     slaDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    source?: NullableEnumTicketSourceFieldUpdateOperationsInput | $Enums.TicketSource | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
     externalEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18357,6 +18479,7 @@ export namespace Prisma {
     slaDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    source?: NullableEnumTicketSourceFieldUpdateOperationsInput | $Enums.TicketSource | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     externalName?: NullableStringFieldUpdateOperationsInput | string | null
     externalEmail?: NullableStringFieldUpdateOperationsInput | string | null

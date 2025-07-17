@@ -199,6 +199,7 @@ exports.Prisma.TicketScalarFieldEnum = {
   slaDeadline: 'slaDeadline',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  source: 'source',
   createdById: 'createdById',
   assignedToId: 'assignedToId',
   externalName: 'externalName',
@@ -258,6 +259,14 @@ exports.TicketPriority = exports.$Enums.TicketPriority = {
   MEDIUM: 'MEDIUM',
   HIGH: 'HIGH',
   URGENT: 'URGENT'
+};
+
+exports.TicketSource = exports.$Enums.TicketSource = {
+  INTERNAL: 'INTERNAL',
+  WIDGET: 'WIDGET',
+  API: 'API',
+  EMAIL: 'EMAIL',
+  OTHER: 'OTHER'
 };
 
 exports.Prisma.ModelName = {

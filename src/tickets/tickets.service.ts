@@ -221,9 +221,7 @@ export class TicketsService {
 </html>
     `;
 
-    console.log(
-      '******************************************----------------socket----------------------',
-    );
+    
     // Emitir evento WebSocket para atualizar a UI de todos os clientes
     this.commentGateway.server.emit('newExternalTicket', { ticket, token });
 

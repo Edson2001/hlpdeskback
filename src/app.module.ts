@@ -10,6 +10,7 @@ import { PrismaService } from './prisma.service';
 import { OrganizationsModule } from './organizations/organizations.module';
 import { PlansModule } from './plans/plans.module';
 import { PaymentsModule } from './payment/payments.module';
+import { ImapEmailModule } from './imap/imap.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { PaymentsModule } from './payment/payments.module';
     OrganizationsModule,
     PlansModule,
     PaymentsModule,
+    ImapEmailModule
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService, EmailService],
