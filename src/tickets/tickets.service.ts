@@ -10,6 +10,7 @@ import { randomBytes } from 'crypto';
 import { CreateExternalTicketDto } from './dto/CreateExternalTicketDto.dto';
 import { addDays } from 'date-fns';
 import { PrismaService } from 'src/prisma.service';
+import { TicketSource } from 'generated/prisma';
 @Injectable()
 export class TicketsService {
   constructor(
@@ -102,7 +103,11 @@ export class TicketsService {
     return ticket;
   }
 
-  async createExternalTicket(dto: CreateExternalTicketDto, orgSlug: string) {
+  async createExternalTicket(
+    dto: CreateExternalTicketDto,
+    orgSlug: string,
+    origin?: TicketSource,
+  ) {
     const org = await this.prisma.organization.findUnique({
       where: { slug: orgSlug },
     });
@@ -118,6 +123,7 @@ export class TicketsService {
         externalName: dto.name,
         externalEmail: dto.email,
         organizationId: org.id,
+        source: origin
       },
     });
 
@@ -221,15 +227,18 @@ export class TicketsService {
 </html>
     `;
 
-    console.log(
-      '******************************************----------------socket----------------------',
-    );
     // Emitir evento WebSocket para atualizar a UI de todos os clientes
     this.commentGateway.server.emit('newExternalTicket', { ticket, token });
 
-    await this.emailService.sendEmail(dto.email, 'Ticket Criado', htmlFile);
+    await this.emailService.sendEmail(
+      dto.email,
+      origin == 'EMAIL'
+        ? `[Ticket #${ticket.id}] Pedido recebido`
+        : 'Ticket Criado',
+      htmlFile,
+    );
 
-    return { message: 'Ticket criado com sucesso' };
+    return { message: 'Ticket criado com sucesso', id: ticket.id };
   }
 
   traduzirPrioridade(priority: 'LOW' | 'MEDIUM' | 'HIGH' | 'URGENT'): string {
@@ -532,7 +541,7 @@ export class TicketsService {
     authorId?: string,
     externalName?: string,
     externalEmail?: string,
-    isImage?: boolean
+    isImage?: boolean,
   ) {
     console.log(
       content,
@@ -541,16 +550,38 @@ export class TicketsService {
       externalName,
       externalEmail,
       isImage,
-      "////////////"
+      '////////////',
     );
-    return this.ticketsRepository.addComment(
+    const result = await this.ticketsRepository.addComment(
       ticketId,
       content,
       authorId,
       externalName,
       externalEmail,
-      isImage
+      isImage,
     );
+
+    const ticket = await this.ticketsRepository.findOne(ticketId);
+    /* {
+        to: ticket.externalEmail,
+        subject: `[Ticket #${ticket.id}] ${ticket.title}`,
+        body: this.buildReplyBody(ticket, content),
+      } */
+     console.log(ticket, "ticketticket")
+    if (ticket?.source === 'EMAIL' && ticket.externalEmail) {
+      await this.emailService.sendEmail(
+        String(ticket.externalEmail),
+        `[Ticket #${ticket.id}] ${ticket.title}`,
+        `
+        <p>Olá ${ticket.externalName || ticket.externalEmail},</p>
+        <p>${content}</p>
+        <hr>
+        <small>Você está respondendo ao ticket <strong>#${ticket.id}</strong>.</small><br>
+        <small>Para continuar a conversa, basta responder este e-mail.</small>
+      `
+      );
+    }
+    return result;
   }
 
   async findOneByToken(token: string) {

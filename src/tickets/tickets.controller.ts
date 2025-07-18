@@ -111,12 +111,15 @@ export class TicketsController {
 
   @Post('upload')
   @UseInterceptors(FileInterceptor('image'))
-  async uploadImage(@UploadedFile() file: Express.Multer.File) {
+  async uploadImage(
+    @UploadedFile() file: Express.Multer.File,
+    @Query('ticketId') ticketId: string,
+  ) {
     const uniqueKey = `${Date.now()}-${file.originalname}`;
     const fileBuffer = file.buffer;
 
     const imageUrl = await this.r2Service.uploadFile(
-      process.env.R2_BUCKET_NAME!,  
+      process.env.R2_BUCKET_NAME!,
       uniqueKey,
       fileBuffer,
     );

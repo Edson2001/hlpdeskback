@@ -199,6 +199,7 @@ exports.Prisma.TicketScalarFieldEnum = {
   slaDeadline: 'slaDeadline',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  source: 'source',
   createdById: 'createdById',
   assignedToId: 'assignedToId',
   externalName: 'externalName',
@@ -225,6 +226,21 @@ exports.Prisma.PaymentScalarFieldEnum = {
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MailServiceConfigScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  serviceType: 'serviceType',
+  host: 'host',
+  port: 'port',
+  user: 'user',
+  password: 'password',
+  tls: 'tls',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  organizationId: 'organizationId'
 };
 
 exports.Prisma.SortOrder = {
@@ -260,6 +276,14 @@ exports.TicketPriority = exports.$Enums.TicketPriority = {
   URGENT: 'URGENT'
 };
 
+exports.TicketSource = exports.$Enums.TicketSource = {
+  INTERNAL: 'INTERNAL',
+  WIDGET: 'WIDGET',
+  API: 'API',
+  EMAIL: 'EMAIL',
+  OTHER: 'OTHER'
+};
+
 exports.Prisma.ModelName = {
   Organization: 'Organization',
   WidgetConfig: 'WidgetConfig',
@@ -269,7 +293,8 @@ exports.Prisma.ModelName = {
   OrganizationPlan: 'OrganizationPlan',
   Ticket: 'Ticket',
   Comment: 'Comment',
-  Payment: 'Payment'
+  Payment: 'Payment',
+  MailServiceConfig: 'MailServiceConfig'
 };
 
 /**
