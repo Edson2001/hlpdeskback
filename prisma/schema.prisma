@@ -15,20 +15,21 @@ datasource db {
 }
 
 model Organization {
-  id               String             @id @default(uuid())
-  name             String
-  email            String
-  slug             String             @unique
-  phoneNumber      String
-  isActive         Boolean            @default(true)
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
-  users            User[]
-  plans            Plan[]
-  tickets          Ticket[] // Adicionado o campo de relação para Ticket
-  widgetConfig     WidgetConfig[]
-  OrganizationPlan OrganizationPlan[]
-  payments         Payment[]
+  id                 String              @id @default(uuid())
+  name               String
+  email              String
+  slug               String              @unique
+  phoneNumber        String
+  isActive           Boolean             @default(true)
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  users              User[]
+  plans              Plan[]
+  tickets            Ticket[] // Adicionado o campo de relação para Ticket
+  widgetConfig       WidgetConfig[]
+  OrganizationPlan   OrganizationPlan[]
+  payments           Payment[]
+  mailServiceConfigs MailServiceConfig[]
 }
 
 model WidgetConfig {
@@ -116,7 +117,7 @@ model Ticket {
   slaDeadline DateTime
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
-  source      TicketSource?   @default(INTERNAL) // Novo campo para rastrear a origem do ticket
+  source      TicketSource?  @default(INTERNAL) // Novo campo para rastrear a origem do ticket
 
   createdById String?
   createdBy   User?   @relation("CreatedTickets", fields: [createdById], references: [id])
@@ -159,6 +160,24 @@ model Payment {
 
   // Vincule ao OrganizationPlan (opcional)
   organizationPlan OrganizationPlan?
+}
+
+model MailServiceConfig {
+  id          String   @id @default(uuid())
+  name        String   @unique // Nome identificador da configuração (ex: "Hostinger IMAP")
+  serviceType String   @default("IMAP") // "IMAP" ou "SMTP"
+  host        String // Endereço do servidor (ex: "imap.hostinger.com")
+  port        Int // Porta (ex: 993 para IMAP)
+  user        String // Usuário (ex: "geral@piteu.ao")
+  password    String // Senha (ex: "Aleluia@123")
+  tls         Boolean  @default(true) // Usar TLS/SSL
+  isActive    Boolean  @default(true) // Configuração ativa ou não
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relação opcional com Organization, se necessário
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  organizationId String?
 }
 
 enum Role {

@@ -17,10 +17,8 @@ export class IMapEmailService implements OnModuleInit {
 
   private startListening() {
     this.imap = new Imap({
-      //user: 'geral@redeveloper.ao',
-      user: 'geral@piteu.ao',
-      //password: '1!MbzEw6aDcy', // Use senha de app se necessário
-      password: 'Aleluia@123',
+      user: 'geral@redeveloper.ao',
+      password: '1!MbzEw6aDcy',
       host: 'imap.hostinger.com',
       port: 993,
       tls: true,
@@ -74,27 +72,70 @@ export class IMapEmailService implements OnModuleInit {
               return;
             }
 
-            const from = parsed.from?.text || '';
+            const from = parsed.from?.value[0]?.address || '';
+            const name = parsed.from?.value[0]?.name || from;
             const subject = parsed.subject || '';
             const text = parsed.text || '';
 
-            if (from.includes('djiedson413@gmail.com')) {
-              this.logger.log(
-                `📩 Novo e-mail de ${from} | Assunto: ${subject}`,
+            // Verificar se o e-mail é do remetente permitido
+            if (from !== 'djiedson413@gmail.com') {
+              this.logger.debug(
+                `E-mail ignorado: remetente não permitido (${from})`,
               );
+              return;
+            }
 
-              this.ticketsService.createExternalTicket(
-                {
-                  description: text,
-                  email: from,
-                  name: from,
-                  priority: TicketPriority.MEDIUM,
-                  title: subject,
-                },
-                'geral',
+            if (!from.includes('@')) return;
+
+            // Buscar ID do ticket no assunto: ex: [Ticket #1234]
+            const ticketIdMatch = subject.match(/\[Ticket\s?#([a-f0-9-]+)]/i);
+            let ticket: any = null;
+
+            if (ticketIdMatch) {
+              const ticketId = ticketIdMatch[1];
+              ticket = await this.ticketsService.findOne(ticketId);
+            }
+            console.log(subject, 'subbbbbbbbbbbbb');
+            console.log(ticketIdMatch, 'ticketIdMatchticketIdMatch');
+
+            /*  if (!ticket) {
+              // fallback: buscar o ticket mais recente aberto por e-mail
+              ticket = await this.ticketsService.findLatestOpenTicketByEmail(from);
+            } */
+
+            if (ticket) {
+              await this.ticketsService.addComment(
+                ticket.id,
+                text,
+                undefined,
+                name,
+                from,
+                false,
+              );
+              this.logger.log(
+                `💬 Comentário adicionado ao ticket ${ticket.id}`,
               );
             } else {
-              this.logger.debug(`Ignorando e-mail de ${from}`);
+              const created = await this.ticketsService.createExternalTicket(
+                {
+                  title: subject,
+                  description: text,
+                  email: from,
+                  name,
+                  priority: TicketPriority.MEDIUM,
+                },
+                'geral',
+                'EMAIL',
+              );
+
+              this.logger.log(`🆕 Novo ticket criado: ${created.message}`);
+
+              // Enviar resposta com ID no assunto (opcional: usando seu serviço de email)
+              // await this.emailService.send({
+              //   to: from,
+              //   subject: `[Ticket #${created.id}] Seu pedido foi recebido`,
+              //   body: `Recebemos seu e-mail e criamos o ticket ${created.id}. Em breve responderemos.`,
+              // });
             }
           });
         });

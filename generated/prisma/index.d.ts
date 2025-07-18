@@ -58,6 +58,11 @@ export type Comment = $Result.DefaultSelection<Prisma.$CommentPayload>
  * 
  */
 export type Payment = $Result.DefaultSelection<Prisma.$PaymentPayload>
+/**
+ * Model MailServiceConfig
+ * 
+ */
+export type MailServiceConfig = $Result.DefaultSelection<Prisma.$MailServiceConfigPayload>
 
 /**
  * Enums
@@ -333,6 +338,16 @@ export class PrismaClient<
     * ```
     */
   get payment(): Prisma.PaymentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.mailServiceConfig`: Exposes CRUD operations for the **MailServiceConfig** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MailServiceConfigs
+    * const mailServiceConfigs = await prisma.mailServiceConfig.findMany()
+    * ```
+    */
+  get mailServiceConfig(): Prisma.MailServiceConfigDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -781,7 +796,8 @@ export namespace Prisma {
     OrganizationPlan: 'OrganizationPlan',
     Ticket: 'Ticket',
     Comment: 'Comment',
-    Payment: 'Payment'
+    Payment: 'Payment',
+    MailServiceConfig: 'MailServiceConfig'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -800,7 +816,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "organization" | "widgetConfig" | "user" | "ticketAccessToken" | "plan" | "organizationPlan" | "ticket" | "comment" | "payment"
+      modelProps: "organization" | "widgetConfig" | "user" | "ticketAccessToken" | "plan" | "organizationPlan" | "ticket" | "comment" | "payment" | "mailServiceConfig"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1470,6 +1486,80 @@ export namespace Prisma {
           }
         }
       }
+      MailServiceConfig: {
+        payload: Prisma.$MailServiceConfigPayload<ExtArgs>
+        fields: Prisma.MailServiceConfigFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MailServiceConfigFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailServiceConfigPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MailServiceConfigFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailServiceConfigPayload>
+          }
+          findFirst: {
+            args: Prisma.MailServiceConfigFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailServiceConfigPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MailServiceConfigFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailServiceConfigPayload>
+          }
+          findMany: {
+            args: Prisma.MailServiceConfigFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailServiceConfigPayload>[]
+          }
+          create: {
+            args: Prisma.MailServiceConfigCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailServiceConfigPayload>
+          }
+          createMany: {
+            args: Prisma.MailServiceConfigCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MailServiceConfigCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailServiceConfigPayload>[]
+          }
+          delete: {
+            args: Prisma.MailServiceConfigDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailServiceConfigPayload>
+          }
+          update: {
+            args: Prisma.MailServiceConfigUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailServiceConfigPayload>
+          }
+          deleteMany: {
+            args: Prisma.MailServiceConfigDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MailServiceConfigUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MailServiceConfigUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailServiceConfigPayload>[]
+          }
+          upsert: {
+            args: Prisma.MailServiceConfigUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailServiceConfigPayload>
+          }
+          aggregate: {
+            args: Prisma.MailServiceConfigAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMailServiceConfig>
+          }
+          groupBy: {
+            args: Prisma.MailServiceConfigGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MailServiceConfigGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MailServiceConfigCountArgs<ExtArgs>
+            result: $Utils.Optional<MailServiceConfigCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1563,6 +1653,7 @@ export namespace Prisma {
     ticket?: TicketOmit
     comment?: CommentOmit
     payment?: PaymentOmit
+    mailServiceConfig?: MailServiceConfigOmit
   }
 
   /* Types for Logging */
@@ -1663,6 +1754,7 @@ export namespace Prisma {
     widgetConfig: number
     OrganizationPlan: number
     payments: number
+    mailServiceConfigs: number
   }
 
   export type OrganizationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1672,6 +1764,7 @@ export namespace Prisma {
     widgetConfig?: boolean | OrganizationCountOutputTypeCountWidgetConfigArgs
     OrganizationPlan?: boolean | OrganizationCountOutputTypeCountOrganizationPlanArgs
     payments?: boolean | OrganizationCountOutputTypeCountPaymentsArgs
+    mailServiceConfigs?: boolean | OrganizationCountOutputTypeCountMailServiceConfigsArgs
   }
 
   // Custom InputTypes
@@ -1725,6 +1818,13 @@ export namespace Prisma {
    */
   export type OrganizationCountOutputTypeCountPaymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PaymentWhereInput
+  }
+
+  /**
+   * OrganizationCountOutputType without action
+   */
+  export type OrganizationCountOutputTypeCountMailServiceConfigsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MailServiceConfigWhereInput
   }
 
 
@@ -2055,6 +2155,7 @@ export namespace Prisma {
     widgetConfig?: boolean | Organization$widgetConfigArgs<ExtArgs>
     OrganizationPlan?: boolean | Organization$OrganizationPlanArgs<ExtArgs>
     payments?: boolean | Organization$paymentsArgs<ExtArgs>
+    mailServiceConfigs?: boolean | Organization$mailServiceConfigsArgs<ExtArgs>
     _count?: boolean | OrganizationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["organization"]>
 
@@ -2099,6 +2200,7 @@ export namespace Prisma {
     widgetConfig?: boolean | Organization$widgetConfigArgs<ExtArgs>
     OrganizationPlan?: boolean | Organization$OrganizationPlanArgs<ExtArgs>
     payments?: boolean | Organization$paymentsArgs<ExtArgs>
+    mailServiceConfigs?: boolean | Organization$mailServiceConfigsArgs<ExtArgs>
     _count?: boolean | OrganizationCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type OrganizationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2113,6 +2215,7 @@ export namespace Prisma {
       widgetConfig: Prisma.$WidgetConfigPayload<ExtArgs>[]
       OrganizationPlan: Prisma.$OrganizationPlanPayload<ExtArgs>[]
       payments: Prisma.$PaymentPayload<ExtArgs>[]
+      mailServiceConfigs: Prisma.$MailServiceConfigPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2523,6 +2626,7 @@ export namespace Prisma {
     widgetConfig<T extends Organization$widgetConfigArgs<ExtArgs> = {}>(args?: Subset<T, Organization$widgetConfigArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WidgetConfigPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     OrganizationPlan<T extends Organization$OrganizationPlanArgs<ExtArgs> = {}>(args?: Subset<T, Organization$OrganizationPlanArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrganizationPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     payments<T extends Organization$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, Organization$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    mailServiceConfigs<T extends Organization$mailServiceConfigsArgs<ExtArgs> = {}>(args?: Subset<T, Organization$mailServiceConfigsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MailServiceConfigPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3089,6 +3193,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PaymentScalarFieldEnum | PaymentScalarFieldEnum[]
+  }
+
+  /**
+   * Organization.mailServiceConfigs
+   */
+  export type Organization$mailServiceConfigsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailServiceConfig
+     */
+    select?: MailServiceConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailServiceConfig
+     */
+    omit?: MailServiceConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MailServiceConfigInclude<ExtArgs> | null
+    where?: MailServiceConfigWhereInput
+    orderBy?: MailServiceConfigOrderByWithRelationInput | MailServiceConfigOrderByWithRelationInput[]
+    cursor?: MailServiceConfigWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MailServiceConfigScalarFieldEnum | MailServiceConfigScalarFieldEnum[]
   }
 
   /**
@@ -12448,6 +12576,1208 @@ export namespace Prisma {
 
 
   /**
+   * Model MailServiceConfig
+   */
+
+  export type AggregateMailServiceConfig = {
+    _count: MailServiceConfigCountAggregateOutputType | null
+    _avg: MailServiceConfigAvgAggregateOutputType | null
+    _sum: MailServiceConfigSumAggregateOutputType | null
+    _min: MailServiceConfigMinAggregateOutputType | null
+    _max: MailServiceConfigMaxAggregateOutputType | null
+  }
+
+  export type MailServiceConfigAvgAggregateOutputType = {
+    port: number | null
+  }
+
+  export type MailServiceConfigSumAggregateOutputType = {
+    port: number | null
+  }
+
+  export type MailServiceConfigMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    serviceType: string | null
+    host: string | null
+    port: number | null
+    user: string | null
+    password: string | null
+    tls: boolean | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    organizationId: string | null
+  }
+
+  export type MailServiceConfigMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    serviceType: string | null
+    host: string | null
+    port: number | null
+    user: string | null
+    password: string | null
+    tls: boolean | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    organizationId: string | null
+  }
+
+  export type MailServiceConfigCountAggregateOutputType = {
+    id: number
+    name: number
+    serviceType: number
+    host: number
+    port: number
+    user: number
+    password: number
+    tls: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    organizationId: number
+    _all: number
+  }
+
+
+  export type MailServiceConfigAvgAggregateInputType = {
+    port?: true
+  }
+
+  export type MailServiceConfigSumAggregateInputType = {
+    port?: true
+  }
+
+  export type MailServiceConfigMinAggregateInputType = {
+    id?: true
+    name?: true
+    serviceType?: true
+    host?: true
+    port?: true
+    user?: true
+    password?: true
+    tls?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    organizationId?: true
+  }
+
+  export type MailServiceConfigMaxAggregateInputType = {
+    id?: true
+    name?: true
+    serviceType?: true
+    host?: true
+    port?: true
+    user?: true
+    password?: true
+    tls?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    organizationId?: true
+  }
+
+  export type MailServiceConfigCountAggregateInputType = {
+    id?: true
+    name?: true
+    serviceType?: true
+    host?: true
+    port?: true
+    user?: true
+    password?: true
+    tls?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    organizationId?: true
+    _all?: true
+  }
+
+  export type MailServiceConfigAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MailServiceConfig to aggregate.
+     */
+    where?: MailServiceConfigWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MailServiceConfigs to fetch.
+     */
+    orderBy?: MailServiceConfigOrderByWithRelationInput | MailServiceConfigOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MailServiceConfigWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MailServiceConfigs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MailServiceConfigs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MailServiceConfigs
+    **/
+    _count?: true | MailServiceConfigCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MailServiceConfigAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MailServiceConfigSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MailServiceConfigMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MailServiceConfigMaxAggregateInputType
+  }
+
+  export type GetMailServiceConfigAggregateType<T extends MailServiceConfigAggregateArgs> = {
+        [P in keyof T & keyof AggregateMailServiceConfig]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMailServiceConfig[P]>
+      : GetScalarType<T[P], AggregateMailServiceConfig[P]>
+  }
+
+
+
+
+  export type MailServiceConfigGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MailServiceConfigWhereInput
+    orderBy?: MailServiceConfigOrderByWithAggregationInput | MailServiceConfigOrderByWithAggregationInput[]
+    by: MailServiceConfigScalarFieldEnum[] | MailServiceConfigScalarFieldEnum
+    having?: MailServiceConfigScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MailServiceConfigCountAggregateInputType | true
+    _avg?: MailServiceConfigAvgAggregateInputType
+    _sum?: MailServiceConfigSumAggregateInputType
+    _min?: MailServiceConfigMinAggregateInputType
+    _max?: MailServiceConfigMaxAggregateInputType
+  }
+
+  export type MailServiceConfigGroupByOutputType = {
+    id: string
+    name: string
+    serviceType: string
+    host: string
+    port: number
+    user: string
+    password: string
+    tls: boolean
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    organizationId: string | null
+    _count: MailServiceConfigCountAggregateOutputType | null
+    _avg: MailServiceConfigAvgAggregateOutputType | null
+    _sum: MailServiceConfigSumAggregateOutputType | null
+    _min: MailServiceConfigMinAggregateOutputType | null
+    _max: MailServiceConfigMaxAggregateOutputType | null
+  }
+
+  type GetMailServiceConfigGroupByPayload<T extends MailServiceConfigGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MailServiceConfigGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MailServiceConfigGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MailServiceConfigGroupByOutputType[P]>
+            : GetScalarType<T[P], MailServiceConfigGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MailServiceConfigSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    serviceType?: boolean
+    host?: boolean
+    port?: boolean
+    user?: boolean
+    password?: boolean
+    tls?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    organizationId?: boolean
+    organization?: boolean | MailServiceConfig$organizationArgs<ExtArgs>
+  }, ExtArgs["result"]["mailServiceConfig"]>
+
+  export type MailServiceConfigSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    serviceType?: boolean
+    host?: boolean
+    port?: boolean
+    user?: boolean
+    password?: boolean
+    tls?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    organizationId?: boolean
+    organization?: boolean | MailServiceConfig$organizationArgs<ExtArgs>
+  }, ExtArgs["result"]["mailServiceConfig"]>
+
+  export type MailServiceConfigSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    serviceType?: boolean
+    host?: boolean
+    port?: boolean
+    user?: boolean
+    password?: boolean
+    tls?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    organizationId?: boolean
+    organization?: boolean | MailServiceConfig$organizationArgs<ExtArgs>
+  }, ExtArgs["result"]["mailServiceConfig"]>
+
+  export type MailServiceConfigSelectScalar = {
+    id?: boolean
+    name?: boolean
+    serviceType?: boolean
+    host?: boolean
+    port?: boolean
+    user?: boolean
+    password?: boolean
+    tls?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    organizationId?: boolean
+  }
+
+  export type MailServiceConfigOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "serviceType" | "host" | "port" | "user" | "password" | "tls" | "isActive" | "createdAt" | "updatedAt" | "organizationId", ExtArgs["result"]["mailServiceConfig"]>
+  export type MailServiceConfigInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | MailServiceConfig$organizationArgs<ExtArgs>
+  }
+  export type MailServiceConfigIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | MailServiceConfig$organizationArgs<ExtArgs>
+  }
+  export type MailServiceConfigIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | MailServiceConfig$organizationArgs<ExtArgs>
+  }
+
+  export type $MailServiceConfigPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MailServiceConfig"
+    objects: {
+      organization: Prisma.$OrganizationPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      serviceType: string
+      host: string
+      port: number
+      user: string
+      password: string
+      tls: boolean
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+      organizationId: string | null
+    }, ExtArgs["result"]["mailServiceConfig"]>
+    composites: {}
+  }
+
+  type MailServiceConfigGetPayload<S extends boolean | null | undefined | MailServiceConfigDefaultArgs> = $Result.GetResult<Prisma.$MailServiceConfigPayload, S>
+
+  type MailServiceConfigCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MailServiceConfigFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MailServiceConfigCountAggregateInputType | true
+    }
+
+  export interface MailServiceConfigDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MailServiceConfig'], meta: { name: 'MailServiceConfig' } }
+    /**
+     * Find zero or one MailServiceConfig that matches the filter.
+     * @param {MailServiceConfigFindUniqueArgs} args - Arguments to find a MailServiceConfig
+     * @example
+     * // Get one MailServiceConfig
+     * const mailServiceConfig = await prisma.mailServiceConfig.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MailServiceConfigFindUniqueArgs>(args: SelectSubset<T, MailServiceConfigFindUniqueArgs<ExtArgs>>): Prisma__MailServiceConfigClient<$Result.GetResult<Prisma.$MailServiceConfigPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one MailServiceConfig that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MailServiceConfigFindUniqueOrThrowArgs} args - Arguments to find a MailServiceConfig
+     * @example
+     * // Get one MailServiceConfig
+     * const mailServiceConfig = await prisma.mailServiceConfig.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MailServiceConfigFindUniqueOrThrowArgs>(args: SelectSubset<T, MailServiceConfigFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MailServiceConfigClient<$Result.GetResult<Prisma.$MailServiceConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MailServiceConfig that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MailServiceConfigFindFirstArgs} args - Arguments to find a MailServiceConfig
+     * @example
+     * // Get one MailServiceConfig
+     * const mailServiceConfig = await prisma.mailServiceConfig.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MailServiceConfigFindFirstArgs>(args?: SelectSubset<T, MailServiceConfigFindFirstArgs<ExtArgs>>): Prisma__MailServiceConfigClient<$Result.GetResult<Prisma.$MailServiceConfigPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MailServiceConfig that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MailServiceConfigFindFirstOrThrowArgs} args - Arguments to find a MailServiceConfig
+     * @example
+     * // Get one MailServiceConfig
+     * const mailServiceConfig = await prisma.mailServiceConfig.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MailServiceConfigFindFirstOrThrowArgs>(args?: SelectSubset<T, MailServiceConfigFindFirstOrThrowArgs<ExtArgs>>): Prisma__MailServiceConfigClient<$Result.GetResult<Prisma.$MailServiceConfigPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more MailServiceConfigs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MailServiceConfigFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MailServiceConfigs
+     * const mailServiceConfigs = await prisma.mailServiceConfig.findMany()
+     * 
+     * // Get first 10 MailServiceConfigs
+     * const mailServiceConfigs = await prisma.mailServiceConfig.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mailServiceConfigWithIdOnly = await prisma.mailServiceConfig.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MailServiceConfigFindManyArgs>(args?: SelectSubset<T, MailServiceConfigFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MailServiceConfigPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a MailServiceConfig.
+     * @param {MailServiceConfigCreateArgs} args - Arguments to create a MailServiceConfig.
+     * @example
+     * // Create one MailServiceConfig
+     * const MailServiceConfig = await prisma.mailServiceConfig.create({
+     *   data: {
+     *     // ... data to create a MailServiceConfig
+     *   }
+     * })
+     * 
+     */
+    create<T extends MailServiceConfigCreateArgs>(args: SelectSubset<T, MailServiceConfigCreateArgs<ExtArgs>>): Prisma__MailServiceConfigClient<$Result.GetResult<Prisma.$MailServiceConfigPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many MailServiceConfigs.
+     * @param {MailServiceConfigCreateManyArgs} args - Arguments to create many MailServiceConfigs.
+     * @example
+     * // Create many MailServiceConfigs
+     * const mailServiceConfig = await prisma.mailServiceConfig.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MailServiceConfigCreateManyArgs>(args?: SelectSubset<T, MailServiceConfigCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MailServiceConfigs and returns the data saved in the database.
+     * @param {MailServiceConfigCreateManyAndReturnArgs} args - Arguments to create many MailServiceConfigs.
+     * @example
+     * // Create many MailServiceConfigs
+     * const mailServiceConfig = await prisma.mailServiceConfig.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MailServiceConfigs and only return the `id`
+     * const mailServiceConfigWithIdOnly = await prisma.mailServiceConfig.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MailServiceConfigCreateManyAndReturnArgs>(args?: SelectSubset<T, MailServiceConfigCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MailServiceConfigPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a MailServiceConfig.
+     * @param {MailServiceConfigDeleteArgs} args - Arguments to delete one MailServiceConfig.
+     * @example
+     * // Delete one MailServiceConfig
+     * const MailServiceConfig = await prisma.mailServiceConfig.delete({
+     *   where: {
+     *     // ... filter to delete one MailServiceConfig
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MailServiceConfigDeleteArgs>(args: SelectSubset<T, MailServiceConfigDeleteArgs<ExtArgs>>): Prisma__MailServiceConfigClient<$Result.GetResult<Prisma.$MailServiceConfigPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one MailServiceConfig.
+     * @param {MailServiceConfigUpdateArgs} args - Arguments to update one MailServiceConfig.
+     * @example
+     * // Update one MailServiceConfig
+     * const mailServiceConfig = await prisma.mailServiceConfig.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MailServiceConfigUpdateArgs>(args: SelectSubset<T, MailServiceConfigUpdateArgs<ExtArgs>>): Prisma__MailServiceConfigClient<$Result.GetResult<Prisma.$MailServiceConfigPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more MailServiceConfigs.
+     * @param {MailServiceConfigDeleteManyArgs} args - Arguments to filter MailServiceConfigs to delete.
+     * @example
+     * // Delete a few MailServiceConfigs
+     * const { count } = await prisma.mailServiceConfig.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MailServiceConfigDeleteManyArgs>(args?: SelectSubset<T, MailServiceConfigDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MailServiceConfigs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MailServiceConfigUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MailServiceConfigs
+     * const mailServiceConfig = await prisma.mailServiceConfig.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MailServiceConfigUpdateManyArgs>(args: SelectSubset<T, MailServiceConfigUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MailServiceConfigs and returns the data updated in the database.
+     * @param {MailServiceConfigUpdateManyAndReturnArgs} args - Arguments to update many MailServiceConfigs.
+     * @example
+     * // Update many MailServiceConfigs
+     * const mailServiceConfig = await prisma.mailServiceConfig.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MailServiceConfigs and only return the `id`
+     * const mailServiceConfigWithIdOnly = await prisma.mailServiceConfig.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MailServiceConfigUpdateManyAndReturnArgs>(args: SelectSubset<T, MailServiceConfigUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MailServiceConfigPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one MailServiceConfig.
+     * @param {MailServiceConfigUpsertArgs} args - Arguments to update or create a MailServiceConfig.
+     * @example
+     * // Update or create a MailServiceConfig
+     * const mailServiceConfig = await prisma.mailServiceConfig.upsert({
+     *   create: {
+     *     // ... data to create a MailServiceConfig
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MailServiceConfig we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MailServiceConfigUpsertArgs>(args: SelectSubset<T, MailServiceConfigUpsertArgs<ExtArgs>>): Prisma__MailServiceConfigClient<$Result.GetResult<Prisma.$MailServiceConfigPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of MailServiceConfigs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MailServiceConfigCountArgs} args - Arguments to filter MailServiceConfigs to count.
+     * @example
+     * // Count the number of MailServiceConfigs
+     * const count = await prisma.mailServiceConfig.count({
+     *   where: {
+     *     // ... the filter for the MailServiceConfigs we want to count
+     *   }
+     * })
+    **/
+    count<T extends MailServiceConfigCountArgs>(
+      args?: Subset<T, MailServiceConfigCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MailServiceConfigCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MailServiceConfig.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MailServiceConfigAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MailServiceConfigAggregateArgs>(args: Subset<T, MailServiceConfigAggregateArgs>): Prisma.PrismaPromise<GetMailServiceConfigAggregateType<T>>
+
+    /**
+     * Group by MailServiceConfig.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MailServiceConfigGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MailServiceConfigGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MailServiceConfigGroupByArgs['orderBy'] }
+        : { orderBy?: MailServiceConfigGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MailServiceConfigGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMailServiceConfigGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MailServiceConfig model
+   */
+  readonly fields: MailServiceConfigFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MailServiceConfig.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MailServiceConfigClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    organization<T extends MailServiceConfig$organizationArgs<ExtArgs> = {}>(args?: Subset<T, MailServiceConfig$organizationArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MailServiceConfig model
+   */
+  interface MailServiceConfigFieldRefs {
+    readonly id: FieldRef<"MailServiceConfig", 'String'>
+    readonly name: FieldRef<"MailServiceConfig", 'String'>
+    readonly serviceType: FieldRef<"MailServiceConfig", 'String'>
+    readonly host: FieldRef<"MailServiceConfig", 'String'>
+    readonly port: FieldRef<"MailServiceConfig", 'Int'>
+    readonly user: FieldRef<"MailServiceConfig", 'String'>
+    readonly password: FieldRef<"MailServiceConfig", 'String'>
+    readonly tls: FieldRef<"MailServiceConfig", 'Boolean'>
+    readonly isActive: FieldRef<"MailServiceConfig", 'Boolean'>
+    readonly createdAt: FieldRef<"MailServiceConfig", 'DateTime'>
+    readonly updatedAt: FieldRef<"MailServiceConfig", 'DateTime'>
+    readonly organizationId: FieldRef<"MailServiceConfig", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MailServiceConfig findUnique
+   */
+  export type MailServiceConfigFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailServiceConfig
+     */
+    select?: MailServiceConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailServiceConfig
+     */
+    omit?: MailServiceConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MailServiceConfigInclude<ExtArgs> | null
+    /**
+     * Filter, which MailServiceConfig to fetch.
+     */
+    where: MailServiceConfigWhereUniqueInput
+  }
+
+  /**
+   * MailServiceConfig findUniqueOrThrow
+   */
+  export type MailServiceConfigFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailServiceConfig
+     */
+    select?: MailServiceConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailServiceConfig
+     */
+    omit?: MailServiceConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MailServiceConfigInclude<ExtArgs> | null
+    /**
+     * Filter, which MailServiceConfig to fetch.
+     */
+    where: MailServiceConfigWhereUniqueInput
+  }
+
+  /**
+   * MailServiceConfig findFirst
+   */
+  export type MailServiceConfigFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailServiceConfig
+     */
+    select?: MailServiceConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailServiceConfig
+     */
+    omit?: MailServiceConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MailServiceConfigInclude<ExtArgs> | null
+    /**
+     * Filter, which MailServiceConfig to fetch.
+     */
+    where?: MailServiceConfigWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MailServiceConfigs to fetch.
+     */
+    orderBy?: MailServiceConfigOrderByWithRelationInput | MailServiceConfigOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MailServiceConfigs.
+     */
+    cursor?: MailServiceConfigWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MailServiceConfigs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MailServiceConfigs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MailServiceConfigs.
+     */
+    distinct?: MailServiceConfigScalarFieldEnum | MailServiceConfigScalarFieldEnum[]
+  }
+
+  /**
+   * MailServiceConfig findFirstOrThrow
+   */
+  export type MailServiceConfigFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailServiceConfig
+     */
+    select?: MailServiceConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailServiceConfig
+     */
+    omit?: MailServiceConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MailServiceConfigInclude<ExtArgs> | null
+    /**
+     * Filter, which MailServiceConfig to fetch.
+     */
+    where?: MailServiceConfigWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MailServiceConfigs to fetch.
+     */
+    orderBy?: MailServiceConfigOrderByWithRelationInput | MailServiceConfigOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MailServiceConfigs.
+     */
+    cursor?: MailServiceConfigWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MailServiceConfigs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MailServiceConfigs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MailServiceConfigs.
+     */
+    distinct?: MailServiceConfigScalarFieldEnum | MailServiceConfigScalarFieldEnum[]
+  }
+
+  /**
+   * MailServiceConfig findMany
+   */
+  export type MailServiceConfigFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailServiceConfig
+     */
+    select?: MailServiceConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailServiceConfig
+     */
+    omit?: MailServiceConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MailServiceConfigInclude<ExtArgs> | null
+    /**
+     * Filter, which MailServiceConfigs to fetch.
+     */
+    where?: MailServiceConfigWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MailServiceConfigs to fetch.
+     */
+    orderBy?: MailServiceConfigOrderByWithRelationInput | MailServiceConfigOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MailServiceConfigs.
+     */
+    cursor?: MailServiceConfigWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MailServiceConfigs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MailServiceConfigs.
+     */
+    skip?: number
+    distinct?: MailServiceConfigScalarFieldEnum | MailServiceConfigScalarFieldEnum[]
+  }
+
+  /**
+   * MailServiceConfig create
+   */
+  export type MailServiceConfigCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailServiceConfig
+     */
+    select?: MailServiceConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailServiceConfig
+     */
+    omit?: MailServiceConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MailServiceConfigInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MailServiceConfig.
+     */
+    data: XOR<MailServiceConfigCreateInput, MailServiceConfigUncheckedCreateInput>
+  }
+
+  /**
+   * MailServiceConfig createMany
+   */
+  export type MailServiceConfigCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MailServiceConfigs.
+     */
+    data: MailServiceConfigCreateManyInput | MailServiceConfigCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MailServiceConfig createManyAndReturn
+   */
+  export type MailServiceConfigCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailServiceConfig
+     */
+    select?: MailServiceConfigSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailServiceConfig
+     */
+    omit?: MailServiceConfigOmit<ExtArgs> | null
+    /**
+     * The data used to create many MailServiceConfigs.
+     */
+    data: MailServiceConfigCreateManyInput | MailServiceConfigCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MailServiceConfigIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MailServiceConfig update
+   */
+  export type MailServiceConfigUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailServiceConfig
+     */
+    select?: MailServiceConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailServiceConfig
+     */
+    omit?: MailServiceConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MailServiceConfigInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MailServiceConfig.
+     */
+    data: XOR<MailServiceConfigUpdateInput, MailServiceConfigUncheckedUpdateInput>
+    /**
+     * Choose, which MailServiceConfig to update.
+     */
+    where: MailServiceConfigWhereUniqueInput
+  }
+
+  /**
+   * MailServiceConfig updateMany
+   */
+  export type MailServiceConfigUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MailServiceConfigs.
+     */
+    data: XOR<MailServiceConfigUpdateManyMutationInput, MailServiceConfigUncheckedUpdateManyInput>
+    /**
+     * Filter which MailServiceConfigs to update
+     */
+    where?: MailServiceConfigWhereInput
+    /**
+     * Limit how many MailServiceConfigs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MailServiceConfig updateManyAndReturn
+   */
+  export type MailServiceConfigUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailServiceConfig
+     */
+    select?: MailServiceConfigSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailServiceConfig
+     */
+    omit?: MailServiceConfigOmit<ExtArgs> | null
+    /**
+     * The data used to update MailServiceConfigs.
+     */
+    data: XOR<MailServiceConfigUpdateManyMutationInput, MailServiceConfigUncheckedUpdateManyInput>
+    /**
+     * Filter which MailServiceConfigs to update
+     */
+    where?: MailServiceConfigWhereInput
+    /**
+     * Limit how many MailServiceConfigs to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MailServiceConfigIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MailServiceConfig upsert
+   */
+  export type MailServiceConfigUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailServiceConfig
+     */
+    select?: MailServiceConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailServiceConfig
+     */
+    omit?: MailServiceConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MailServiceConfigInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MailServiceConfig to update in case it exists.
+     */
+    where: MailServiceConfigWhereUniqueInput
+    /**
+     * In case the MailServiceConfig found by the `where` argument doesn't exist, create a new MailServiceConfig with this data.
+     */
+    create: XOR<MailServiceConfigCreateInput, MailServiceConfigUncheckedCreateInput>
+    /**
+     * In case the MailServiceConfig was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MailServiceConfigUpdateInput, MailServiceConfigUncheckedUpdateInput>
+  }
+
+  /**
+   * MailServiceConfig delete
+   */
+  export type MailServiceConfigDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailServiceConfig
+     */
+    select?: MailServiceConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailServiceConfig
+     */
+    omit?: MailServiceConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MailServiceConfigInclude<ExtArgs> | null
+    /**
+     * Filter which MailServiceConfig to delete.
+     */
+    where: MailServiceConfigWhereUniqueInput
+  }
+
+  /**
+   * MailServiceConfig deleteMany
+   */
+  export type MailServiceConfigDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MailServiceConfigs to delete
+     */
+    where?: MailServiceConfigWhereInput
+    /**
+     * Limit how many MailServiceConfigs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MailServiceConfig.organization
+   */
+  export type MailServiceConfig$organizationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organization
+     */
+    select?: OrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organization
+     */
+    omit?: OrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationInclude<ExtArgs> | null
+    where?: OrganizationWhereInput
+  }
+
+  /**
+   * MailServiceConfig without action
+   */
+  export type MailServiceConfigDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailServiceConfig
+     */
+    select?: MailServiceConfigSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailServiceConfig
+     */
+    omit?: MailServiceConfigOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MailServiceConfigInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -12594,6 +13924,24 @@ export namespace Prisma {
   };
 
   export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+
+
+  export const MailServiceConfigScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    serviceType: 'serviceType',
+    host: 'host',
+    port: 'port',
+    user: 'user',
+    password: 'password',
+    tls: 'tls',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    organizationId: 'organizationId'
+  };
+
+  export type MailServiceConfigScalarFieldEnum = (typeof MailServiceConfigScalarFieldEnum)[keyof typeof MailServiceConfigScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -12765,6 +14113,7 @@ export namespace Prisma {
     widgetConfig?: WidgetConfigListRelationFilter
     OrganizationPlan?: OrganizationPlanListRelationFilter
     payments?: PaymentListRelationFilter
+    mailServiceConfigs?: MailServiceConfigListRelationFilter
   }
 
   export type OrganizationOrderByWithRelationInput = {
@@ -12782,6 +14131,7 @@ export namespace Prisma {
     widgetConfig?: WidgetConfigOrderByRelationAggregateInput
     OrganizationPlan?: OrganizationPlanOrderByRelationAggregateInput
     payments?: PaymentOrderByRelationAggregateInput
+    mailServiceConfigs?: MailServiceConfigOrderByRelationAggregateInput
   }
 
   export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
@@ -12802,6 +14152,7 @@ export namespace Prisma {
     widgetConfig?: WidgetConfigListRelationFilter
     OrganizationPlan?: OrganizationPlanListRelationFilter
     payments?: PaymentListRelationFilter
+    mailServiceConfigs?: MailServiceConfigListRelationFilter
   }, "id" | "slug">
 
   export type OrganizationOrderByWithAggregationInput = {
@@ -13481,6 +14832,98 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Payment"> | Date | string
   }
 
+  export type MailServiceConfigWhereInput = {
+    AND?: MailServiceConfigWhereInput | MailServiceConfigWhereInput[]
+    OR?: MailServiceConfigWhereInput[]
+    NOT?: MailServiceConfigWhereInput | MailServiceConfigWhereInput[]
+    id?: StringFilter<"MailServiceConfig"> | string
+    name?: StringFilter<"MailServiceConfig"> | string
+    serviceType?: StringFilter<"MailServiceConfig"> | string
+    host?: StringFilter<"MailServiceConfig"> | string
+    port?: IntFilter<"MailServiceConfig"> | number
+    user?: StringFilter<"MailServiceConfig"> | string
+    password?: StringFilter<"MailServiceConfig"> | string
+    tls?: BoolFilter<"MailServiceConfig"> | boolean
+    isActive?: BoolFilter<"MailServiceConfig"> | boolean
+    createdAt?: DateTimeFilter<"MailServiceConfig"> | Date | string
+    updatedAt?: DateTimeFilter<"MailServiceConfig"> | Date | string
+    organizationId?: StringNullableFilter<"MailServiceConfig"> | string | null
+    organization?: XOR<OrganizationNullableScalarRelationFilter, OrganizationWhereInput> | null
+  }
+
+  export type MailServiceConfigOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    serviceType?: SortOrder
+    host?: SortOrder
+    port?: SortOrder
+    user?: SortOrder
+    password?: SortOrder
+    tls?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    organizationId?: SortOrderInput | SortOrder
+    organization?: OrganizationOrderByWithRelationInput
+  }
+
+  export type MailServiceConfigWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    name?: string
+    AND?: MailServiceConfigWhereInput | MailServiceConfigWhereInput[]
+    OR?: MailServiceConfigWhereInput[]
+    NOT?: MailServiceConfigWhereInput | MailServiceConfigWhereInput[]
+    serviceType?: StringFilter<"MailServiceConfig"> | string
+    host?: StringFilter<"MailServiceConfig"> | string
+    port?: IntFilter<"MailServiceConfig"> | number
+    user?: StringFilter<"MailServiceConfig"> | string
+    password?: StringFilter<"MailServiceConfig"> | string
+    tls?: BoolFilter<"MailServiceConfig"> | boolean
+    isActive?: BoolFilter<"MailServiceConfig"> | boolean
+    createdAt?: DateTimeFilter<"MailServiceConfig"> | Date | string
+    updatedAt?: DateTimeFilter<"MailServiceConfig"> | Date | string
+    organizationId?: StringNullableFilter<"MailServiceConfig"> | string | null
+    organization?: XOR<OrganizationNullableScalarRelationFilter, OrganizationWhereInput> | null
+  }, "id" | "name">
+
+  export type MailServiceConfigOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    serviceType?: SortOrder
+    host?: SortOrder
+    port?: SortOrder
+    user?: SortOrder
+    password?: SortOrder
+    tls?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    organizationId?: SortOrderInput | SortOrder
+    _count?: MailServiceConfigCountOrderByAggregateInput
+    _avg?: MailServiceConfigAvgOrderByAggregateInput
+    _max?: MailServiceConfigMaxOrderByAggregateInput
+    _min?: MailServiceConfigMinOrderByAggregateInput
+    _sum?: MailServiceConfigSumOrderByAggregateInput
+  }
+
+  export type MailServiceConfigScalarWhereWithAggregatesInput = {
+    AND?: MailServiceConfigScalarWhereWithAggregatesInput | MailServiceConfigScalarWhereWithAggregatesInput[]
+    OR?: MailServiceConfigScalarWhereWithAggregatesInput[]
+    NOT?: MailServiceConfigScalarWhereWithAggregatesInput | MailServiceConfigScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MailServiceConfig"> | string
+    name?: StringWithAggregatesFilter<"MailServiceConfig"> | string
+    serviceType?: StringWithAggregatesFilter<"MailServiceConfig"> | string
+    host?: StringWithAggregatesFilter<"MailServiceConfig"> | string
+    port?: IntWithAggregatesFilter<"MailServiceConfig"> | number
+    user?: StringWithAggregatesFilter<"MailServiceConfig"> | string
+    password?: StringWithAggregatesFilter<"MailServiceConfig"> | string
+    tls?: BoolWithAggregatesFilter<"MailServiceConfig"> | boolean
+    isActive?: BoolWithAggregatesFilter<"MailServiceConfig"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"MailServiceConfig"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"MailServiceConfig"> | Date | string
+    organizationId?: StringNullableWithAggregatesFilter<"MailServiceConfig"> | string | null
+  }
+
   export type OrganizationCreateInput = {
     id?: string
     name: string
@@ -13496,6 +14939,7 @@ export namespace Prisma {
     widgetConfig?: WidgetConfigCreateNestedManyWithoutOrgInput
     OrganizationPlan?: OrganizationPlanCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
+    mailServiceConfigs?: MailServiceConfigCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateInput = {
@@ -13513,6 +14957,7 @@ export namespace Prisma {
     widgetConfig?: WidgetConfigUncheckedCreateNestedManyWithoutOrgInput
     OrganizationPlan?: OrganizationPlanUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
+    mailServiceConfigs?: MailServiceConfigUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUpdateInput = {
@@ -13530,6 +14975,7 @@ export namespace Prisma {
     widgetConfig?: WidgetConfigUpdateManyWithoutOrgNestedInput
     OrganizationPlan?: OrganizationPlanUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
+    mailServiceConfigs?: MailServiceConfigUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateInput = {
@@ -13547,6 +14993,7 @@ export namespace Prisma {
     widgetConfig?: WidgetConfigUncheckedUpdateManyWithoutOrgNestedInput
     OrganizationPlan?: OrganizationPlanUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
+    mailServiceConfigs?: MailServiceConfigUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationCreateManyInput = {
@@ -14279,6 +15726,110 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type MailServiceConfigCreateInput = {
+    id?: string
+    name: string
+    serviceType?: string
+    host: string
+    port: number
+    user: string
+    password: string
+    tls?: boolean
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organization?: OrganizationCreateNestedOneWithoutMailServiceConfigsInput
+  }
+
+  export type MailServiceConfigUncheckedCreateInput = {
+    id?: string
+    name: string
+    serviceType?: string
+    host: string
+    port: number
+    user: string
+    password: string
+    tls?: boolean
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organizationId?: string | null
+  }
+
+  export type MailServiceConfigUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    serviceType?: StringFieldUpdateOperationsInput | string
+    host?: StringFieldUpdateOperationsInput | string
+    port?: IntFieldUpdateOperationsInput | number
+    user?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    tls?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organization?: OrganizationUpdateOneWithoutMailServiceConfigsNestedInput
+  }
+
+  export type MailServiceConfigUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    serviceType?: StringFieldUpdateOperationsInput | string
+    host?: StringFieldUpdateOperationsInput | string
+    port?: IntFieldUpdateOperationsInput | number
+    user?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    tls?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organizationId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type MailServiceConfigCreateManyInput = {
+    id?: string
+    name: string
+    serviceType?: string
+    host: string
+    port: number
+    user: string
+    password: string
+    tls?: boolean
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organizationId?: string | null
+  }
+
+  export type MailServiceConfigUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    serviceType?: StringFieldUpdateOperationsInput | string
+    host?: StringFieldUpdateOperationsInput | string
+    port?: IntFieldUpdateOperationsInput | number
+    user?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    tls?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MailServiceConfigUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    serviceType?: StringFieldUpdateOperationsInput | string
+    host?: StringFieldUpdateOperationsInput | string
+    port?: IntFieldUpdateOperationsInput | number
+    user?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    tls?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organizationId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -14346,6 +15897,12 @@ export namespace Prisma {
     none?: PaymentWhereInput
   }
 
+  export type MailServiceConfigListRelationFilter = {
+    every?: MailServiceConfigWhereInput
+    some?: MailServiceConfigWhereInput
+    none?: MailServiceConfigWhereInput
+  }
+
   export type UserOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -14367,6 +15924,10 @@ export namespace Prisma {
   }
 
   export type PaymentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MailServiceConfigOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -15005,6 +16566,59 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type MailServiceConfigCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    serviceType?: SortOrder
+    host?: SortOrder
+    port?: SortOrder
+    user?: SortOrder
+    password?: SortOrder
+    tls?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    organizationId?: SortOrder
+  }
+
+  export type MailServiceConfigAvgOrderByAggregateInput = {
+    port?: SortOrder
+  }
+
+  export type MailServiceConfigMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    serviceType?: SortOrder
+    host?: SortOrder
+    port?: SortOrder
+    user?: SortOrder
+    password?: SortOrder
+    tls?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    organizationId?: SortOrder
+  }
+
+  export type MailServiceConfigMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    serviceType?: SortOrder
+    host?: SortOrder
+    port?: SortOrder
+    user?: SortOrder
+    password?: SortOrder
+    tls?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    organizationId?: SortOrder
+  }
+
+  export type MailServiceConfigSumOrderByAggregateInput = {
+    port?: SortOrder
+  }
+
   export type UserCreateNestedManyWithoutOrganizationInput = {
     create?: XOR<UserCreateWithoutOrganizationInput, UserUncheckedCreateWithoutOrganizationInput> | UserCreateWithoutOrganizationInput[] | UserUncheckedCreateWithoutOrganizationInput[]
     connectOrCreate?: UserCreateOrConnectWithoutOrganizationInput | UserCreateOrConnectWithoutOrganizationInput[]
@@ -15047,6 +16661,13 @@ export namespace Prisma {
     connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
   }
 
+  export type MailServiceConfigCreateNestedManyWithoutOrganizationInput = {
+    create?: XOR<MailServiceConfigCreateWithoutOrganizationInput, MailServiceConfigUncheckedCreateWithoutOrganizationInput> | MailServiceConfigCreateWithoutOrganizationInput[] | MailServiceConfigUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: MailServiceConfigCreateOrConnectWithoutOrganizationInput | MailServiceConfigCreateOrConnectWithoutOrganizationInput[]
+    createMany?: MailServiceConfigCreateManyOrganizationInputEnvelope
+    connect?: MailServiceConfigWhereUniqueInput | MailServiceConfigWhereUniqueInput[]
+  }
+
   export type UserUncheckedCreateNestedManyWithoutOrganizationInput = {
     create?: XOR<UserCreateWithoutOrganizationInput, UserUncheckedCreateWithoutOrganizationInput> | UserCreateWithoutOrganizationInput[] | UserUncheckedCreateWithoutOrganizationInput[]
     connectOrCreate?: UserCreateOrConnectWithoutOrganizationInput | UserCreateOrConnectWithoutOrganizationInput[]
@@ -15087,6 +16708,13 @@ export namespace Prisma {
     connectOrCreate?: PaymentCreateOrConnectWithoutOrganizationInput | PaymentCreateOrConnectWithoutOrganizationInput[]
     createMany?: PaymentCreateManyOrganizationInputEnvelope
     connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+  }
+
+  export type MailServiceConfigUncheckedCreateNestedManyWithoutOrganizationInput = {
+    create?: XOR<MailServiceConfigCreateWithoutOrganizationInput, MailServiceConfigUncheckedCreateWithoutOrganizationInput> | MailServiceConfigCreateWithoutOrganizationInput[] | MailServiceConfigUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: MailServiceConfigCreateOrConnectWithoutOrganizationInput | MailServiceConfigCreateOrConnectWithoutOrganizationInput[]
+    createMany?: MailServiceConfigCreateManyOrganizationInputEnvelope
+    connect?: MailServiceConfigWhereUniqueInput | MailServiceConfigWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -15185,6 +16813,20 @@ export namespace Prisma {
     deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
   }
 
+  export type MailServiceConfigUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<MailServiceConfigCreateWithoutOrganizationInput, MailServiceConfigUncheckedCreateWithoutOrganizationInput> | MailServiceConfigCreateWithoutOrganizationInput[] | MailServiceConfigUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: MailServiceConfigCreateOrConnectWithoutOrganizationInput | MailServiceConfigCreateOrConnectWithoutOrganizationInput[]
+    upsert?: MailServiceConfigUpsertWithWhereUniqueWithoutOrganizationInput | MailServiceConfigUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: MailServiceConfigCreateManyOrganizationInputEnvelope
+    set?: MailServiceConfigWhereUniqueInput | MailServiceConfigWhereUniqueInput[]
+    disconnect?: MailServiceConfigWhereUniqueInput | MailServiceConfigWhereUniqueInput[]
+    delete?: MailServiceConfigWhereUniqueInput | MailServiceConfigWhereUniqueInput[]
+    connect?: MailServiceConfigWhereUniqueInput | MailServiceConfigWhereUniqueInput[]
+    update?: MailServiceConfigUpdateWithWhereUniqueWithoutOrganizationInput | MailServiceConfigUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: MailServiceConfigUpdateManyWithWhereWithoutOrganizationInput | MailServiceConfigUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: MailServiceConfigScalarWhereInput | MailServiceConfigScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateManyWithoutOrganizationNestedInput = {
     create?: XOR<UserCreateWithoutOrganizationInput, UserUncheckedCreateWithoutOrganizationInput> | UserCreateWithoutOrganizationInput[] | UserUncheckedCreateWithoutOrganizationInput[]
     connectOrCreate?: UserCreateOrConnectWithoutOrganizationInput | UserCreateOrConnectWithoutOrganizationInput[]
@@ -15267,6 +16909,20 @@ export namespace Prisma {
     update?: PaymentUpdateWithWhereUniqueWithoutOrganizationInput | PaymentUpdateWithWhereUniqueWithoutOrganizationInput[]
     updateMany?: PaymentUpdateManyWithWhereWithoutOrganizationInput | PaymentUpdateManyWithWhereWithoutOrganizationInput[]
     deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
+  }
+
+  export type MailServiceConfigUncheckedUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<MailServiceConfigCreateWithoutOrganizationInput, MailServiceConfigUncheckedCreateWithoutOrganizationInput> | MailServiceConfigCreateWithoutOrganizationInput[] | MailServiceConfigUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: MailServiceConfigCreateOrConnectWithoutOrganizationInput | MailServiceConfigCreateOrConnectWithoutOrganizationInput[]
+    upsert?: MailServiceConfigUpsertWithWhereUniqueWithoutOrganizationInput | MailServiceConfigUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: MailServiceConfigCreateManyOrganizationInputEnvelope
+    set?: MailServiceConfigWhereUniqueInput | MailServiceConfigWhereUniqueInput[]
+    disconnect?: MailServiceConfigWhereUniqueInput | MailServiceConfigWhereUniqueInput[]
+    delete?: MailServiceConfigWhereUniqueInput | MailServiceConfigWhereUniqueInput[]
+    connect?: MailServiceConfigWhereUniqueInput | MailServiceConfigWhereUniqueInput[]
+    update?: MailServiceConfigUpdateWithWhereUniqueWithoutOrganizationInput | MailServiceConfigUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: MailServiceConfigUpdateManyWithWhereWithoutOrganizationInput | MailServiceConfigUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: MailServiceConfigScalarWhereInput | MailServiceConfigScalarWhereInput[]
   }
 
   export type OrganizationCreateNestedOneWithoutWidgetConfigInput = {
@@ -15858,6 +17514,22 @@ export namespace Prisma {
     update?: XOR<XOR<OrganizationPlanUpdateToOneWithWhereWithoutPaymentInput, OrganizationPlanUpdateWithoutPaymentInput>, OrganizationPlanUncheckedUpdateWithoutPaymentInput>
   }
 
+  export type OrganizationCreateNestedOneWithoutMailServiceConfigsInput = {
+    create?: XOR<OrganizationCreateWithoutMailServiceConfigsInput, OrganizationUncheckedCreateWithoutMailServiceConfigsInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutMailServiceConfigsInput
+    connect?: OrganizationWhereUniqueInput
+  }
+
+  export type OrganizationUpdateOneWithoutMailServiceConfigsNestedInput = {
+    create?: XOR<OrganizationCreateWithoutMailServiceConfigsInput, OrganizationUncheckedCreateWithoutMailServiceConfigsInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutMailServiceConfigsInput
+    upsert?: OrganizationUpsertWithoutMailServiceConfigsInput
+    disconnect?: OrganizationWhereInput | boolean
+    delete?: OrganizationWhereInput | boolean
+    connect?: OrganizationWhereUniqueInput
+    update?: XOR<XOR<OrganizationUpdateToOneWithWhereWithoutMailServiceConfigsInput, OrganizationUpdateWithoutMailServiceConfigsInput>, OrganizationUncheckedUpdateWithoutMailServiceConfigsInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -16349,6 +18021,44 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type MailServiceConfigCreateWithoutOrganizationInput = {
+    id?: string
+    name: string
+    serviceType?: string
+    host: string
+    port: number
+    user: string
+    password: string
+    tls?: boolean
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MailServiceConfigUncheckedCreateWithoutOrganizationInput = {
+    id?: string
+    name: string
+    serviceType?: string
+    host: string
+    port: number
+    user: string
+    password: string
+    tls?: boolean
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MailServiceConfigCreateOrConnectWithoutOrganizationInput = {
+    where: MailServiceConfigWhereUniqueInput
+    create: XOR<MailServiceConfigCreateWithoutOrganizationInput, MailServiceConfigUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type MailServiceConfigCreateManyOrganizationInputEnvelope = {
+    data: MailServiceConfigCreateManyOrganizationInput | MailServiceConfigCreateManyOrganizationInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithWhereUniqueWithoutOrganizationInput = {
     where: UserWhereUniqueInput
     update: XOR<UserUpdateWithoutOrganizationInput, UserUncheckedUpdateWithoutOrganizationInput>
@@ -16541,6 +18251,40 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Payment"> | Date | string
   }
 
+  export type MailServiceConfigUpsertWithWhereUniqueWithoutOrganizationInput = {
+    where: MailServiceConfigWhereUniqueInput
+    update: XOR<MailServiceConfigUpdateWithoutOrganizationInput, MailServiceConfigUncheckedUpdateWithoutOrganizationInput>
+    create: XOR<MailServiceConfigCreateWithoutOrganizationInput, MailServiceConfigUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type MailServiceConfigUpdateWithWhereUniqueWithoutOrganizationInput = {
+    where: MailServiceConfigWhereUniqueInput
+    data: XOR<MailServiceConfigUpdateWithoutOrganizationInput, MailServiceConfigUncheckedUpdateWithoutOrganizationInput>
+  }
+
+  export type MailServiceConfigUpdateManyWithWhereWithoutOrganizationInput = {
+    where: MailServiceConfigScalarWhereInput
+    data: XOR<MailServiceConfigUpdateManyMutationInput, MailServiceConfigUncheckedUpdateManyWithoutOrganizationInput>
+  }
+
+  export type MailServiceConfigScalarWhereInput = {
+    AND?: MailServiceConfigScalarWhereInput | MailServiceConfigScalarWhereInput[]
+    OR?: MailServiceConfigScalarWhereInput[]
+    NOT?: MailServiceConfigScalarWhereInput | MailServiceConfigScalarWhereInput[]
+    id?: StringFilter<"MailServiceConfig"> | string
+    name?: StringFilter<"MailServiceConfig"> | string
+    serviceType?: StringFilter<"MailServiceConfig"> | string
+    host?: StringFilter<"MailServiceConfig"> | string
+    port?: IntFilter<"MailServiceConfig"> | number
+    user?: StringFilter<"MailServiceConfig"> | string
+    password?: StringFilter<"MailServiceConfig"> | string
+    tls?: BoolFilter<"MailServiceConfig"> | boolean
+    isActive?: BoolFilter<"MailServiceConfig"> | boolean
+    createdAt?: DateTimeFilter<"MailServiceConfig"> | Date | string
+    updatedAt?: DateTimeFilter<"MailServiceConfig"> | Date | string
+    organizationId?: StringNullableFilter<"MailServiceConfig"> | string | null
+  }
+
   export type OrganizationCreateWithoutWidgetConfigInput = {
     id?: string
     name: string
@@ -16555,6 +18299,7 @@ export namespace Prisma {
     tickets?: TicketCreateNestedManyWithoutOrganizationInput
     OrganizationPlan?: OrganizationPlanCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
+    mailServiceConfigs?: MailServiceConfigCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutWidgetConfigInput = {
@@ -16571,6 +18316,7 @@ export namespace Prisma {
     tickets?: TicketUncheckedCreateNestedManyWithoutOrganizationInput
     OrganizationPlan?: OrganizationPlanUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
+    mailServiceConfigs?: MailServiceConfigUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutWidgetConfigInput = {
@@ -16603,6 +18349,7 @@ export namespace Prisma {
     tickets?: TicketUpdateManyWithoutOrganizationNestedInput
     OrganizationPlan?: OrganizationPlanUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
+    mailServiceConfigs?: MailServiceConfigUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutWidgetConfigInput = {
@@ -16619,6 +18366,7 @@ export namespace Prisma {
     tickets?: TicketUncheckedUpdateManyWithoutOrganizationNestedInput
     OrganizationPlan?: OrganizationPlanUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
+    mailServiceConfigs?: MailServiceConfigUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type TicketCreateWithoutCreatedByInput = {
@@ -16757,6 +18505,7 @@ export namespace Prisma {
     widgetConfig?: WidgetConfigCreateNestedManyWithoutOrgInput
     OrganizationPlan?: OrganizationPlanCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
+    mailServiceConfigs?: MailServiceConfigCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutUsersInput = {
@@ -16773,6 +18522,7 @@ export namespace Prisma {
     widgetConfig?: WidgetConfigUncheckedCreateNestedManyWithoutOrgInput
     OrganizationPlan?: OrganizationPlanUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
+    mailServiceConfigs?: MailServiceConfigUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutUsersInput = {
@@ -16867,6 +18617,7 @@ export namespace Prisma {
     widgetConfig?: WidgetConfigUpdateManyWithoutOrgNestedInput
     OrganizationPlan?: OrganizationPlanUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
+    mailServiceConfigs?: MailServiceConfigUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutUsersInput = {
@@ -16883,6 +18634,7 @@ export namespace Prisma {
     widgetConfig?: WidgetConfigUncheckedUpdateManyWithoutOrgNestedInput
     OrganizationPlan?: OrganizationPlanUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
+    mailServiceConfigs?: MailServiceConfigUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type TicketCreateWithoutTicketAccessTokensInput = {
@@ -17015,6 +18767,7 @@ export namespace Prisma {
     widgetConfig?: WidgetConfigCreateNestedManyWithoutOrgInput
     OrganizationPlan?: OrganizationPlanCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
+    mailServiceConfigs?: MailServiceConfigCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutPlansInput = {
@@ -17031,6 +18784,7 @@ export namespace Prisma {
     widgetConfig?: WidgetConfigUncheckedCreateNestedManyWithoutOrgInput
     OrganizationPlan?: OrganizationPlanUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
+    mailServiceConfigs?: MailServiceConfigUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutPlansInput = {
@@ -17109,6 +18863,7 @@ export namespace Prisma {
     widgetConfig?: WidgetConfigUpdateManyWithoutOrgNestedInput
     OrganizationPlan?: OrganizationPlanUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
+    mailServiceConfigs?: MailServiceConfigUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutPlansInput = {
@@ -17125,6 +18880,7 @@ export namespace Prisma {
     widgetConfig?: WidgetConfigUncheckedUpdateManyWithoutOrgNestedInput
     OrganizationPlan?: OrganizationPlanUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
+    mailServiceConfigs?: MailServiceConfigUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type PaymentUpsertWithWhereUniqueWithoutPlanInput = {
@@ -17157,6 +18913,7 @@ export namespace Prisma {
     tickets?: TicketCreateNestedManyWithoutOrganizationInput
     widgetConfig?: WidgetConfigCreateNestedManyWithoutOrgInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
+    mailServiceConfigs?: MailServiceConfigCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutOrganizationPlanInput = {
@@ -17173,6 +18930,7 @@ export namespace Prisma {
     tickets?: TicketUncheckedCreateNestedManyWithoutOrganizationInput
     widgetConfig?: WidgetConfigUncheckedCreateNestedManyWithoutOrgInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
+    mailServiceConfigs?: MailServiceConfigUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutOrganizationPlanInput = {
@@ -17269,6 +19027,7 @@ export namespace Prisma {
     tickets?: TicketUpdateManyWithoutOrganizationNestedInput
     widgetConfig?: WidgetConfigUpdateManyWithoutOrgNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
+    mailServiceConfigs?: MailServiceConfigUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutOrganizationPlanInput = {
@@ -17285,6 +19044,7 @@ export namespace Prisma {
     tickets?: TicketUncheckedUpdateManyWithoutOrganizationNestedInput
     widgetConfig?: WidgetConfigUncheckedUpdateManyWithoutOrgNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
+    mailServiceConfigs?: MailServiceConfigUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type PlanUpsertWithoutOrganizationPlansInput = {
@@ -17489,6 +19249,7 @@ export namespace Prisma {
     widgetConfig?: WidgetConfigCreateNestedManyWithoutOrgInput
     OrganizationPlan?: OrganizationPlanCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
+    mailServiceConfigs?: MailServiceConfigCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutTicketsInput = {
@@ -17505,6 +19266,7 @@ export namespace Prisma {
     widgetConfig?: WidgetConfigUncheckedCreateNestedManyWithoutOrgInput
     OrganizationPlan?: OrganizationPlanUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
+    mailServiceConfigs?: MailServiceConfigUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutTicketsInput = {
@@ -17650,6 +19412,7 @@ export namespace Prisma {
     widgetConfig?: WidgetConfigUpdateManyWithoutOrgNestedInput
     OrganizationPlan?: OrganizationPlanUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
+    mailServiceConfigs?: MailServiceConfigUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutTicketsInput = {
@@ -17666,6 +19429,7 @@ export namespace Prisma {
     widgetConfig?: WidgetConfigUncheckedUpdateManyWithoutOrgNestedInput
     OrganizationPlan?: OrganizationPlanUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
+    mailServiceConfigs?: MailServiceConfigUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type TicketCreateWithoutCommentsInput = {
@@ -17834,6 +19598,7 @@ export namespace Prisma {
     tickets?: TicketCreateNestedManyWithoutOrganizationInput
     widgetConfig?: WidgetConfigCreateNestedManyWithoutOrgInput
     OrganizationPlan?: OrganizationPlanCreateNestedManyWithoutOrganizationInput
+    mailServiceConfigs?: MailServiceConfigCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutPaymentsInput = {
@@ -17850,6 +19615,7 @@ export namespace Prisma {
     tickets?: TicketUncheckedCreateNestedManyWithoutOrganizationInput
     widgetConfig?: WidgetConfigUncheckedCreateNestedManyWithoutOrgInput
     OrganizationPlan?: OrganizationPlanUncheckedCreateNestedManyWithoutOrganizationInput
+    mailServiceConfigs?: MailServiceConfigUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutPaymentsInput = {
@@ -17944,6 +19710,7 @@ export namespace Prisma {
     tickets?: TicketUpdateManyWithoutOrganizationNestedInput
     widgetConfig?: WidgetConfigUpdateManyWithoutOrgNestedInput
     OrganizationPlan?: OrganizationPlanUpdateManyWithoutOrganizationNestedInput
+    mailServiceConfigs?: MailServiceConfigUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutPaymentsInput = {
@@ -17960,6 +19727,7 @@ export namespace Prisma {
     tickets?: TicketUncheckedUpdateManyWithoutOrganizationNestedInput
     widgetConfig?: WidgetConfigUncheckedUpdateManyWithoutOrgNestedInput
     OrganizationPlan?: OrganizationPlanUncheckedUpdateManyWithoutOrganizationNestedInput
+    mailServiceConfigs?: MailServiceConfigUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type PlanUpsertWithoutPaymentsInput = {
@@ -18036,6 +19804,90 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
+  export type OrganizationCreateWithoutMailServiceConfigsInput = {
+    id?: string
+    name: string
+    email: string
+    slug: string
+    phoneNumber: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserCreateNestedManyWithoutOrganizationInput
+    plans?: PlanCreateNestedManyWithoutOrganizationInput
+    tickets?: TicketCreateNestedManyWithoutOrganizationInput
+    widgetConfig?: WidgetConfigCreateNestedManyWithoutOrgInput
+    OrganizationPlan?: OrganizationPlanCreateNestedManyWithoutOrganizationInput
+    payments?: PaymentCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationUncheckedCreateWithoutMailServiceConfigsInput = {
+    id?: string
+    name: string
+    email: string
+    slug: string
+    phoneNumber: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutOrganizationInput
+    plans?: PlanUncheckedCreateNestedManyWithoutOrganizationInput
+    tickets?: TicketUncheckedCreateNestedManyWithoutOrganizationInput
+    widgetConfig?: WidgetConfigUncheckedCreateNestedManyWithoutOrgInput
+    OrganizationPlan?: OrganizationPlanUncheckedCreateNestedManyWithoutOrganizationInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationCreateOrConnectWithoutMailServiceConfigsInput = {
+    where: OrganizationWhereUniqueInput
+    create: XOR<OrganizationCreateWithoutMailServiceConfigsInput, OrganizationUncheckedCreateWithoutMailServiceConfigsInput>
+  }
+
+  export type OrganizationUpsertWithoutMailServiceConfigsInput = {
+    update: XOR<OrganizationUpdateWithoutMailServiceConfigsInput, OrganizationUncheckedUpdateWithoutMailServiceConfigsInput>
+    create: XOR<OrganizationCreateWithoutMailServiceConfigsInput, OrganizationUncheckedCreateWithoutMailServiceConfigsInput>
+    where?: OrganizationWhereInput
+  }
+
+  export type OrganizationUpdateToOneWithWhereWithoutMailServiceConfigsInput = {
+    where?: OrganizationWhereInput
+    data: XOR<OrganizationUpdateWithoutMailServiceConfigsInput, OrganizationUncheckedUpdateWithoutMailServiceConfigsInput>
+  }
+
+  export type OrganizationUpdateWithoutMailServiceConfigsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutOrganizationNestedInput
+    plans?: PlanUpdateManyWithoutOrganizationNestedInput
+    tickets?: TicketUpdateManyWithoutOrganizationNestedInput
+    widgetConfig?: WidgetConfigUpdateManyWithoutOrgNestedInput
+    OrganizationPlan?: OrganizationPlanUpdateManyWithoutOrganizationNestedInput
+    payments?: PaymentUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type OrganizationUncheckedUpdateWithoutMailServiceConfigsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutOrganizationNestedInput
+    plans?: PlanUncheckedUpdateManyWithoutOrganizationNestedInput
+    tickets?: TicketUncheckedUpdateManyWithoutOrganizationNestedInput
+    widgetConfig?: WidgetConfigUncheckedUpdateManyWithoutOrgNestedInput
+    OrganizationPlan?: OrganizationPlanUncheckedUpdateManyWithoutOrganizationNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
+  }
+
   export type UserCreateManyOrganizationInput = {
     id?: string
     name: string
@@ -18104,6 +19956,20 @@ export namespace Prisma {
     paymentReference: string
     planId: string
     status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MailServiceConfigCreateManyOrganizationInput = {
+    id?: string
+    name: string
+    serviceType?: string
+    host: string
+    port: number
+    user: string
+    password: string
+    tls?: boolean
+    isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -18336,6 +20202,48 @@ export namespace Prisma {
     paymentReference?: StringFieldUpdateOperationsInput | string
     planId?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MailServiceConfigUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    serviceType?: StringFieldUpdateOperationsInput | string
+    host?: StringFieldUpdateOperationsInput | string
+    port?: IntFieldUpdateOperationsInput | number
+    user?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    tls?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MailServiceConfigUncheckedUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    serviceType?: StringFieldUpdateOperationsInput | string
+    host?: StringFieldUpdateOperationsInput | string
+    port?: IntFieldUpdateOperationsInput | number
+    user?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    tls?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MailServiceConfigUncheckedUpdateManyWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    serviceType?: StringFieldUpdateOperationsInput | string
+    host?: StringFieldUpdateOperationsInput | string
+    port?: IntFieldUpdateOperationsInput | number
+    user?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    tls?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

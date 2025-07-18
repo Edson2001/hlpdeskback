@@ -228,6 +228,21 @@ exports.Prisma.PaymentScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.MailServiceConfigScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  serviceType: 'serviceType',
+  host: 'host',
+  port: 'port',
+  user: 'user',
+  password: 'password',
+  tls: 'tls',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  organizationId: 'organizationId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -278,7 +293,8 @@ exports.Prisma.ModelName = {
   OrganizationPlan: 'OrganizationPlan',
   Ticket: 'Ticket',
   Comment: 'Comment',
-  Payment: 'Payment'
+  Payment: 'Payment',
+  MailServiceConfig: 'MailServiceConfig'
 };
 
 /**
